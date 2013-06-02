@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="AE1879E5-61BE-40FA-8613-28B4CC08113E" Name="ChatBeat" Language="1033" Version="0.0.0.1" Manufacturer="Kolipri Communications Inc." UpgradeCode="8D065617-ABE0-4052-8D67-7917C2B7D979">
+        <Package Description="Test file in a Product" Comments="Simple test" InstallerVersion="200" Compressed="yes" />
+        <Media Id="1" Cabinet="simple.cab" EmbedCab="yes" />
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder" Name="PFiles">
+                <Directory Id="KolipriSoftware" Name="Kolipri Software">
+                    <Component Id="CHATBEAT.EXE" DiskId="1" Guid="C08154C4-2FD8-4F08-A50E-9BAAC5860E6E">
+                        <File Id="CHATBEAT.EXE" Name="chatbeat.exe" Source="C:\xampp\htdocs\chatbeat\BUILD\chatbeat.exe">
+                            <Shortcut Id="desktopShortcut" Directory="DesktopFolder" Name="ChatBeat" WorkingDirectory="INSTALLDIR" Advertise="yes" Icon="DesktopIcon.exe" IconIndex="0" />
+                            <Shortcut Id="ExeShortcut" Directory="ProgramMenuDir" Name="ChatBeat" Advertise="yes" Icon="StartMenuIcon.exe" IconIndex="0" />
+                        </File>
+                    </Component>
+                    <Component Id="MIMETYPE" DiskId="1" Guid="F2CF0F26-4D82-46C4-B716-EE788E05FE03">
+                        <File Id="MIMETYPE" Name="mimetype" Source="C:\xampp\htdocs\chatbeat\BUILD\mimetype" />
+                    </Component>
+                    <Component Id="PLAYER.HTML" DiskId="1" Guid="9C9A0400-4D37-42D3-B03F-53875AF04D46">
+                        <File Id="PLAYER.HTML" Name="player.html" Source="C:\xampp\htdocs\chatbeat\BUILD\player.html" />
+                    </Component>
+                    <Directory Id="ADOBE_AIR" Name="Adobe AIR">
+                        <Directory Id="VERSIONS" Name="Versions">
+                            <Directory Id="_1.0" Name="1.0">
+                                <Component Id="ADOBE_AIR.DLL" DiskId="1" Guid="CAB2723D-6998-4180-965B-311820798717">
+                                    <File Id="ADOBE_AIR.DLL" Name="Adobe AIR.dll" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Adobe AIR.dll" />
+                                </Component>
+                                <Directory Id="RESOURCES" Name="Resources">
+                                    <Component Id="ADOBE_AIR.VCH" DiskId="1" Guid="38A408A3-1CAF-49FD-9160-1C1F92A4A960">
+                                        <File Id="ADOBE_AIR.VCH" Name="Adobe AIR.vch" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\Adobe AIR.vch" />
+                                    </Component>
+                                    <Component Id="ADOBECP.DLL" DiskId="1" Guid="75FDFB23-8A49-4D04-8D89-8899C8B8D98B">
+                                        <File Id="ADOBECP.DLL" Name="adobecp.dll" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\adobecp.dll" />
+                                    </Component>
+                                    <Component Id="ADOBECP.VCH" DiskId="1" Guid="C02ED338-DC1E-4BEF-A519-463E32198E94">
+                                        <File Id="ADOBECP.VCH" Name="adobecp.vch" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\adobecp.vch" />
+                                    </Component>
+                                    <Component Id="ADOBECP15.DLL" DiskId="1" Guid="51161325-369E-4078-BD36-476C8D94AD6F">
+                                        <File Id="ADOBECP15.DLL" Name="AdobeCP15.dll" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\AdobeCP15.dll" />
+                                    </Component>
+                                    <Component Id="CAPTIVEAPPENTRY.EXE" DiskId="1" Guid="D73E0A76-F0FD-4F4C-8CF6-11309CFAABA8">
+                                        <File Id="CAPTIVEAPPENTRY.EXE" Name="CaptiveAppEntry.exe" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\CaptiveAppEntry.exe" />
+                                    </Component>
+                                    <Component Id="NPSWF32.DLL" DiskId="1" Guid="75B04391-57FA-4902-9388-72C0D2F7B90C">
+                                        <File Id="NPSWF32.DLL" Name="NPSWF32.dll" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\NPSWF32.dll" />
+                                    </Component>
+                                    <Component Id="WEBKIT.DLL" DiskId="1" Guid="0DAD301A-FD21-46AB-87D1-254200887FF2">
+                                        <File Id="WEBKIT.DLL" Name="WebKit.dll" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\WebKit.dll" />
+                                    </Component>
+                                </Directory>
+                            </Directory>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="ASSETS" Name="assets">
+                        <Directory Id="FONTS" Name="fonts">
+                            <Component Id="MYRIADPRO_BOLD.OTF" DiskId="1" Guid="E9C860CA-1265-40EA-A18E-7D3E8247B50F">
+                                <File Id="MYRIADPRO_BOLD.OTF" Name="MyriadPro-Bold.otf" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\fonts\MyriadPro-Bold.otf" />
+                            </Component>
+                            <Component Id="MYRIADPRO_REGULAR.OTF" DiskId="1" Guid="1D21EB7F-0308-4FE6-BFF4-75AA91F3C8CC">
+                                <File Id="MYRIADPRO_REGULAR.OTF" Name="MyriadPro-Regular.otf" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\fonts\MyriadPro-Regular.otf" />
+                            </Component>
+                            <Component Id="MYRIADPRO_SEMIBOLD.OTF" DiskId="1" Guid="48CFA9D7-2D6D-4A09-BE70-021420D67285">
+                                <File Id="MYRIADPRO_SEMIBOLD.OTF" Name="MyriadPro-Semibold.otf" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\fonts\MyriadPro-Semibold.otf" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="ICON" Name="icon">
+                            <Component Id="_128.PNG" DiskId="1" Guid="BFB201B2-8945-4C07-891A-C94B69C07B6B">
+                                <File Id="_128.PNG" Name="128.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\icon\128.png" />
+                            </Component>
+                            <Component Id="_16.PNG" DiskId="1" Guid="B5B4E8B6-5542-4A3B-A017-B4D1601B6C26">
+                                <File Id="_16.PNG" Name="16.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\icon\16.png" />
+                            </Component>
+                            <Component Id="_32.PNG" DiskId="1" Guid="09D6A8EE-ECC0-4576-95A3-89F8C2FFC917">
+                                <File Id="_32.PNG" Name="32.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\icon\32.png" />
+                            </Component>
+                            <Component Id="_48.PNG" DiskId="1" Guid="7E94C415-4BB8-47CA-95F0-0A779645EC8E">
+                                <File Id="_48.PNG" Name="48.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\icon\48.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="IMAGES" Name="images">
+                            <Component Id="CB_CLOSE.PNG" DiskId="1" Guid="4E0A4A28-2A99-4276-801B-EC8385BBE45B">
+                                <File Id="CB_CLOSE.PNG" Name="cb_close.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_close.png" />
+                            </Component>
+                            <Component Id="CB_DIVIDER.PNG" DiskId="1" Guid="69E4A8B2-42F4-4B5D-B085-081431141C55">
+                                <File Id="CB_DIVIDER.PNG" Name="cb_divider.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_divider.png" />
+                            </Component>
+                            <Component Id="CB_LOGO.PNG" DiskId="1" Guid="DDF36837-7E3E-4714-90FC-A7703875877D">
+                                <File Id="CB_LOGO.PNG" Name="cb_logo.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_logo.png" />
+                            </Component>
+                            <Component Id="CB_MINIMIZE.PNG" DiskId="1" Guid="D36995D7-6C1F-4EEB-A35F-65942F7B01BC">
+                                <File Id="CB_MINIMIZE.PNG" Name="cb_minimize.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_minimize.png" />
+                            </Component>
+                            <Component Id="CB_NEXT.PNG" DiskId="1" Guid="D536540C-7E64-4ECB-B2B9-72D6F6ECB449">
+                                <File Id="CB_NEXT.PNG" Name="cb_next.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_next.png" />
+                            </Component>
+                            <Component Id="CB_NEXT_HOVER.PNG" DiskId="1" Guid="AFF0E07C-9A8E-4D1D-A6FC-3CB6A657DF79">
+                                <File Id="CB_NEXT_HOVER.PNG" Name="cb_next_hover.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_next_hover.png" />
+                            </Component>
+                            <Component Id="CB_PLAY.PNG" DiskId="1" Guid="EE1539F1-6D70-40AF-B198-0A576EB618FC">
+                                <File Id="CB_PLAY.PNG" Name="cb_play.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_play.png" />
+                            </Component>
+                            <Component Id="CB_PLAY_HOVER.PNG" DiskId="1" Guid="5F6785E0-E34A-476C-8ABB-B0C8EC19A994">
+                                <File Id="CB_PLAY_HOVER.PNG" Name="cb_play_hover.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_play_hover.png" />
+                            </Component>
+                            <Component Id="CB_PREV.PNG" DiskId="1" Guid="6F07F39D-A21E-479F-A42B-B0AC2085C30D">
+                                <File Id="CB_PREV.PNG" Name="cb_prev.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_prev.png" />
+                            </Component>
+                            <Component Id="CB_PREV_HOVER.PNG" DiskId="1" Guid="1455C2D6-2CD2-4547-9567-88BA5ACA9FB5">
+                                <File Id="CB_PREV_HOVER.PNG" Name="cb_prev_hover.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_prev_hover.png" />
+                            </Component>
+                            <Component Id="CB_REPEAT.PNG" DiskId="1" Guid="9CEE1608-760A-4360-9369-BA2CC1A6EF26">
+                                <File Id="CB_REPEAT.PNG" Name="cb_repeat.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_repeat.png" />
+                            </Component>
+                            <Component Id="CB_SHUFFLE.PNG" DiskId="1" Guid="9A09E5D7-4133-46DB-B28E-D7A693AB54DE">
+                                <File Id="CB_SHUFFLE.PNG" Name="cb_shuffle.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_shuffle.png" />
+                            </Component>
+                            <Component Id="ICON_MUSIC.PNG" DiskId="1" Guid="189A1FF5-EF62-4B2E-86A4-D5333B9D9BAB">
+                                <File Id="ICON_MUSIC.PNG" Name="icon_music.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\icon_music.png" />
+                            </Component>
+                            <Component Id="SCRUB_BG.PNG" DiskId="1" Guid="7AA9B646-0610-449B-98F7-DDFB401681CF">
+                                <File Id="SCRUB_BG.PNG" Name="scrub_bg.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\scrub_bg.png" />
+                            </Component>
+                            <Component Id="UNTITLED_1.PNG" DiskId="1" Guid="2FE9A40F-CC46-4443-AFC1-7F669F9351E6">
+                                <File Id="UNTITLED_1.PNG" Name="Untitled-1.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\Untitled-1.png" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="CSS" Name="css">
+                        <Component Id="MAIN.CSS" DiskId="1" Guid="D8C4E326-6902-434E-9F6D-28EE032602F0">
+                            <File Id="MAIN.CSS" Name="main.css" Source="C:\xampp\htdocs\chatbeat\BUILD\css\main.css" />
+                        </Component>
+                        <Component Id="RANGE.CSS" DiskId="1" Guid="8B84BB1F-D37B-446B-9754-3A6C455421F6">
+                            <File Id="RANGE.CSS" Name="range.css" Source="C:\xampp\htdocs\chatbeat\BUILD\css\range.css" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="JS" Name="js">
+                        <Directory Id="COMPONENTS" Name="components">
+                            <Component Id="CENTERSCREEN.JS" DiskId="1" Guid="421D2D41-7B35-42AB-BDF2-8384D966A48D">
+                                <File Id="CENTERSCREEN.JS" Name="centerScreen.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\centerScreen.js" />
+                            </Component>
+                            <Component Id="CHATBEAT.CONTROLS.JS" DiskId="1" Guid="CA776E5B-D58E-42DA-83D1-8CE2401E05BC">
+                                <File Id="CHATBEAT.CONTROLS.JS" Name="chatbeat.controls.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.controls.js" />
+                            </Component>
+                            <Component Id="CHATBEAT.FEATURED.JS" DiskId="1" Guid="BAB9C604-604C-412B-A7E1-E04F2227E4CB">
+                                <File Id="CHATBEAT.FEATURED.JS" Name="chatbeat.featured.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.featured.js" />
+                            </Component>
+                            <Component Id="CHATBEAT.HANDLERS.JS" DiskId="1" Guid="DB87347A-579C-459D-B1F4-AF862FAE1161">
+                                <File Id="CHATBEAT.HANDLERS.JS" Name="chatbeat.handlers.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.handlers.js" />
+                            </Component>
+                            <Component Id="CHATBEAT.JS" DiskId="1" Guid="3A558699-5A47-471E-8A8E-9FA63EF2F697">
+                                <File Id="CHATBEAT.JS" Name="chatbeat.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.js" />
+                            </Component>
+                            <Component Id="CHATBEAT.LISTING.JS" DiskId="1" Guid="CED52622-9508-44B5-8C55-D27A8DFD2346">
+                                <File Id="CHATBEAT.LISTING.JS" Name="chatbeat.listing.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.listing.js" />
+                            </Component>
+                            <Component Id="CHATBEAT.PAGES.JS" DiskId="1" Guid="1FAB8A60-2282-4BCB-BDA6-4577C4783223">
+                                <File Id="CHATBEAT.PAGES.JS" Name="chatbeat.pages.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.pages.js" />
+                            </Component>
+                            <Component Id="CHATBEAT.PLAYER.JS" DiskId="1" Guid="83022761-7072-4E2A-B12D-5F628FBA4776">
+                                <File Id="CHATBEAT.PLAYER.JS" Name="chatbeat.player.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.player.js" />
+                            </Component>
+                            <Component Id="CHATBEAT.STREAM.JS" DiskId="1" Guid="C60F2F53-6BF4-4555-9C13-A6442ED2CE39">
+                                <File Id="CHATBEAT.STREAM.JS" Name="chatbeat.stream.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.stream.js" />
+                            </Component>
+                            <Component Id="CHATBEAT.WINDOW.JS" DiskId="1" Guid="6FF136A0-02B1-4025-928C-2014FABC1768">
+                                <File Id="CHATBEAT.WINDOW.JS" Name="chatbeat.window.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.window.js" />
+                            </Component>
+                            <Component Id="FEATURED.JS" DiskId="1" Guid="3B9F0FF1-D801-47CD-B818-3D81378D1EA1">
+                                <File Id="FEATURED.JS" Name="featured.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\featured.js" />
+                            </Component>
+                            <Component Id="LOADER.JS" DiskId="1" Guid="78A12437-AE56-4A74-872C-59FA0DEDBD64">
+                                <File Id="LOADER.JS" Name="loader.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\loader.js" />
+                            </Component>
+                            <Component Id="OBFUSCATED.JS" DiskId="1" Guid="217763B3-611E-4BF7-A4DA-C731B7D6D6F4">
+                                <File Id="OBFUSCATED.JS" Name="obfuscated.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\obfuscated.js" />
+                            </Component>
+                            <Component Id="SOUNDPLAYER.JS" DiskId="1" Guid="7EF4870E-8AFE-4BD6-8CB7-A16150C873BE">
+                                <File Id="SOUNDPLAYER.JS" Name="soundPlayer.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\soundPlayer.js" />
+                            </Component>
+                            <Component Id="SYSTEMTRAYDOCK.JS" DiskId="1" Guid="861EC599-065A-4124-B2DC-B2F46E24E475">
+                                <File Id="SYSTEMTRAYDOCK.JS" Name="systemTrayDock.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\systemTrayDock.js" />
+                            </Component>
+                            <Component Id="VISUALIZER.JS" DiskId="1" Guid="5C3D7F42-61AB-4B4B-A784-75B5C53202DC">
+                                <File Id="VISUALIZER.JS" Name="visualizer.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\visualizer.js" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="PACKAGES" Name="packages">
+                            <Component Id="AIRALIASES.JS" DiskId="1" Guid="5D42DAAD-6FFE-41F8-8ABD-C915A7C94946">
+                                <File Id="AIRALIASES.JS" Name="AIRAliases.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\AIRAliases.js" />
+                            </Component>
+                            <Component Id="AIRINTROSPECTOR.JS" DiskId="1" Guid="5DD85E82-A6CB-4069-A5D2-FAE1E3E2A167">
+                                <File Id="AIRINTROSPECTOR.JS" Name="AIRIntrospector.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\AIRIntrospector.js" />
+                            </Component>
+                            <Component Id="JQUERY_1.3.MIN.JS" DiskId="1" Guid="DAB7D4E5-C03F-4002-9E18-06DE61BFACFD">
+                                <File Id="JQUERY_1.3.MIN.JS" Name="jquery-1.3.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery-1.3.min.js" />
+                            </Component>
+                            <Component Id="JQUERY_1.6.4.JS" DiskId="1" Guid="ED55B088-F293-43F9-855A-EC2EFDA8DA7D">
+                                <File Id="JQUERY_1.6.4.JS" Name="jquery-1.6.4.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery-1.6.4.js" />
+                            </Component>
+                            <Component Id="JQUERY.PRELOADER.JS" DiskId="1" Guid="BAAF73E7-7637-442D-9CC0-EC09768B4FB5">
+                                <File Id="JQUERY.PRELOADER.JS" Name="jquery.preloader.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.preloader.js" />
+                            </Component>
+                            <Component Id="JQUERY.RANGEINPUT.MIN.JS" DiskId="1" Guid="AE55DDF3-6001-43C8-B1DC-D72EAB66AE42">
+                                <File Id="JQUERY.RANGEINPUT.MIN.JS" Name="jquery.rangeinput.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.rangeinput.min.js" />
+                            </Component>
+                            <Directory Id="JQUERY" Name="jquery">
+                                <Component Id="JQUERY_1.7.1.MIN.JS" DiskId="1" Guid="86AE9F49-BB11-4FBA-92E5-FEF3EDAEF9FA">
+                                    <File Id="JQUERY_1.7.1.MIN.JS" Name="jquery-1.7.1.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery\jquery-1.7.1.min.js" />
+                                </Component>
+                                <Component Id="JQUERY_UI_1.8.17.CUSTOM.MIN.JS" DiskId="1" Guid="50118276-0DAD-4A15-9AC3-39C48E378C8E">
+                                    <File Id="JQUERY_UI_1.8.17.CUSTOM.MIN.JS" Name="jquery-ui-1.8.17.custom.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery\jquery-ui-1.8.17.custom.min.js" />
+                                </Component>
+                            </Directory>
+                            <Directory Id="JQUERY.UI" Name="jquery.ui">
+                                <Component Id="JQUERY_UI_1.8.17.CUSTOM.JS" DiskId="1" Guid="5BA6BCA4-2E8C-4672-BA6E-3352A569C354">
+                                    <File Id="JQUERY_UI_1.8.17.CUSTOM.JS" Name="jquery-ui-1.8.17.custom.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery-ui-1.8.17.custom.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.BLIND.JS" DiskId="1" Guid="62BB5203-7EB8-4946-AB93-2D4E32F515F7">
+                                    <File Id="JQUERY.EFFECTS.BLIND.JS" Name="jquery.effects.blind.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.blind.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.BOUNCE.JS" DiskId="1" Guid="41A9625B-BD9A-4D57-8CF4-2A5E0D0F05F2">
+                                    <File Id="JQUERY.EFFECTS.BOUNCE.JS" Name="jquery.effects.bounce.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.bounce.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.CLIP.JS" DiskId="1" Guid="5693E470-5A91-4A9C-AEB3-5AD3886DA0C5">
+                                    <File Id="JQUERY.EFFECTS.CLIP.JS" Name="jquery.effects.clip.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.clip.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.CORE.JS" DiskId="1" Guid="4E29AA28-D06D-4FE6-8CBA-C64F4A7FE83A">
+                                    <File Id="JQUERY.EFFECTS.CORE.JS" Name="jquery.effects.core.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.core.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.DROP.JS" DiskId="1" Guid="E2068AEA-3AC1-46B8-8025-2BF6374381C7">
+                                    <File Id="JQUERY.EFFECTS.DROP.JS" Name="jquery.effects.drop.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.drop.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.EXPLODE.JS" DiskId="1" Guid="253FD272-C090-43BE-8374-E8450CC36987">
+                                    <File Id="JQUERY.EFFECTS.EXPLODE.JS" Name="jquery.effects.explode.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.explode.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.FADE.JS" DiskId="1" Guid="66CB1A1A-FAEB-49AA-BA06-2E2CF061C4FB">
+                                    <File Id="JQUERY.EFFECTS.FADE.JS" Name="jquery.effects.fade.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.fade.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.FOLD.JS" DiskId="1" Guid="D57FB0CE-2369-495C-B6FC-C4A48753759A">
+                                    <File Id="JQUERY.EFFECTS.FOLD.JS" Name="jquery.effects.fold.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.fold.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.HIGHLIGHT.JS" DiskId="1" Guid="BD0BAAA1-E8A2-441B-87F9-FEA72A5B41BD">
+                                    <File Id="JQUERY.EFFECTS.HIGHLIGHT.JS" Name="jquery.effects.highlight.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.highlight.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.PULSATE.JS" DiskId="1" Guid="68E6E483-1F29-4A84-91E1-D3CB1CAEA109">
+                                    <File Id="JQUERY.EFFECTS.PULSATE.JS" Name="jquery.effects.pulsate.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.pulsate.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.SCALE.JS" DiskId="1" Guid="4CD156DF-7A4C-49B7-A79A-6A0661050506">
+                                    <File Id="JQUERY.EFFECTS.SCALE.JS" Name="jquery.effects.scale.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.scale.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.SHAKE.JS" DiskId="1" Guid="F23F29F7-3B85-418F-9460-BE46EEA7B01C">
+                                    <File Id="JQUERY.EFFECTS.SHAKE.JS" Name="jquery.effects.shake.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.shake.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.SLIDE.JS" DiskId="1" Guid="79BC9861-10F0-4DE3-B8E3-1E72B473AA1C">
+                                    <File Id="JQUERY.EFFECTS.SLIDE.JS" Name="jquery.effects.slide.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.slide.js" />
+                                </Component>
+                                <Component Id="JQUERY.EFFECTS.TRANSFER.JS" DiskId="1" Guid="0A4E3530-D353-4905-8186-0EF989496D62">
+                                    <File Id="JQUERY.EFFECTS.TRANSFER.JS" Name="jquery.effects.transfer.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.effects.transfer.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.ACCORDION.JS" DiskId="1" Guid="8EE7FCC4-64DD-43A1-B99E-81AD9D6C522F">
+                                    <File Id="JQUERY.UI.ACCORDION.JS" Name="jquery.ui.accordion.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.accordion.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.AUTOCOMPLETE.JS" DiskId="1" Guid="DEBAA635-6B3A-43B3-8F84-2C6BDF1296BD">
+                                    <File Id="JQUERY.UI.AUTOCOMPLETE.JS" Name="jquery.ui.autocomplete.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.autocomplete.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.BUTTON.JS" DiskId="1" Guid="E2CE3203-A5D2-42CC-8F42-E32F8EBCFC77">
+                                    <File Id="JQUERY.UI.BUTTON.JS" Name="jquery.ui.button.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.button.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.CORE.JS" DiskId="1" Guid="28023E6F-6436-4FC1-A1FF-1AF9B41B22C2">
+                                    <File Id="JQUERY.UI.CORE.JS" Name="jquery.ui.core.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.core.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.DATEPICKER.JS" DiskId="1" Guid="3666F1B5-BA1E-45AC-ACEF-2F4B2C447B3A">
+                                    <File Id="JQUERY.UI.DATEPICKER.JS" Name="jquery.ui.datepicker.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.datepicker.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.DIALOG.JS" DiskId="1" Guid="1F67EEB0-3BFF-4506-AF2A-6518986A7EA5">
+                                    <File Id="JQUERY.UI.DIALOG.JS" Name="jquery.ui.dialog.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.dialog.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.DRAGGABLE.JS" DiskId="1" Guid="050BA82E-5D4D-4432-9B23-EC371CA833B0">
+                                    <File Id="JQUERY.UI.DRAGGABLE.JS" Name="jquery.ui.draggable.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.draggable.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.DROPPABLE.JS" DiskId="1" Guid="71B575FA-ADD0-43B2-8947-80314429CCCA">
+                                    <File Id="JQUERY.UI.DROPPABLE.JS" Name="jquery.ui.droppable.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.droppable.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.MOUSE.JS" DiskId="1" Guid="0F429281-D713-48F5-87C4-0376143F36DD">
+                                    <File Id="JQUERY.UI.MOUSE.JS" Name="jquery.ui.mouse.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.mouse.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.POSITION.JS" DiskId="1" Guid="B2074C1E-C35F-40A8-82F5-7FC55A6A433A">
+                                    <File Id="JQUERY.UI.POSITION.JS" Name="jquery.ui.position.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.position.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.PROGRESSBAR.JS" DiskId="1" Guid="0CF7D154-0163-4F59-88CA-2A585B3306DB">
+                                    <File Id="JQUERY.UI.PROGRESSBAR.JS" Name="jquery.ui.progressbar.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.progressbar.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.RESIZABLE.JS" DiskId="1" Guid="203C1013-6E1E-4C22-9B02-4B0EF814D525">
+                                    <File Id="JQUERY.UI.RESIZABLE.JS" Name="jquery.ui.resizable.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.resizable.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.SELECTABLE.JS" DiskId="1" Guid="BC3FFE59-A023-497C-A28F-01E80C22EF53">
+                                    <File Id="JQUERY.UI.SELECTABLE.JS" Name="jquery.ui.selectable.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.selectable.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.SLIDER.JS" DiskId="1" Guid="88C0A52B-18B3-46EE-ADFA-6EDAE8DBE74D">
+                                    <File Id="JQUERY.UI.SLIDER.JS" Name="jquery.ui.slider.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.slider.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.SORTABLE.JS" DiskId="1" Guid="FB48A04F-8FB9-494E-A8B0-273ED81FEA81">
+                                    <File Id="JQUERY.UI.SORTABLE.JS" Name="jquery.ui.sortable.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.sortable.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.TABS.JS" DiskId="1" Guid="7D87BEE9-0FAE-4E31-9AF3-AAB24BA2461B">
+                                    <File Id="JQUERY.UI.TABS.JS" Name="jquery.ui.tabs.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.tabs.js" />
+                                </Component>
+                                <Component Id="JQUERY.UI.WIDGET.JS" DiskId="1" Guid="CA2BE630-7A98-4217-A5F9-8FD7C21BFBD8">
+                                    <File Id="JQUERY.UI.WIDGET.JS" Name="jquery.ui.widget.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\jquery.ui.widget.js" />
+                                </Component>
+                                <Directory Id="I18N" Name="i18n">
+                                    <Component Id="JQUERY_UI_I18N.JS" DiskId="1" Guid="4436D6CF-D6F2-4725-9759-3EC488891C9A">
+                                        <File Id="JQUERY_UI_I18N.JS" Name="jquery-ui-i18n.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery-ui-i18n.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_AF.JS" DiskId="1" Guid="7C3C5A9C-F912-42F9-9323-472E21658E26">
+                                        <File Id="JQUERY.UI.DATEPICKER_AF.JS" Name="jquery.ui.datepicker-af.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-af.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_AR_DZ.JS" DiskId="1" Guid="55A28BD5-0B70-451B-919D-17BCA1905224">
+                                        <File Id="JQUERY.UI.DATEPICKER_AR_DZ.JS" Name="jquery.ui.datepicker-ar-DZ.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-ar-DZ.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_AR.JS" DiskId="1" Guid="144347C4-5B52-4A18-8367-7596EAACB0C6">
+                                        <File Id="JQUERY.UI.DATEPICKER_AR.JS" Name="jquery.ui.datepicker-ar.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-ar.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_AZ.JS" DiskId="1" Guid="9227DC6B-7D26-4590-9882-CE3ECBDEE4D5">
+                                        <File Id="JQUERY.UI.DATEPICKER_AZ.JS" Name="jquery.ui.datepicker-az.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-az.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_BG.JS" DiskId="1" Guid="848523A5-D991-4239-A03A-CD3928AAFE8F">
+                                        <File Id="JQUERY.UI.DATEPICKER_BG.JS" Name="jquery.ui.datepicker-bg.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-bg.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_BS.JS" DiskId="1" Guid="32D81B78-7198-4557-BA7E-492A7F275696">
+                                        <File Id="JQUERY.UI.DATEPICKER_BS.JS" Name="jquery.ui.datepicker-bs.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-bs.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_CA.JS" DiskId="1" Guid="190A4D74-6125-4F9E-8BE6-87AFE9549C1D">
+                                        <File Id="JQUERY.UI.DATEPICKER_CA.JS" Name="jquery.ui.datepicker-ca.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-ca.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_CS.JS" DiskId="1" Guid="361492E3-0806-497D-B4A5-AF990358F9E6">
+                                        <File Id="JQUERY.UI.DATEPICKER_CS.JS" Name="jquery.ui.datepicker-cs.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-cs.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_CY_GB.JS" DiskId="1" Guid="9442A79D-DB64-43F7-BB76-D9E9AC328B24">
+                                        <File Id="JQUERY.UI.DATEPICKER_CY_GB.JS" Name="jquery.ui.datepicker-cy-GB.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-cy-GB.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_DA.JS" DiskId="1" Guid="D5646CC5-FFD8-4E4B-9C14-8EE56A4CFB93">
+                                        <File Id="JQUERY.UI.DATEPICKER_DA.JS" Name="jquery.ui.datepicker-da.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-da.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_DE.JS" DiskId="1" Guid="DCD3DD9D-CF31-489D-B789-9FA56DE308E9">
+                                        <File Id="JQUERY.UI.DATEPICKER_DE.JS" Name="jquery.ui.datepicker-de.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-de.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_EL.JS" DiskId="1" Guid="DFC1F887-9CCB-4A43-969D-B9FF497C0DB6">
+                                        <File Id="JQUERY.UI.DATEPICKER_EL.JS" Name="jquery.ui.datepicker-el.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-el.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_EN_AU.JS" DiskId="1" Guid="06FAA9C0-EFE0-4E37-BB4F-D70F64682FCC">
+                                        <File Id="JQUERY.UI.DATEPICKER_EN_AU.JS" Name="jquery.ui.datepicker-en-AU.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-en-AU.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_EN_GB.JS" DiskId="1" Guid="0361D92D-8752-4BB1-8A8A-FAC4CC5A5028">
+                                        <File Id="JQUERY.UI.DATEPICKER_EN_GB.JS" Name="jquery.ui.datepicker-en-GB.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-en-GB.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_EN_NZ.JS" DiskId="1" Guid="4C651C49-D20D-4B44-803E-3B9D863CE94A">
+                                        <File Id="JQUERY.UI.DATEPICKER_EN_NZ.JS" Name="jquery.ui.datepicker-en-NZ.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-en-NZ.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_EO.JS" DiskId="1" Guid="F8C988D3-963C-4FB7-9A41-C28C5C49CF4B">
+                                        <File Id="JQUERY.UI.DATEPICKER_EO.JS" Name="jquery.ui.datepicker-eo.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-eo.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_ES.JS" DiskId="1" Guid="3EB6412C-811D-493D-B415-8FC3A38B8CCF">
+                                        <File Id="JQUERY.UI.DATEPICKER_ES.JS" Name="jquery.ui.datepicker-es.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-es.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_ET.JS" DiskId="1" Guid="FB213F5D-D120-4A1B-86CE-A92666AF41B5">
+                                        <File Id="JQUERY.UI.DATEPICKER_ET.JS" Name="jquery.ui.datepicker-et.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-et.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_EU.JS" DiskId="1" Guid="DA2FD41E-ECCB-42CB-86F4-783B5C7B6893">
+                                        <File Id="JQUERY.UI.DATEPICKER_EU.JS" Name="jquery.ui.datepicker-eu.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-eu.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_FA.JS" DiskId="1" Guid="8596C086-3C73-451A-A81F-C6862DF91951">
+                                        <File Id="JQUERY.UI.DATEPICKER_FA.JS" Name="jquery.ui.datepicker-fa.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-fa.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_FI.JS" DiskId="1" Guid="287C628D-252B-469C-A0C4-143D81C5B6BE">
+                                        <File Id="JQUERY.UI.DATEPICKER_FI.JS" Name="jquery.ui.datepicker-fi.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-fi.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_FO.JS" DiskId="1" Guid="078F3312-E443-433C-97C2-93E18A07E203">
+                                        <File Id="JQUERY.UI.DATEPICKER_FO.JS" Name="jquery.ui.datepicker-fo.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-fo.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_FR_CH.JS" DiskId="1" Guid="4476DED8-1592-4B02-9909-76809C496925">
+                                        <File Id="JQUERY.UI.DATEPICKER_FR_CH.JS" Name="jquery.ui.datepicker-fr-CH.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-fr-CH.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_FR.JS" DiskId="1" Guid="377E7C26-1D9F-49EF-97B9-5D00D850545A">
+                                        <File Id="JQUERY.UI.DATEPICKER_FR.JS" Name="jquery.ui.datepicker-fr.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-fr.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_GL.JS" DiskId="1" Guid="79B3903A-CA13-43A0-951D-CA83A3DCA9CF">
+                                        <File Id="JQUERY.UI.DATEPICKER_GL.JS" Name="jquery.ui.datepicker-gl.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-gl.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_HE.JS" DiskId="1" Guid="0EE01A1B-6EED-4168-A27A-A56C47975903">
+                                        <File Id="JQUERY.UI.DATEPICKER_HE.JS" Name="jquery.ui.datepicker-he.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-he.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_HR.JS" DiskId="1" Guid="F8060B16-6D84-4A6E-BBFF-D0C6DCEB1A72">
+                                        <File Id="JQUERY.UI.DATEPICKER_HR.JS" Name="jquery.ui.datepicker-hr.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-hr.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_HU.JS" DiskId="1" Guid="EC4FDF40-C6FD-4214-B7B9-12FDFD162248">
+                                        <File Id="JQUERY.UI.DATEPICKER_HU.JS" Name="jquery.ui.datepicker-hu.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-hu.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_HY.JS" DiskId="1" Guid="7B977F00-8FBE-4BFA-9A37-400593D79317">
+                                        <File Id="JQUERY.UI.DATEPICKER_HY.JS" Name="jquery.ui.datepicker-hy.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-hy.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_ID.JS" DiskId="1" Guid="5187849F-C267-40C0-8C5A-AA38747AE606">
+                                        <File Id="JQUERY.UI.DATEPICKER_ID.JS" Name="jquery.ui.datepicker-id.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-id.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_IS.JS" DiskId="1" Guid="8CDAAA5A-A148-4EE7-9BDC-0E11E42F176A">
+                                        <File Id="JQUERY.UI.DATEPICKER_IS.JS" Name="jquery.ui.datepicker-is.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-is.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_IT.JS" DiskId="1" Guid="B6D4FCE6-E927-425F-AD7A-8978491A89C0">
+                                        <File Id="JQUERY.UI.DATEPICKER_IT.JS" Name="jquery.ui.datepicker-it.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-it.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_JA.JS" DiskId="1" Guid="CD77979E-E980-4CCA-A3E2-E1BE30FBE548">
+                                        <File Id="JQUERY.UI.DATEPICKER_JA.JS" Name="jquery.ui.datepicker-ja.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-ja.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_KK.JS" DiskId="1" Guid="1BB25952-E4F1-409D-8BB1-0F1190E189C6">
+                                        <File Id="JQUERY.UI.DATEPICKER_KK.JS" Name="jquery.ui.datepicker-kk.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-kk.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_KO.JS" DiskId="1" Guid="96F4AF3B-A63E-40B1-97E9-8D0B0F47D6F5">
+                                        <File Id="JQUERY.UI.DATEPICKER_KO.JS" Name="jquery.ui.datepicker-ko.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-ko.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_LB.JS" DiskId="1" Guid="13621B06-1367-4C59-A573-51E988DA3AEF">
+                                        <File Id="JQUERY.UI.DATEPICKER_LB.JS" Name="jquery.ui.datepicker-lb.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-lb.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_LT.JS" DiskId="1" Guid="C6247587-B3F4-4459-A790-7D06231F1F11">
+                                        <File Id="JQUERY.UI.DATEPICKER_LT.JS" Name="jquery.ui.datepicker-lt.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-lt.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_LV.JS" DiskId="1" Guid="F4992B6E-D0DD-4275-930F-28F468C6A8EE">
+                                        <File Id="JQUERY.UI.DATEPICKER_LV.JS" Name="jquery.ui.datepicker-lv.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-lv.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_MK.JS" DiskId="1" Guid="9B9CE7AE-3E80-4577-9BA4-4D7BDC7BC4F0">
+                                        <File Id="JQUERY.UI.DATEPICKER_MK.JS" Name="jquery.ui.datepicker-mk.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-mk.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_ML.JS" DiskId="1" Guid="23B55FCA-C69C-4EF3-916B-5C20DB37C7CC">
+                                        <File Id="JQUERY.UI.DATEPICKER_ML.JS" Name="jquery.ui.datepicker-ml.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-ml.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_MS.JS" DiskId="1" Guid="527A0DFD-F257-4A3D-A38E-B6BD4D76BD53">
+                                        <File Id="JQUERY.UI.DATEPICKER_MS.JS" Name="jquery.ui.datepicker-ms.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-ms.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_NL_BE.JS" DiskId="1" Guid="5A7E4E59-2EF4-4554-9880-0D64115CC073">
+                                        <File Id="JQUERY.UI.DATEPICKER_NL_BE.JS" Name="jquery.ui.datepicker-nl-BE.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-nl-BE.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_NL.JS" DiskId="1" Guid="B2F60C21-416D-4489-B070-7F80CE80BB3D">
+                                        <File Id="JQUERY.UI.DATEPICKER_NL.JS" Name="jquery.ui.datepicker-nl.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-nl.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_NO.JS" DiskId="1" Guid="A28B61ED-8ED6-435D-8F38-6ABEAC8E0B27">
+                                        <File Id="JQUERY.UI.DATEPICKER_NO.JS" Name="jquery.ui.datepicker-no.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-no.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_PL.JS" DiskId="1" Guid="9F8C3B61-91CE-40B8-BCE3-BFCF15628ABC">
+                                        <File Id="JQUERY.UI.DATEPICKER_PL.JS" Name="jquery.ui.datepicker-pl.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-pl.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_PT_BR.JS" DiskId="1" Guid="65A797DF-6407-4040-9F65-8F22E113D280">
+                                        <File Id="JQUERY.UI.DATEPICKER_PT_BR.JS" Name="jquery.ui.datepicker-pt-BR.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-pt-BR.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_PT.JS" DiskId="1" Guid="5CC52706-EFE5-4A63-9FC0-EC2906A1645F">
+                                        <File Id="JQUERY.UI.DATEPICKER_PT.JS" Name="jquery.ui.datepicker-pt.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-pt.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_RM.JS" DiskId="1" Guid="8DAD6E0B-4070-48A5-979D-3982D5EB46E6">
+                                        <File Id="JQUERY.UI.DATEPICKER_RM.JS" Name="jquery.ui.datepicker-rm.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-rm.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_RO.JS" DiskId="1" Guid="68C05C4B-E31F-43BB-8130-B7EA28E7C473">
+                                        <File Id="JQUERY.UI.DATEPICKER_RO.JS" Name="jquery.ui.datepicker-ro.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-ro.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_RU.JS" DiskId="1" Guid="DDD1B2D9-4FF0-4C42-8B10-262DC2952EF7">
+                                        <File Id="JQUERY.UI.DATEPICKER_RU.JS" Name="jquery.ui.datepicker-ru.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-ru.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_SK.JS" DiskId="1" Guid="A73C6B4F-391B-42B2-BC56-B6E69BFDF930">
+                                        <File Id="JQUERY.UI.DATEPICKER_SK.JS" Name="jquery.ui.datepicker-sk.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-sk.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_SL.JS" DiskId="1" Guid="79FB6E9A-2D34-4FBC-BA0A-D09937CAF1D7">
+                                        <File Id="JQUERY.UI.DATEPICKER_SL.JS" Name="jquery.ui.datepicker-sl.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-sl.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_SQ.JS" DiskId="1" Guid="A79F6B7D-807E-4887-8FCB-090C502AC77A">
+                                        <File Id="JQUERY.UI.DATEPICKER_SQ.JS" Name="jquery.ui.datepicker-sq.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-sq.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_SR_SR.JS" DiskId="1" Guid="CBBFDA54-B3CA-40A9-9857-86155188D82F">
+                                        <File Id="JQUERY.UI.DATEPICKER_SR_SR.JS" Name="jquery.ui.datepicker-sr-SR.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-sr-SR.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_SR.JS" DiskId="1" Guid="3D979269-AD4E-4C8B-8DB9-9A97FA731F24">
+                                        <File Id="JQUERY.UI.DATEPICKER_SR.JS" Name="jquery.ui.datepicker-sr.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-sr.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_SV.JS" DiskId="1" Guid="89777262-F01B-47B3-9374-69E7CB3BCCDE">
+                                        <File Id="JQUERY.UI.DATEPICKER_SV.JS" Name="jquery.ui.datepicker-sv.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-sv.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_TA.JS" DiskId="1" Guid="5B6EA23B-6C58-43EF-A55C-971936CFFA2D">
+                                        <File Id="JQUERY.UI.DATEPICKER_TA.JS" Name="jquery.ui.datepicker-ta.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-ta.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_TH.JS" DiskId="1" Guid="A4A7302C-D8ED-45E3-9E07-E80798E6EAAB">
+                                        <File Id="JQUERY.UI.DATEPICKER_TH.JS" Name="jquery.ui.datepicker-th.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-th.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_TJ.JS" DiskId="1" Guid="E1F0C04E-D3A5-4459-8926-26AA1E796FC4">
+                                        <File Id="JQUERY.UI.DATEPICKER_TJ.JS" Name="jquery.ui.datepicker-tj.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-tj.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_TR.JS" DiskId="1" Guid="3499961B-0C30-40C4-A104-908FC1DC7B40">
+                                        <File Id="JQUERY.UI.DATEPICKER_TR.JS" Name="jquery.ui.datepicker-tr.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-tr.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_UK.JS" DiskId="1" Guid="57197CAF-FDB7-46E8-BD3D-36039D9C1793">
+                                        <File Id="JQUERY.UI.DATEPICKER_UK.JS" Name="jquery.ui.datepicker-uk.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-uk.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_VI.JS" DiskId="1" Guid="B07A8CA9-FB79-4618-A566-6BA19B381118">
+                                        <File Id="JQUERY.UI.DATEPICKER_VI.JS" Name="jquery.ui.datepicker-vi.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-vi.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_ZH_CN.JS" DiskId="1" Guid="764AC296-8831-4603-9987-BA8AD1E00404">
+                                        <File Id="JQUERY.UI.DATEPICKER_ZH_CN.JS" Name="jquery.ui.datepicker-zh-CN.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-zh-CN.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_ZH_HK.JS" DiskId="1" Guid="0C576FA2-889F-48D1-86B5-E0CD1958AB62">
+                                        <File Id="JQUERY.UI.DATEPICKER_ZH_HK.JS" Name="jquery.ui.datepicker-zh-HK.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-zh-HK.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER_ZH_TW.JS" DiskId="1" Guid="EDDFEE81-6B54-4333-91ED-9FDF7065E0DE">
+                                        <File Id="JQUERY.UI.DATEPICKER_ZH_TW.JS" Name="jquery.ui.datepicker-zh-TW.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\i18n\jquery.ui.datepicker-zh-TW.js" />
+                                    </Component>
+                                </Directory>
+                                <Directory Id="MINIFIED" Name="minified">
+                                    <Component Id="JQUERY.EFFECTS.BLIND.MIN.JS" DiskId="1" Guid="8B12EB97-D54B-435D-92FB-D234EB43CF98">
+                                        <File Id="JQUERY.EFFECTS.BLIND.MIN.JS" Name="jquery.effects.blind.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.blind.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.BOUNCE.MIN.JS" DiskId="1" Guid="E89B0162-91F1-4F7F-85B4-7D3B679DA3C1">
+                                        <File Id="JQUERY.EFFECTS.BOUNCE.MIN.JS" Name="jquery.effects.bounce.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.bounce.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.CLIP.MIN.JS" DiskId="1" Guid="E9383E3E-C7C7-4692-904E-88BCAF8E4933">
+                                        <File Id="JQUERY.EFFECTS.CLIP.MIN.JS" Name="jquery.effects.clip.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.clip.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.CORE.MIN.JS" DiskId="1" Guid="1F537C43-4444-4E43-A83D-96D5B0A5B476">
+                                        <File Id="JQUERY.EFFECTS.CORE.MIN.JS" Name="jquery.effects.core.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.core.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.DROP.MIN.JS" DiskId="1" Guid="BB23D17F-BBA7-4806-81B6-02DCB5017BB0">
+                                        <File Id="JQUERY.EFFECTS.DROP.MIN.JS" Name="jquery.effects.drop.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.drop.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.EXPLODE.MIN.JS" DiskId="1" Guid="09C0DD00-B7E8-44E4-9BA5-2787D8A2254C">
+                                        <File Id="JQUERY.EFFECTS.EXPLODE.MIN.JS" Name="jquery.effects.explode.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.explode.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.FADE.MIN.JS" DiskId="1" Guid="A3C201DD-B32B-44A5-8848-35E9BE36CB60">
+                                        <File Id="JQUERY.EFFECTS.FADE.MIN.JS" Name="jquery.effects.fade.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.fade.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.FOLD.MIN.JS" DiskId="1" Guid="C4EB2810-5A85-4D63-AD8E-A6F209678CAA">
+                                        <File Id="JQUERY.EFFECTS.FOLD.MIN.JS" Name="jquery.effects.fold.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.fold.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.HIGHLIGHT.MIN.JS" DiskId="1" Guid="8D95CCE0-AABA-4A7B-863D-98ABE6D5ADE2">
+                                        <File Id="JQUERY.EFFECTS.HIGHLIGHT.MIN.JS" Name="jquery.effects.highlight.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.highlight.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.PULSATE.MIN.JS" DiskId="1" Guid="9A9C1BEC-5F67-4003-AE15-6B0EBAED3AE3">
+                                        <File Id="JQUERY.EFFECTS.PULSATE.MIN.JS" Name="jquery.effects.pulsate.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.pulsate.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.SCALE.MIN.JS" DiskId="1" Guid="A23CD829-B0BF-412C-99A8-DA5AC2FB495C">
+                                        <File Id="JQUERY.EFFECTS.SCALE.MIN.JS" Name="jquery.effects.scale.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.scale.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.SHAKE.MIN.JS" DiskId="1" Guid="83DFA0C0-9146-48EA-ADD5-B81D64E0CC89">
+                                        <File Id="JQUERY.EFFECTS.SHAKE.MIN.JS" Name="jquery.effects.shake.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.shake.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.SLIDE.MIN.JS" DiskId="1" Guid="63365C68-B130-4609-B17F-41ACC7BA1F24">
+                                        <File Id="JQUERY.EFFECTS.SLIDE.MIN.JS" Name="jquery.effects.slide.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.slide.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.EFFECTS.TRANSFER.MIN.JS" DiskId="1" Guid="B4095568-CAA2-4C6E-B29E-ED853952F09A">
+                                        <File Id="JQUERY.EFFECTS.TRANSFER.MIN.JS" Name="jquery.effects.transfer.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.effects.transfer.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.ACCORDION.MIN.JS" DiskId="1" Guid="E163AFC2-C38C-4FD0-A5D0-A018758DD308">
+                                        <File Id="JQUERY.UI.ACCORDION.MIN.JS" Name="jquery.ui.accordion.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.accordion.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.AUTOCOMPLETE.MIN.JS" DiskId="1" Guid="AC78A972-9059-4E46-814E-34812BF88C55">
+                                        <File Id="JQUERY.UI.AUTOCOMPLETE.MIN.JS" Name="jquery.ui.autocomplete.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.autocomplete.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.BUTTON.MIN.JS" DiskId="1" Guid="03094508-9C79-4B66-9203-18C42BC51630">
+                                        <File Id="JQUERY.UI.BUTTON.MIN.JS" Name="jquery.ui.button.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.button.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.CORE.MIN.JS" DiskId="1" Guid="3E17DB60-EA11-47A2-8BAE-F84C523B4593">
+                                        <File Id="JQUERY.UI.CORE.MIN.JS" Name="jquery.ui.core.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.core.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DATEPICKER.MIN.JS" DiskId="1" Guid="1FEEDFE9-E0EF-4771-B3C1-D45FDA6BA66F">
+                                        <File Id="JQUERY.UI.DATEPICKER.MIN.JS" Name="jquery.ui.datepicker.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.datepicker.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DIALOG.MIN.JS" DiskId="1" Guid="5BBB2C48-E985-46B2-A730-F7F81C7909BA">
+                                        <File Id="JQUERY.UI.DIALOG.MIN.JS" Name="jquery.ui.dialog.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.dialog.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DRAGGABLE.MIN.JS" DiskId="1" Guid="670D4CF0-2004-4DD3-80AA-E356E4AE65E2">
+                                        <File Id="JQUERY.UI.DRAGGABLE.MIN.JS" Name="jquery.ui.draggable.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.draggable.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.DROPPABLE.MIN.JS" DiskId="1" Guid="F5A05B76-EE48-4A8F-B155-7FBF699E4840">
+                                        <File Id="JQUERY.UI.DROPPABLE.MIN.JS" Name="jquery.ui.droppable.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.droppable.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.MOUSE.MIN.JS" DiskId="1" Guid="16957324-6AEA-4D4A-B5C3-CE08730AA61A">
+                                        <File Id="JQUERY.UI.MOUSE.MIN.JS" Name="jquery.ui.mouse.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.mouse.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.POSITION.MIN.JS" DiskId="1" Guid="D164C215-62A4-4204-AF23-19E1262F037C">
+                                        <File Id="JQUERY.UI.POSITION.MIN.JS" Name="jquery.ui.position.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.position.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.PROGRESSBAR.MIN.JS" DiskId="1" Guid="9F1FBBFB-1693-4A90-8B72-5DD43E607039">
+                                        <File Id="JQUERY.UI.PROGRESSBAR.MIN.JS" Name="jquery.ui.progressbar.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.progressbar.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.RESIZABLE.MIN.JS" DiskId="1" Guid="B866B50B-3E5A-4A14-B02C-C54211B2BE16">
+                                        <File Id="JQUERY.UI.RESIZABLE.MIN.JS" Name="jquery.ui.resizable.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.resizable.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.SELECTABLE.MIN.JS" DiskId="1" Guid="9A3F35AC-AEDF-493F-8708-E07BDD48D715">
+                                        <File Id="JQUERY.UI.SELECTABLE.MIN.JS" Name="jquery.ui.selectable.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.selectable.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.SLIDER.MIN.JS" DiskId="1" Guid="2F5D970B-3C86-4AB4-B227-1627F65785DC">
+                                        <File Id="JQUERY.UI.SLIDER.MIN.JS" Name="jquery.ui.slider.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.slider.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.SORTABLE.MIN.JS" DiskId="1" Guid="E5921B8B-4A22-4BE6-85A0-D69C53329432">
+                                        <File Id="JQUERY.UI.SORTABLE.MIN.JS" Name="jquery.ui.sortable.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.sortable.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.TABS.MIN.JS" DiskId="1" Guid="CA6766B5-58C9-47DF-A9F9-D440E4FA5384">
+                                        <File Id="JQUERY.UI.TABS.MIN.JS" Name="jquery.ui.tabs.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.tabs.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY.UI.WIDGET.MIN.JS" DiskId="1" Guid="A58853AB-DB28-4D66-9B15-FC3FB90B9088">
+                                        <File Id="JQUERY.UI.WIDGET.MIN.JS" Name="jquery.ui.widget.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery.ui\minified\jquery.ui.widget.min.js" />
+                                    </Component>
+                                </Directory>
+                            </Directory>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="META_INF" Name="META-INF">
+                        <Component Id="SIGNATURES.XML" DiskId="1" Guid="CBB597EC-F933-456A-A532-9901F0108A74">
+                            <File Id="SIGNATURES.XML" Name="signatures.xml" Source="C:\xampp\htdocs\chatbeat\BUILD\META-INF\signatures.xml" />
+                        </Component>
+                        <Directory Id="AIR" Name="AIR">
+                            <Component Id="APPLICATION.XML" DiskId="1" Guid="8A1D1E45-AD76-4781-B145-4FC94BAF7AFF">
+                                <File Id="APPLICATION.XML" Name="application.xml" Source="C:\xampp\htdocs\chatbeat\BUILD\META-INF\AIR\application.xml" />
+                            </Component>
+                            <Component Id="HASH" DiskId="1" Guid="410E17D0-FD73-42D2-B8EB-78BB2902B23A">
+                                <File Id="HASH" Name="hash" Source="C:\xampp\htdocs\chatbeat\BUILD\META-INF\AIR\hash" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+            <Directory Id="DesktopFolder" />
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ProgramMenuDir" Name="Kolipri Software">
+                    <Component Id="StartMenuShortcuts" Guid="B636C64D-C362-4C4F-828D-1D8DC2961DC1">
+                        <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+                        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" />
+                        <Shortcut Id="UninstallProduct" Name="Uninstall" Description="Uninstalls the application" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]" />
+                    </Component>
+                </Directory>
+            </Directory>
+        </Directory>
+        <Feature Id="DefaultFeature" Title="Main Feature" Level="1">
+            <ComponentRef Id="CHATBEAT.EXE" />
+            <ComponentRef Id="MIMETYPE" />
+            <ComponentRef Id="PLAYER.HTML" />
+            <ComponentRef Id="ADOBE_AIR.DLL" />
+            <ComponentRef Id="ADOBE_AIR.VCH" />
+            <ComponentRef Id="ADOBECP.DLL" />
+            <ComponentRef Id="ADOBECP.VCH" />
+            <ComponentRef Id="ADOBECP15.DLL" />
+            <ComponentRef Id="CAPTIVEAPPENTRY.EXE" />
+            <ComponentRef Id="NPSWF32.DLL" />
+            <ComponentRef Id="WEBKIT.DLL" />
+            <ComponentRef Id="MYRIADPRO_BOLD.OTF" />
+            <ComponentRef Id="MYRIADPRO_REGULAR.OTF" />
+            <ComponentRef Id="MYRIADPRO_SEMIBOLD.OTF" />
+            <ComponentRef Id="_128.PNG" />
+            <ComponentRef Id="_16.PNG" />
+            <ComponentRef Id="_32.PNG" />
+            <ComponentRef Id="_48.PNG" />
+            <ComponentRef Id="CB_CLOSE.PNG" />
+            <ComponentRef Id="CB_DIVIDER.PNG" />
+            <ComponentRef Id="CB_LOGO.PNG" />
+            <ComponentRef Id="CB_MINIMIZE.PNG" />
+            <ComponentRef Id="CB_NEXT.PNG" />
+            <ComponentRef Id="CB_NEXT_HOVER.PNG" />
+            <ComponentRef Id="CB_PLAY.PNG" />
+            <ComponentRef Id="CB_PLAY_HOVER.PNG" />
+            <ComponentRef Id="CB_PREV.PNG" />
+            <ComponentRef Id="CB_PREV_HOVER.PNG" />
+            <ComponentRef Id="CB_REPEAT.PNG" />
+            <ComponentRef Id="CB_SHUFFLE.PNG" />
+            <ComponentRef Id="ICON_MUSIC.PNG" />
+            <ComponentRef Id="SCRUB_BG.PNG" />
+            <ComponentRef Id="UNTITLED_1.PNG" />
+            <ComponentRef Id="MAIN.CSS" />
+            <ComponentRef Id="RANGE.CSS" />
+            <ComponentRef Id="CENTERSCREEN.JS" />
+            <ComponentRef Id="CHATBEAT.CONTROLS.JS" />
+            <ComponentRef Id="CHATBEAT.FEATURED.JS" />
+            <ComponentRef Id="CHATBEAT.HANDLERS.JS" />
+            <ComponentRef Id="CHATBEAT.JS" />
+            <ComponentRef Id="CHATBEAT.LISTING.JS" />
+            <ComponentRef Id="CHATBEAT.PAGES.JS" />
+            <ComponentRef Id="CHATBEAT.PLAYER.JS" />
+            <ComponentRef Id="CHATBEAT.STREAM.JS" />
+            <ComponentRef Id="CHATBEAT.WINDOW.JS" />
+            <ComponentRef Id="FEATURED.JS" />
+            <ComponentRef Id="LOADER.JS" />
+            <ComponentRef Id="OBFUSCATED.JS" />
+            <ComponentRef Id="SOUNDPLAYER.JS" />
+            <ComponentRef Id="SYSTEMTRAYDOCK.JS" />
+            <ComponentRef Id="VISUALIZER.JS" />
+            <ComponentRef Id="AIRALIASES.JS" />
+            <ComponentRef Id="AIRINTROSPECTOR.JS" />
+            <ComponentRef Id="JQUERY_1.3.MIN.JS" />
+            <ComponentRef Id="JQUERY_1.6.4.JS" />
+            <ComponentRef Id="JQUERY.PRELOADER.JS" />
+            <ComponentRef Id="JQUERY.RANGEINPUT.MIN.JS" />
+            <ComponentRef Id="JQUERY_1.7.1.MIN.JS" />
+            <ComponentRef Id="JQUERY_UI_1.8.17.CUSTOM.MIN.JS" />
+            <ComponentRef Id="JQUERY_UI_1.8.17.CUSTOM.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.BLIND.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.BOUNCE.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.CLIP.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.CORE.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.DROP.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.EXPLODE.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.FADE.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.FOLD.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.HIGHLIGHT.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.PULSATE.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.SCALE.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.SHAKE.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.SLIDE.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.TRANSFER.JS" />
+            <ComponentRef Id="JQUERY.UI.ACCORDION.JS" />
+            <ComponentRef Id="JQUERY.UI.AUTOCOMPLETE.JS" />
+            <ComponentRef Id="JQUERY.UI.BUTTON.JS" />
+            <ComponentRef Id="JQUERY.UI.CORE.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER.JS" />
+            <ComponentRef Id="JQUERY.UI.DIALOG.JS" />
+            <ComponentRef Id="JQUERY.UI.DRAGGABLE.JS" />
+            <ComponentRef Id="JQUERY.UI.DROPPABLE.JS" />
+            <ComponentRef Id="JQUERY.UI.MOUSE.JS" />
+            <ComponentRef Id="JQUERY.UI.POSITION.JS" />
+            <ComponentRef Id="JQUERY.UI.PROGRESSBAR.JS" />
+            <ComponentRef Id="JQUERY.UI.RESIZABLE.JS" />
+            <ComponentRef Id="JQUERY.UI.SELECTABLE.JS" />
+            <ComponentRef Id="JQUERY.UI.SLIDER.JS" />
+            <ComponentRef Id="JQUERY.UI.SORTABLE.JS" />
+            <ComponentRef Id="JQUERY.UI.TABS.JS" />
+            <ComponentRef Id="JQUERY.UI.WIDGET.JS" />
+            <ComponentRef Id="JQUERY_UI_I18N.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_AF.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_AR_DZ.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_AR.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_AZ.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_BG.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_BS.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_CA.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_CS.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_CY_GB.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_DA.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_DE.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_EL.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_EN_AU.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_EN_GB.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_EN_NZ.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_EO.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_ES.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_ET.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_EU.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_FA.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_FI.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_FO.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_FR_CH.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_FR.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_GL.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_HE.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_HR.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_HU.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_HY.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_ID.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_IS.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_IT.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_JA.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_KK.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_KO.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_LB.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_LT.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_LV.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_MK.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_ML.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_MS.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_NL_BE.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_NL.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_NO.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_PL.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_PT_BR.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_PT.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_RM.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_RO.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_RU.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_SK.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_SL.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_SQ.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_SR_SR.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_SR.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_SV.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_TA.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_TH.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_TJ.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_TR.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_UK.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_VI.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_ZH_CN.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_ZH_HK.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER_ZH_TW.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.BLIND.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.BOUNCE.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.CLIP.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.CORE.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.DROP.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.EXPLODE.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.FADE.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.FOLD.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.HIGHLIGHT.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.PULSATE.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.SCALE.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.SHAKE.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.SLIDE.MIN.JS" />
+            <ComponentRef Id="JQUERY.EFFECTS.TRANSFER.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.ACCORDION.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.AUTOCOMPLETE.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.BUTTON.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.CORE.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.DATEPICKER.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.DIALOG.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.DRAGGABLE.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.DROPPABLE.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.MOUSE.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.POSITION.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.PROGRESSBAR.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.RESIZABLE.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.SELECTABLE.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.SLIDER.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.SORTABLE.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.TABS.MIN.JS" />
+            <ComponentRef Id="JQUERY.UI.WIDGET.MIN.JS" />
+            <ComponentRef Id="SIGNATURES.XML" />
+            <ComponentRef Id="APPLICATION.XML" />
+            <ComponentRef Id="HASH" />
+            <ComponentRef Id="StartMenuShortcuts" />
+        </Feature>
+        <UI />
+        <WixVariable Id="WixUIDialogBmp" Value="C:\logo-mirror.bmp" />
+        <Icon Id="DesktopIcon.exe" SourceFile="C:\xampp\htdocs\chatbeat\BUILD\chatbeat.exe" />
+        <Icon Id="StartMenuIcon.exe" SourceFile="C:\xampp\htdocs\chatbeat\BUILD\chatbeat.exe" />
+    </Product>
+</Wix>

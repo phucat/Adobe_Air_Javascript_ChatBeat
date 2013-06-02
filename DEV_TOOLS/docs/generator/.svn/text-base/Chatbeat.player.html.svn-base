@@ -1,0 +1,921 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: chatbeat  Chatbeat.player   (Chatbeat Javascript Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1334918017.6" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1334918017.6" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1334918017.6"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1334918017.6"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://www.chatbeat.com" title="Chatbeat Desktop AIR Javascript Library">Chatbeat Desktop AIR Javascript Library</a></h1>
+        <h3>chatbeat&nbsp; <span class="subtitle">1.0.0</span></h3>
+        <a href="./index.html" title="Chatbeat Desktop AIR Javascript Library">Chatbeat Desktop AIR Javascript Library</a> 
+            &gt; <a href="./module_chatbeat.html" title="chatbeat">chatbeat</a>
+                 &gt; Chatbeat.player 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">Chatbeat.player</b>
+                        <span class="extends">
+                        </span>
+
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        Chatbeat component for UI and basic player functionalities
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">Chatbeat.player</strong>
+                                <code>
+                                    (
+                                    )
+                                </code>
+                                <div class="description">
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:method" resource="#method__load">
+                                    <h4>
+                                        <a name="method__load">_load</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_load</strong>
+                                           (
+                                                
+                                                        
+                                                         url
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Load the Sound from AIR URLloader Object to Air Sound Object
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">url</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method__search">
+                                    <h4>
+                                        <a name="method__search">_search</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_search</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            search functionality attached to search UI.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_bindControls">
+                                    <h4>
+                                        <a name="method_bindControls">bindControls</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">bindControls</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Bind the DOM and the method configured in runtime
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_checkIfComplete">
+                                    <h4>
+                                        <a name="method_checkIfComplete">checkIfComplete</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">checkIfComplete</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            check if the song duration has reach the final duration
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_DOMcontrol">
+                                    <h4>
+                                        <a name="method_DOMcontrol">DOMcontrol</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">DOMcontrol</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            You can configure which DOM elements you want to have the Player functionality
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getDuration">
+                                    <h4>
+                                        <a name="method_getDuration">getDuration</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">getDuration</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            updates the UI for song duration
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getPlayingID">
+                                    <h4>
+                                        <a name="method_getPlayingID">getPlayingID</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        object
+                                            <strong property="yui:name">getPlayingID</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            gets the ID of the currently playing or loaded sound.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        object
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">jQuery Object</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_init">
+                                    <h4>
+                                        <a name="method_init">init</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">init</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            this method is automatically loaded onStart of the application called by Chatbeat.initComponent <br>
+- Bind DOM elements with their respective methods<br>
+- Encrypt the secret key and store it on Encrypted local store provided by Air Runtime<br>
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_next">
+                                    <h4>
+                                        <a name="method_next">next</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">next</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            play next song
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_pause">
+                                    <h4>
+                                        <a name="method_pause">pause</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">pause</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            pause the player
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_play">
+                                    <h4>
+                                        <a name="method_play">play</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">play</strong>
+                                           (
+                                                
+                                                        
+                                                         url
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            play the sound loaded from the Sound Object. Can also directly load a sound when URL parameter is assigned.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">url</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_playVideo">
+                                    <h4>
+                                        <a name="method_playVideo">playVideo</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">playVideo</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            play video
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_prev">
+                                    <h4>
+                                        <a name="method_prev">prev</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">prev</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            play previous song
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_selector">
+                                    <h4>
+                                        <a name="method_selector">selector</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">selector</strong>
+                                           (
+                                                
+                                                        
+                                                         jQuery
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            selects songs thats is being checked or selected
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">jQuery</span>
+                                                        &lt;<span property="yui:type">object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Object</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_setInfos">
+                                    <h4>
+                                        <a name="method_setInfos">setInfos</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">setInfos</strong>
+                                           (
+                                                
+                                                        
+                                                         jQuery
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Update the artist, album and song information in UI.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">jQuery</span>
+                                                        &lt;<span property="yui:type">object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Object</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_setVolume">
+                                    <h4>
+                                        <a name="method_setVolume">setVolume</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">setVolume</strong>
+                                           (
+                                                
+                                                        
+                                                         val
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            pause the player
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">val</span>
+                                                        &lt;<span property="yui:type">int</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_soundDetails">
+                                    <h4>
+                                        <a name="method_soundDetails">soundDetails</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">soundDetails</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            calculates the current playing duration
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_stop">
+                                    <h4>
+                                        <a name="method_stop">stop</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">stop</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            stops the player
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_chatbeat.html" title="chatbeat">chatbeat</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Chatbeat.html" title="Chatbeat">Chatbeat</a></li>
+                                <li class=""><a href="Chatbeat.cache.html" title="Chatbeat.cache">Chatbeat.cache</a></li>
+                                <li class=""><a href="Chatbeat.handlers.html" title="Chatbeat.handlers">Chatbeat.handlers</a></li>
+                                <li class=""><a href="Chatbeat.offline.html" title="Chatbeat.offline">Chatbeat.offline</a></li>
+                                <li class=""><a href="Chatbeat.pages.html" title="Chatbeat.pages">Chatbeat.pages</a></li>
+                                <li class="selected"><a href="Chatbeat.player.html" title="Chatbeat.player">Chatbeat.player</a></li>
+                                <li class=""><a href="Chatbeat.playlist.html" title="Chatbeat.playlist">Chatbeat.playlist</a></li>
+                                <li class=""><a href="Chatbeat.window.html" title="Chatbeat.window">Chatbeat.window</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="chatbeat.cache.js.html" title="chatbeat.cache.js">chatbeat.cache.js</a></li>
+                                <li class=""><a href="chatbeat.handlers.js.html" title="chatbeat.handlers.js">chatbeat.handlers.js</a></li>
+                                <li class=""><a href="chatbeat.js.html" title="chatbeat.js">chatbeat.js</a></li>
+                                <li class=""><a href="chatbeat.offline.js.html" title="chatbeat.offline.js">chatbeat.offline.js</a></li>
+                                <li class=""><a href="chatbeat.pages.js.html" title="chatbeat.pages.js">chatbeat.pages.js</a></li>
+                                <li class=""><a href="chatbeat.player.js.html" title="chatbeat.player.js">chatbeat.player.js</a></li>
+                                <li class=""><a href="chatbeat.playlist.js.html" title="chatbeat.playlist.js">chatbeat.playlist.js</a></li>
+                                <li class=""><a href="chatbeat.window.js.html" title="chatbeat.window.js">chatbeat.window.js</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#method__load" title="_load">_load</a></li>
+                                <li class=""><a href="#method__search" title="_search">_search</a></li>
+                                <li class=""><a href="#method_bindControls" title="bindControls">bindControls</a></li>
+                                <li class=""><a href="#method_checkIfComplete" title="checkIfComplete">checkIfComplete</a></li>
+                                <li class=""><a href="#method_DOMcontrol" title="DOMcontrol">DOMcontrol</a></li>
+                                <li class=""><a href="#method_getDuration" title="getDuration">getDuration</a></li>
+                                <li class=""><a href="#method_getPlayingID" title="getPlayingID">getPlayingID</a></li>
+                                <li class=""><a href="#method_init" title="init">init</a></li>
+                                <li class=""><a href="#method_next" title="next">next</a></li>
+                                <li class=""><a href="#method_pause" title="pause">pause</a></li>
+                                <li class=""><a href="#method_play" title="play">play</a></li>
+                                <li class=""><a href="#method_playVideo" title="playVideo">playVideo</a></li>
+                                <li class=""><a href="#method_prev" title="prev">prev</a></li>
+                                <li class=""><a href="#method_selector" title="selector">selector</a></li>
+                                <li class=""><a href="#method_setInfos" title="setInfos">setInfos</a></li>
+                                <li class=""><a href="#method_setVolume" title="setVolume">setVolume</a></li>
+                                <li class=""><a href="#method_soundDetails" title="soundDetails">soundDetails</a></li>
+                                <li class=""><a href="#method_stop" title="stop">stop</a></li>
+                        </ul>
+                    </div>
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2012 Kolipri Communications Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "Chatbeat.pages.html#property_active", "access": "", "host": "Chatbeat.pages", "type": "property", "name": "active"}, {"url": "Chatbeat.playlist.html#method_add", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "add"}, {"url": "Chatbeat.html#method_addComponent", "access": "", "host": "Chatbeat", "type": "method", "name": "addComponent"}, {"url": "Chatbeat.playlist.html#method_addNewOfflinePL", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "addNewOfflinePL"}, {"url": "Chatbeat.playlist.html#method_addNewPL", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "addNewPL"}, {"url": "Chatbeat.playlist.html#method_addSong {object}", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "addSong {object}"}, {"url": "Chatbeat.playlist.html#method_addSongHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "addSongHandler"}, {"url": "Chatbeat.cache.html#property_appDir", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "appDir"}, {"url": "Chatbeat.html#property_autoPlay", "access": "", "host": "Chatbeat", "type": "property", "name": "autoPlay"}, {"url": "Chatbeat.player.html#method_bindControls", "access": "", "host": "Chatbeat.player", "type": "method", "name": "bindControls"}, {"url": "Chatbeat.html#property_bufferTime", "access": "", "host": "Chatbeat", "type": "property", "name": "bufferTime"}, {"url": "Chatbeat.cache.html#property_cacheDir", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "cacheDir"}, {"url": "Chatbeat.cache.html#property_cacheLocation", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "cacheLocation"}, {"url": "Chatbeat.html#property_channel", "access": "", "host": "Chatbeat", "type": "property", "name": "channel"}, {"url": "Chatbeat.html#method_checkConnection", "access": "", "host": "Chatbeat", "type": "method", "name": "checkConnection"}, {"url": "Chatbeat.player.html#method_checkIfComplete", "access": "", "host": "Chatbeat.player", "type": "method", "name": "checkIfComplete"}, {"url": "Chatbeat.cache.html#method_checkLocation", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "checkLocation"}, {"url": "Chatbeat.handlers.html#method_completeHandler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "completeHandler"}, {"url": "Chatbeat.playlist.html#property_container", "access": "", "host": "Chatbeat.playlist", "type": "property", "name": "container"}, {"url": "Chatbeat.playlist.html#property_contextMenu", "access": "", "host": "Chatbeat.playlist", "type": "property", "name": "contextMenu"}, {"url": "Chatbeat.playlist.html#method_convertObj", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "convertObj"}, {"url": "Chatbeat.playlist.html#method_create", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "create"}, {"url": "Chatbeat.offline.html#method_createLocalPlaylist", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "createLocalPlaylist"}, {"url": "Chatbeat.html#property_debug", "access": "", "host": "Chatbeat", "type": "property", "name": "debug"}, {"url": "Chatbeat.cache.html#method_decrypt", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "decrypt"}, {"url": "Chatbeat.html#property_defaultVolume", "access": "", "host": "Chatbeat", "type": "property", "name": "defaultVolume"}, {"url": "Chatbeat.playlist.html#method_deletePlaylist", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "deletePlaylist"}, {"url": "Chatbeat.playlist.html#method_deletePlaylistHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "deletePlaylistHandler"}, {"url": "Chatbeat.handlers.html#method_directoryListingHandler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "directoryListingHandler"}, {"url": "Chatbeat.playlist.html#method_display", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "display"}, {"url": "Chatbeat.playlist.html#method_displayAlbums", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "displayAlbums"}, {"url": "Chatbeat.cache.html#property_docDir", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "docDir"}, {"url": "Chatbeat.playlist.html#method_DOMcontrol", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "DOMcontrol"}, {"url": "Chatbeat.player.html#method_DOMcontrol", "access": "", "host": "Chatbeat.player", "type": "method", "name": "DOMcontrol"}, {"url": "Chatbeat.playlist.html#property_drag {object}", "access": "", "host": "Chatbeat.playlist", "type": "property", "name": "drag {object}"}, {"url": "Chatbeat.cache.html#method_encrypt", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "encrypt"}, {"url": "Chatbeat.playlist.html#method_featured", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "featured"}, {"url": "Chatbeat.playlist.html#method_getAlbumList", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getAlbumList"}, {"url": "Chatbeat.playlist.html#method_getAlbumListHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getAlbumListHandler"}, {"url": "Chatbeat.playlist.html#method_getArtistList", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getArtistList"}, {"url": "Chatbeat.playlist.html#method_getArtistListHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getArtistListHandler"}, {"url": "Chatbeat.player.html#method_getDuration", "access": "", "host": "Chatbeat.player", "type": "method", "name": "getDuration"}, {"url": "Chatbeat.cache.html#method_getID", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "getID"}, {"url": "Chatbeat.playlist.html#method_getList", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getList"}, {"url": "Chatbeat.playlist.html#method_getListHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getListHandler"}, {"url": "Chatbeat.playlist.html#method_getOfflineListHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getOfflineListHandler"}, {"url": "Chatbeat.player.html#method_getPlayingID", "access": "", "host": "Chatbeat.player", "type": "method", "name": "getPlayingID"}, {"url": "Chatbeat.playlist.html#method_getSongsList", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getSongsList"}, {"url": "Chatbeat.playlist.html#method_getSongsListHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getSongsListHandler"}, {"url": "Chatbeat.handlers.html#method_handleSoundComplete", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "handleSoundComplete"}, {"url": "Chatbeat.html#property_httpStream", "access": "", "host": "Chatbeat", "type": "property", "name": "httpStream"}, {"url": "Chatbeat.handlers.html#method_id3Handler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "id3Handler"}, {"url": "Chatbeat.cache.html#method_init", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "init"}, {"url": "Chatbeat.offline.html#method_init", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "init"}, {"url": "Chatbeat.pages.html#method_init", "access": "", "host": "Chatbeat.pages", "type": "method", "name": "init"}, {"url": "Chatbeat.handlers.html#method_init", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "init"}, {"url": "Chatbeat.window.html#method_init", "access": "", "host": "Chatbeat.window", "type": "method", "name": "init"}, {"url": "Chatbeat.playlist.html#method_init", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "init"}, {"url": "Chatbeat.html#method_init", "access": "", "host": "Chatbeat", "type": "method", "name": "init"}, {"url": "Chatbeat.player.html#method_init", "access": "", "host": "Chatbeat.player", "type": "method", "name": "init"}, {"url": "Chatbeat.html#method_initComponent", "access": "", "host": "Chatbeat", "type": "method", "name": "initComponent"}, {"url": "Chatbeat.handlers.html#method_initializationHandler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "initializationHandler"}, {"url": "Chatbeat.playlist.html#method_insertToList", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "insertToList"}, {"url": "Chatbeat.handlers.html#method_ioErrorHandler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "ioErrorHandler"}, {"url": "Chatbeat.cache.html#method_isCached", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "isCached"}, {"url": "Chatbeat.html#property_isOnline", "access": "", "host": "Chatbeat", "type": "property", "name": "isOnline"}, {"url": "Chatbeat.html#property_isPaused", "access": "", "host": "Chatbeat", "type": "property", "name": "isPaused"}, {"url": "Chatbeat.html#property_isPlaying", "access": "", "host": "Chatbeat", "type": "property", "name": "isPlaying"}, {"url": "Chatbeat.html#property_isRandom", "access": "", "host": "Chatbeat", "type": "property", "name": "isRandom"}, {"url": "Chatbeat.cache.html#method_keep", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "keep"}, {"url": "Chatbeat.cache.html#property_key", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "key"}, {"url": "Chatbeat.html#property_lastposition", "access": "", "host": "Chatbeat", "type": "property", "name": "lastposition"}, {"url": "Chatbeat.playlist.html#property_list", "access": "", "host": "Chatbeat.playlist", "type": "property", "name": "list"}, {"url": "Chatbeat.playlist.html#method__load", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "_load"}, {"url": "Chatbeat.player.html#method__load", "access": "", "host": "Chatbeat.player", "type": "method", "name": "_load"}, {"url": "Chatbeat.playlist.html#method__loadOffline", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "_loadOffline"}, {"url": "Chatbeat.offline.html#method_loadPlaylist", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "loadPlaylist"}, {"url": "Chatbeat.offline.html#method_makeOffline", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "makeOffline"}, {"url": "Chatbeat.offline.html#method_makeOnline", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "makeOnline"}, {"url": "Chatbeat.playlist.html#property_menu {object}", "access": "", "host": "Chatbeat.playlist", "type": "property", "name": "menu {object}"}, {"url": "Chatbeat.html#property_mode", "access": "", "host": "Chatbeat", "type": "property", "name": "mode"}, {"url": "Chatbeat.player.html#method_next", "access": "", "host": "Chatbeat.player", "type": "method", "name": "next"}, {"url": "Chatbeat.playlist.html#method_onDrop", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "onDrop"}, {"url": "Chatbeat.offline.html#method_parseJSON", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "parseJSON"}, {"url": "Chatbeat.cache.html#method_parseURL", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "parseURL"}, {"url": "Chatbeat.html#property_password", "access": "", "host": "Chatbeat", "type": "property", "name": "password"}, {"url": "Chatbeat.player.html#method_pause", "access": "", "host": "Chatbeat.player", "type": "method", "name": "pause"}, {"url": "Chatbeat.player.html#method_play", "access": "", "host": "Chatbeat.player", "type": "method", "name": "play"}, {"url": "Chatbeat.player.html#method_playVideo", "access": "", "host": "Chatbeat.player", "type": "method", "name": "playVideo"}, {"url": "Chatbeat.player.html#method_prev", "access": "", "host": "Chatbeat.player", "type": "method", "name": "prev"}, {"url": "Chatbeat.handlers.html#method_progressHandler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "progressHandler"}, {"url": "Chatbeat.playlist.html#method_renderSave", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "renderSave"}, {"url": "Chatbeat.offline.html#method_save", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "save"}, {"url": "Chatbeat.playlist.html#method_save", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "save"}, {"url": "Chatbeat.playlist.html#method_saveOffline", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "saveOffline"}, {"url": "Chatbeat.html#property_scrubed", "access": "", "host": "Chatbeat", "type": "property", "name": "scrubed"}, {"url": "Chatbeat.player.html#method__search", "access": "", "host": "Chatbeat.player", "type": "method", "name": "_search"}, {"url": "Chatbeat.offline.html#method_searchPlaylist", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "searchPlaylist"}, {"url": "Chatbeat.playlist.html#method_searchResult", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "searchResult"}, {"url": "Chatbeat.playlist.html#method_searchResulterror", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "searchResulterror"}, {"url": "Chatbeat.player.html#method_selector", "access": "", "host": "Chatbeat.player", "type": "method", "name": "selector"}, {"url": "Chatbeat.playlist.html#method__send", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "_send"}, {"url": "Chatbeat.pages.html#method_setActions", "access": "", "host": "Chatbeat.pages", "type": "method", "name": "setActions"}, {"url": "Chatbeat.player.html#method_setInfos", "access": "", "host": "Chatbeat.player", "type": "method", "name": "setInfos"}, {"url": "Chatbeat.offline.html#method_setMode", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "setMode"}, {"url": "Chatbeat.pages.html#method_setPages", "access": "", "host": "Chatbeat.pages", "type": "method", "name": "setPages"}, {"url": "Chatbeat.player.html#method_setVolume", "access": "", "host": "Chatbeat.player", "type": "method", "name": "setVolume"}, {"url": "Chatbeat.html#property_songposition", "access": "", "host": "Chatbeat", "type": "property", "name": "songposition"}, {"url": "Chatbeat.html#property_soundContext", "access": "", "host": "Chatbeat", "type": "property", "name": "soundContext"}, {"url": "Chatbeat.player.html#method_soundDetails", "access": "", "host": "Chatbeat.player", "type": "method", "name": "soundDetails"}, {"url": "Chatbeat.handlers.html#method_soundDetailsProgress", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "soundDetailsProgress"}, {"url": "Chatbeat.html#property_soundObj", "access": "", "host": "Chatbeat", "type": "property", "name": "soundObj"}, {"url": "Chatbeat.html#property_soundTransformObj", "access": "", "host": "Chatbeat", "type": "property", "name": "soundTransformObj"}, {"url": "Chatbeat.window.html#property_state {[normal or maximized]}", "access": "", "host": "Chatbeat.window", "type": "property", "name": "state {[normal or maximized]}"}, {"url": "Chatbeat.html#property_staticURL", "access": "", "host": "Chatbeat", "type": "property", "name": "staticURL"}, {"url": "Chatbeat.player.html#method_stop", "access": "", "host": "Chatbeat.player", "type": "method", "name": "stop"}, {"url": "Chatbeat.html#property_ticker", "access": "", "host": "Chatbeat", "type": "property", "name": "ticker"}, {"url": "Chatbeat.playlist.html#method_toggleViews", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "toggleViews"}, {"url": "Chatbeat.html#property_URLObj", "access": "", "host": "Chatbeat", "type": "property", "name": "URLObj"}, {"url": "Chatbeat.html#property_username", "access": "", "host": "Chatbeat", "type": "property", "name": "username"}, {"url": "Chatbeat.html#property_videoObj", "access": "", "host": "Chatbeat", "type": "property", "name": "videoObj"}];
+</script>
+</body>
+</html>

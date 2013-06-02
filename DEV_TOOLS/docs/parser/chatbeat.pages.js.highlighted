@@ -1,0 +1,156 @@
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* Chatbeat component that controls the loaded page when a user selects or navigates on the application.</span>
+<span class="cm">* @class pages</span>
+<span class="cm">* @constructor </span>
+<span class="cm">* @namespace Chatbeat </span>
+<span class="cm">*/</span>
+<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="s1">&#39;pages&#39;</span><span class="p">,</span> <span class="p">{</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* container for active status of the page</span>
+<span class="cm">	* @property active	</span>
+<span class="cm">	*/</span>
+	<span class="nx">active</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* this method is automatically loaded onStart of the application called by Chatbeat.initComponent &lt;br&gt;</span>
+<span class="cm">	* binds all the respective buttons in the UI to its specific methods.</span>
+<span class="cm">	* @method init</span>
+<span class="cm">	*/</span>
+	<span class="nx">init</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="nx">_pageParent</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#leftPanel li, #rightPanel li&#39;</span><span class="p">).</span><span class="nx">live</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="c1">// void if creating a playlist</span>
+			<span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>		
+			<span class="k">if</span><span class="p">(</span><span class="nx">val</span> <span class="o">==</span> <span class="s1">&#39;Create New Playlist&#39;</span> <span class="o">||</span> <span class="nx">val</span> <span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+			
+			<span class="c1">// mark the tab that is currrently selected</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">_pageParent</span><span class="p">.</span><span class="nx">active</span><span class="p">)</span> <span class="p">{</span>				
+				<span class="nx">$</span><span class="p">(</span><span class="nx">_pageParent</span><span class="p">.</span><span class="nx">active</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;pageCurrent&#39;</span><span class="p">);</span>			
+			<span class="p">}</span>			
+			<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;pageCurrent&#39;</span><span class="p">);</span>
+			<span class="nx">_pageParent</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+						
+			<span class="c1">// reset values</span>
+				
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#pageTitle&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.page&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#toggleViewsContainer&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+
+
+			<span class="c1">// if custom playlist</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;pl_id&quot;</span><span class="p">))</span>	<span class="p">{</span>
+				
+				<span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;pl_id&quot;</span><span class="p">),</span>
+					<span class="nx">type</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">);</span>
+				
+				<span class="c1">// check if offline or online playlist</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">type</span> <span class="o">==</span> <span class="s2">&quot;offline&quot;</span><span class="p">)</span>	<span class="p">{</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">_loadOffline</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>	
+				<span class="p">}</span>	<span class="k">else</span> <span class="p">{</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">_load</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+				<span class="p">}</span>
+				
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#songsPage&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#toggleViewsContainer&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>				
+							
+			<span class="c1">//	$(&#39;#pageContent&#39;).load(&#39;html/playlist.html&#39;);</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>				
+					<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;[load custom playlist] id=&gt;&quot;</span> <span class="o">+</span> <span class="nx">id</span><span class="p">);</span>
+				<span class="p">}</span>				
+				
+			<span class="c1">// pre built-in menus</span>
+			<span class="p">}</span>	<span class="k">else</span> <span class="p">{</span>
+
+				<span class="nx">_pageParent</span><span class="p">.</span><span class="nx">setPages</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+				
+			<span class="p">}</span>
+			
+		<span class="p">})</span>
+		
+		
+		<span class="k">this</span><span class="p">.</span><span class="nx">setActions</span><span class="p">();</span>
+
+
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* sets the pages looks, functionalities etc. depending ong the object caption or text &lt;br&gt;</span>
+<span class="cm">	* @method setPages</span>
+<span class="cm">	* @param val {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">setPages</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>				
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;[page select]=&gt; &quot;</span> <span class="o">+</span> <span class="nx">val</span><span class="p">);</span>
+		<span class="p">}</span>				
+		
+		<span class="k">switch</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="k">case</span> <span class="s1">&#39;Artists&#39;</span><span class="o">:</span> 
+				<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">getArtistList</span><span class="p">();</span>
+				
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="s1">&#39;Albums&#39;</span><span class="o">:</span>
+				
+				<span class="k">break</span><span class="p">;</span>
+				
+			<span class="k">case</span> <span class="s1">&#39;Now Playing&#39;</span><span class="o">:</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#nowPlayingPage&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#toggleViewsContainer&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+				<span class="k">break</span><span class="p">;</span>
+				
+			<span class="k">case</span> <span class="s1">&#39;My Account&#39;</span><span class="o">:</span>
+				
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="s1">&#39;Settings&#39;</span><span class="o">:</span>
+				
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="s1">&#39;Logout&#39;</span><span class="o">:</span>
+				
+				<span class="k">break</span><span class="p">;</span>
+
+		<span class="p">}</span>	
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* this defines the functionality that will be applied to an element that will be added to a certain page dynamically</span>
+<span class="cm">	* @method setActions</span>
+<span class="cm">	*/</span>
+	<span class="nx">setActions</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#nowPlayingPage tbody tr&#39;</span><span class="p">).</span><span class="nx">live</span><span class="p">(</span><span class="s2">&quot;dblclick&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">));</span>
+			
+		<span class="p">});</span>
+
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#nowPlayingPage .songsAlbumArt li&#39;</span><span class="p">).</span><span class="nx">live</span><span class="p">(</span><span class="s2">&quot;dblclick&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">));</span>			
+		<span class="p">});</span>
+		
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#songsPage tbody tr, #songsPage .songsAlbumArt li&#39;</span><span class="p">).</span><span class="nx">live</span><span class="p">(</span><span class="s2">&quot;dblclick&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			
+			<span class="nx">artist_id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;artist_id&#39;</span><span class="p">);</span>
+			<span class="nx">album_id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;album_id&#39;</span><span class="p">);</span>
+			<span class="nx">id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;song_id&#39;</span><span class="p">);</span>			
+			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#pageTitle&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;Now Playing &gt; &#39;</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span><span class="nx">_pageParent</span><span class="p">.</span><span class="nx">active</span><span class="p">).</span><span class="nx">text</span><span class="p">());</span>
+			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#nowPlayingPage&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#songsPage .wrapper&#39;</span><span class="p">).</span><span class="nx">clone</span><span class="p">().</span><span class="nx">appendTo</span><span class="p">(</span><span class="s1">&#39;#nowPlayingPage&#39;</span><span class="p">);</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#nowPlayingSelection&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#songsPage&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+			
+			<span class="kd">var</span> <span class="nx">selected</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">);</span>
+		
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#nowPlayingPage tbody tr[id=&quot;&#39;</span><span class="o">+</span> <span class="nx">selected</span><span class="o">+</span><span class="s1">&#39;&quot;]&#39;</span><span class="p">).</span><span class="nx">dblclick</span><span class="p">();</span>
+		<span class="p">});</span>
+		
+	
+	<span class="p">}</span>
+	
+<span class="p">});</span>
+</pre></div>

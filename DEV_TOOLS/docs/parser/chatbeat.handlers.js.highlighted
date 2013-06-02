@@ -1,0 +1,171 @@
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* Chatbeat component that handlers all the triggers of specific events in the application</span>
+<span class="cm">* @class handlers</span>
+<span class="cm">* @constructor  </span>
+<span class="cm">* @namespace Chatbeat</span>
+<span class="cm">*/</span>
+
+<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="s1">&#39;handlers&#39;</span><span class="p">,</span> <span class="p">{</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* this method is automatically loaded onStart of the application called by Chatbeat.initComponent </span>
+<span class="cm">	*/</span>	
+	<span class="nx">init</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* handler for first inialization of Chatbeat Application. Whether it is opened manually by double clicking of an icon by a user or, opened by system for playing music file.</span>
+<span class="cm">	* @method initializationHandler</span>
+<span class="cm">	* @param e {event returned by the system}</span>
+<span class="cm">	*/</span>
+	<span class="nx">initializationHandler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;app trigger =&gt; &quot;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span> <span class="s1">&#39; manual launch&#39;</span><span class="p">);</span> <span class="c1">// file path</span>
+		<span class="p">}</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+		<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">featured</span><span class="p">();</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* handler for directory object (AIR FILE OBJECT) triggered by Chatbeat.offline.searchPlaylist()</span>
+<span class="cm">	* @method directoryListingHandler</span>
+<span class="cm">	* @param e {event returned by the system}</span>
+<span class="cm">	*/</span>
+	<span class="nx">directoryListingHandler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        
+		<span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">firstRun</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+		
+		<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			
+			<span class="k">if</span><span class="p">(</span><span class="nx">$cb</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">nativePath</span><span class="p">);</span>			
+			<span class="p">}</span>
+			<span class="kd">var</span> <span class="nx">extension</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">nativePath</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+			
+			<span class="k">if</span><span class="p">(</span><span class="nx">extension</span> <span class="o">==</span> <span class="s1">&#39;mp3&#39;</span><span class="p">)</span>	<span class="p">{</span>				
+				<span class="nx">$cb</span><span class="p">.</span><span class="nx">playListSongs</span><span class="p">[</span><span class="nx">counter</span><span class="p">]</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">nativePath</span><span class="p">;</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">firstRun</span><span class="p">)</span>	<span class="p">{</span>
+					<span class="nx">firstRun</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>					
+				<span class="p">}</span>
+				<span class="nx">counter</span><span class="o">++</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="nx">$cb</span><span class="p">.</span><span class="nx">listLenght</span> <span class="o">=</span> <span class="nx">counter</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="c1">//$cb.songposition = Math.floor(Math.random() * counter);</span>
+		<span class="c1">//playSound();</span>
+		<span class="c1">//Chatbeat.player._load();</span>
+
+    <span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* handler for the GLOBAL Ticker or Timer (Chatbeat.ticker) of the whole application. Primarily used for displaying the real time status of playing, streaming and loaded amount of music file.</span>
+<span class="cm">	* @method soundDetailsProgress</span>
+<span class="cm">	*/</span>
+	<span class="nx">soundDetailsProgress</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">)</span> <span class="p">{</span>
+		
+			<span class="kd">var</span> <span class="nx">percentLoaded</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesLoaded</span> <span class="o">/</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesTotal</span><span class="p">)</span> <span class="o">*</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#mainDuration&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">();</span>
+			<span class="kd">var</span> <span class="nx">loadTime</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesLoaded</span> <span class="o">/</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesTotal</span><span class="p">;</span>
+			<span class="kd">var</span> <span class="nx">loadPercent</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="nx">loadTime</span><span class="p">);</span>
+			<span class="kd">var</span> <span class="nx">estimatedLength</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="p">(</span><span class="nx">loadTime</span><span class="p">));</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">estimatedLength</span> <span class="o">=</span> <span class="nx">estimatedLength</span>
+			<span class="kd">var</span> <span class="nx">playbackPercent</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">position</span> <span class="o">/</span> <span class="nx">estimatedLength</span><span class="p">));</span>
+			<span class="kd">var</span> <span class="nx">playbackbar</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#mainDuration&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">position</span> <span class="o">/</span> <span class="nx">estimatedLength</span><span class="p">));</span>
+			
+			<span class="cm">/*</span>
+<span class="cm">			</span>
+<span class="cm">			$(&#39;#debugDiv&#39;).html(&quot;Sound files size is &quot; + Chatbeat.soundObj.bytesTotal + &quot; bytes.\n&quot;  </span>
+<span class="cm">										+ &quot;Bytes being loaded: &quot; + Chatbeat.soundObj.bytesLoaded + &quot;\n&quot;</span>
+<span class="cm">										+ &quot;Percentage of sound file that is loaded &quot; + loadPercent + &quot;%.\n&quot;</span>
+<span class="cm">										+ &quot;Sound playback is &quot; + playbackPercent + &quot;% complete &quot; + &quot;%.\n&quot;</span>
+<span class="cm">										+ &quot;Seeker Position &quot; + Chatbeat.channel.position + &quot;.\n&quot;</span>
+<span class="cm">										+ &quot;Sound Length &quot; + Chatbeat.soundObj.length </span>
+<span class="cm">										);</span>
+<span class="cm">			</span>
+<span class="cm">			*/</span>
+			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#duration&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">(</span><span class="nx">percentLoaded</span><span class="p">);</span>		
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#position&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">(</span><span class="nx">playbackbar</span><span class="p">);</span>
+			
+			<span class="k">if</span><span class="p">(</span><span class="nx">percentLoaded</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span>	<span class="p">{</span>
+			
+				<span class="nx">percentLoaded</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesLoaded</span> <span class="o">/</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesTotal</span><span class="p">)</span> <span class="o">*</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#mainDuration&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">();</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#duration&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">(</span><span class="nx">percentLoaded</span><span class="p">);</span>
+
+			<span class="p">}</span>
+			
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">getDuration</span><span class="p">();</span>
+			
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* handler for COMPLETE_STATUS of AIR SoundObject. Triggered by Chatbeat.soundObj. This function is called when a streaming object is completed loaded.</span>
+<span class="cm">	* @method completeHandler</span>
+<span class="cm">	*/</span>
+	<span class="nx">completeHandler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+
+		<span class="nx">percentLoaded</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesLoaded</span> <span class="o">/</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesTotal</span><span class="p">)</span> <span class="o">*</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#mainDuration&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">();</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#duration&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">(</span><span class="nx">percentLoaded</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#seeker&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* handler for ID3 info of AIR Sound Object. Triggered by Chatbeat.soundObj. This function is called when a streaming object has an ID3 meta data attached on it.</span>
+<span class="cm">	* @method id3Handler</span>
+<span class="cm">	*/</span>
+	<span class="nx">id3Handler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="k">in</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">id3</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">//		air.Introspector.Console.log(&quot;id3: &quot; + i + &quot; : &quot; + 	Chatbeat.soundObj.id3[i]);</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+
+		<span class="cm">/*</span>
+<span class="cm">		$(&#39;#title&#39;).text(Chatbeat.soundObj.id3.TIT2);</span>
+<span class="cm">		$(&#39;#artist&#39;).text(Chatbeat.soundObj.id3.TPE1);</span>
+<span class="cm">		$(&#39;#album&#39;).text(Chatbeat.soundObj.id3.TALB);</span>
+<span class="cm">		*/</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* handler for ERROR_STATUS of AIR Sound Object. Triggered by Chatbeat.soundObj. This function is called when a streaming object cannot be loaded, file not found or file corrupted</span>
+<span class="cm">	* @method ioErrorHandler</span>
+<span class="cm">	*/</span>
+	<span class="nx">ioErrorHandler</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;ioErrorHandler: &quot;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* handler for air.ProgressEvent.PROGRESS of AIR Sound Object. Triggered by Chatbeat.soundObj. This method broadcast the status of the streaming object while it is still downloading or streamin.</span>
+<span class="cm">	* @method progressHandler</span>
+<span class="cm">	*/</span>
+	<span class="nx">progressHandler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">getDuration</span><span class="p">();</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* handler for air.Event.SOUND_COMPLETE of AIR Sound Object. Triggered by Chatbeat.soundObj. this method is called when the player is already finish playing the sound object.</span>
+<span class="cm">	* @method handleSoundComplete</span>
+<span class="cm">	*/</span>
+	<span class="nx">handleSoundComplete</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Sound Complete!&quot;</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+	<span class="p">}</span>
+	
+<span class="p">});</span>
+</pre></div>

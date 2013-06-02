@@ -1,0 +1,21 @@
+Testing Chatbeat Air Application
+
+adl application.xml
+
+
+
+Package Chatbeat Project as EXE
+
+adt -package -tsa none -keystore cert.p12 -storetype pkcs12 -target bundle BUILD application.xml player.html assets css js
+
+
+
+
+Package Chatbeat Project as AIR file
+
+adt -package -tsa none -keystore cert.p12 -storetype pkcs12 ChatBeat-1.9.6.air application.xml player.html assets css js
+
+
+PACKAGE INSTALLER
+
+C:\AdobeAIRSDK\bin\adt -package -tsa none -keystore trinko.p12 -storetype pkcs12 -target native AsianBankerPlayer application.xml index.html js assets

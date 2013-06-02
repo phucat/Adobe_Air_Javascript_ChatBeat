@@ -1,0 +1,172 @@
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* Chatbeat component that is responsible on  overall native windows behaviour.</span>
+<span class="cm">* @class window</span>
+<span class="cm">* @constructor </span>
+<span class="cm">* @namespace Chatbeat </span>
+<span class="cm">*/</span>
+<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="s1">&#39;window&#39;</span><span class="p">,</span> <span class="p">{</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* status of window</span>
+<span class="cm">	* @property state {[normal or maximized]}</span>
+<span class="cm">	*/</span>
+	<span class="nx">state</span> <span class="o">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* this method is automatically loaded onStart of the application called by Chatbeat.initComponent &lt;br&gt;</span>
+<span class="cm">	* - initialize the startup window positioning and size. &lt;br&gt;</span>
+<span class="cm">	* - applies the correct effects of window depending on the users operating system</span>
+<span class="cm">	* @method init</span>
+<span class="cm">	*/</span>
+	<span class="nx">init</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+	
+		<span class="nx">cbWindiwParent</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		
+		<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">((</span><span class="nx">air</span><span class="p">.</span><span class="nx">Capabilities</span><span class="p">.</span><span class="nx">screenResolutionX</span> <span class="o">-</span> <span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+		<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">((</span><span class="nx">air</span><span class="p">.</span><span class="nx">Capabilities</span><span class="p">.</span><span class="nx">screenResolutionY</span> <span class="o">-</span> <span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>	
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#moveHandle&#39;</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startMove</span><span class="p">()</span>
+		<span class="p">});</span>
+				
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#moveHandle&#39;</span><span class="p">).</span><span class="nx">dblclick</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">displayState</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">maximize</span><span class="p">();</span>	
+				<span class="nx">cbWindiwParent</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;maximized&#39;</span><span class="p">;</span>	
+			<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+				<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+				<span class="nx">cbWindiwParent</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;normal&#39;</span><span class="p">;</span>				
+			<span class="p">}</span>
+			
+		<span class="p">});</span>
+	
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#closeBtn&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#minBtn&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">minimize</span><span class="p">();</span>
+	
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#maxBtn&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">displayState</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">maximize</span><span class="p">();</span>	
+				<span class="nx">cbWindiwParent</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;maximized&#39;</span><span class="p">;</span>
+			<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+				<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+				<span class="nx">cbWindiwParent</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;normal&#39;</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#resizeHandle .top&#39;</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startResize</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindowResize</span><span class="p">.</span><span class="nx">TOP</span><span class="p">);</span>
+		<span class="p">});</span>
+
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#resizeHandle .bottom&#39;</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startResize</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindowResize</span><span class="p">.</span><span class="nx">BOTTOM</span><span class="p">);</span>
+		<span class="p">});</span>
+
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#resizeHandle .left&#39;</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startResize</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindowResize</span><span class="p">.</span><span class="nx">LEFT</span><span class="p">);</span>
+		<span class="p">});</span>
+
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#resizeHandle .right&#39;</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startResize</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindowResize</span><span class="p">.</span><span class="nx">RIGHT</span><span class="p">);</span>
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#resizeHandle .bottom-right&#39;</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startResize</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindowResize</span><span class="p">.</span><span class="nx">BOTTOM_RIGHT</span><span class="p">);</span>
+		<span class="p">});</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#resizeHandle .bottom-left&#39;</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startResize</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindowResize</span><span class="p">.</span><span class="nx">BOTTOM_LEFT</span><span class="p">);</span>
+		<span class="p">});</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#resizeHandle .top-right&#39;</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startResize</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindowResize</span><span class="p">.</span><span class="nx">TOP_RIGHT</span><span class="p">);</span>
+		<span class="p">});</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#resizeHandle .top-left&#39;</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startResize</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindowResize</span><span class="p">.</span><span class="nx">TOP_LEFT</span><span class="p">);</span>
+		<span class="p">});</span>
+		
+		<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">minSize</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">650</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+		
+		<span class="kd">function</span> <span class="nx">resizeWrapper</span><span class="p">()</span>	<span class="p">{</span>
+			
+			<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindow</span><span class="p">.</span><span class="nx">supportsTransparency</span> <span class="o">||</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">mode</span> <span class="o">==</span> <span class="s1">&#39;light&#39;</span><span class="p">)</span>	<span class="p">{</span>
+				
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;-webkit-border-radius&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;opacity&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#moveHandle&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;-webkit-border-radius&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#playerControls&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;-webkit-border-radius&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">);</span>
+
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;margin&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;-webkit-box-shadow&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">);</span>
+				
+			
+
+			<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">width</span> <span class="o">-</span> <span class="mi">50</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="mi">50</span><span class="p">);</span>				
+			<span class="p">}</span>
+			
+			
+			
+			<span class="kd">var</span> <span class="nx">subs</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span> <span class="o">-</span> <span class="mi">170</span><span class="p">;</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#mainDuration&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">()</span> <span class="o">-</span> <span class="mi">180</span><span class="p">)</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#contents&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">(</span><span class="nx">subs</span><span class="p">);</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#leftPanel&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">(</span><span class="nx">subs</span><span class="p">);</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#rightPanel&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">(</span><span class="nx">subs</span><span class="p">);</span>			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#centerPanel&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">(</span><span class="nx">subs</span><span class="p">);</span>
+			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#searchInput&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#rightPanel&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">()</span> <span class="o">-</span> <span class="mi">50</span><span class="p">);</span>
+
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">videoObj</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#centerPanel&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span> <span class="o">-</span><span class="mi">42</span><span class="p">;</span>	
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">videoObj</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#centerPanel&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">();</span>	
+			<span class="c1">//Chatbeat.videoObj.height = getAspectHeight($(&#39;#centerPanel&#39;).width(), 640, 480);</span>
+
+			<span class="kd">var</span> <span class="nx">offset</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#centerPanel&quot;</span><span class="p">).</span><span class="nx">offset</span><span class="p">();</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">videoObj</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span>  <span class="nx">offset</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">videoObj</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span>  <span class="nx">offset</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="mi">42</span><span class="p">;</span>			
+			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#toastWindow&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="p">((</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span> <span class="o">-</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#toastWindow&#39;</span><span class="p">).</span><span class="nx">outerHeight</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">));</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#toastWindow&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="p">((</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#wrapper&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">()</span> <span class="o">-</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#toastWindow&#39;</span><span class="p">).</span><span class="nx">outerWidth</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">));</span>
+		<span class="p">}</span>
+		
+		<span class="kd">function</span> <span class="nx">getAspectWidth</span><span class="p">(</span><span class="nx">newHeight</span><span class="p">,</span><span class="nx">orginalWidth</span><span class="p">,</span><span class="nx">originalHeight</span><span class="p">)</span>	<span class="p">{</span>
+		
+			<span class="kd">var</span> <span class="nx">aspectRatio</span> <span class="o">=</span> <span class="nx">orginalWidth</span> <span class="o">/</span> <span class="nx">originalHeight</span><span class="p">;</span>
+			<span class="k">return</span> <span class="nx">newHeight</span> <span class="o">*</span> <span class="nx">aspectRatio</span><span class="p">;</span>
+		<span class="p">}</span>
+		
+		<span class="kd">function</span> <span class="nx">getAspectHeight</span><span class="p">(</span><span class="nx">newWidth</span><span class="p">,</span><span class="nx">orginalWidth</span><span class="p">,</span><span class="nx">originalHeight</span><span class="p">)</span>	<span class="p">{</span>
+		
+			<span class="kd">var</span> <span class="nx">aspectRatio</span> <span class="o">=</span> <span class="nx">originalHeight</span> <span class="o">/</span> <span class="nx">orginalWidth</span><span class="p">;</span>
+			<span class="k">return</span> <span class="nx">newWidth</span> <span class="o">*</span> <span class="nx">aspectRatio</span><span class="p">;</span>
+		<span class="p">}</span>
+		
+		<span class="nx">resizeWrapper</span><span class="p">();</span>
+		
+		<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">RESIZE</span><span class="p">,</span> <span class="nx">resizeWrapper</span><span class="p">);</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Supports Transparency : &quot;</span> <span class="o">+</span> <span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindow</span><span class="p">.</span><span class="nx">supportsTransparency</span><span class="p">);</span>
+		<span class="p">}</span>
+		
+		
+	<span class="p">},</span>
+	
+	<span class="nx">toast</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;unable to play!&#39;</span><span class="p">);</span>
+	<span class="p">}</span>
+	
+<span class="p">});</span>
+</pre></div>

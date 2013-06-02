@@ -1,0 +1,306 @@
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* This contains the global configuration of Chatbeat variables and access to other extended object properties, methods and events.</span>
+<span class="cm">* @module chatbeat</span>
+<span class="cm">* @namespace  </span>
+<span class="cm">*/</span>
+
+<span class="cm">/**</span>
+<span class="cm">* This contains the global configuration of Chatbeat variables and access to other extended object properties, methods and events.</span>
+<span class="cm">* @class Chatbeat</span>
+<span class="cm">* @constructor  </span>
+<span class="cm">* </span>
+<span class="cm">*/</span>
+
+<span class="kd">var</span> <span class="nx">Chatbeat</span><span class="p">;</span>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Chatbeat</span><span class="p">)</span> <span class="nx">Chatbeat</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span>	<span class="p">{</span>
+
+	
+<span class="kd">var</span> <span class="nx">Chatbeat</span> <span class="o">=</span> <span class="p">{</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* app username of the user</span>
+<span class="cm">	* @property username   </span>
+<span class="cm">	* @type string   </span>
+<span class="cm">	*/</span>
+	<span class="nx">username</span> <span class="o">:</span> <span class="s1">&#39;ray&#39;</span><span class="p">,</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* app password of the user</span>
+<span class="cm">	* @property password   </span>
+<span class="cm">	* @type string   </span>
+<span class="cm">	*/</span>
+	<span class="nx">password</span> <span class="o">:</span> <span class="s1">&#39;ray&#39;</span><span class="p">,</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* sets app if in debug mode</span>
+<span class="cm">	* @property debug   </span>
+<span class="cm">	* @type string   </span>
+<span class="cm">	*/</span>	
+	<span class="nx">debug</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* sets buffer time before playing</span>
+<span class="cm">	* @property bufferTime</span>
+<span class="cm">	* @type int</span>
+<span class="cm">	*/</span>
+	<span class="nx">bufferTime</span> <span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* sets the initial volume amount</span>
+<span class="cm">	* @property defaultVolume</span>
+<span class="cm">	* @type int</span>
+<span class="cm">	*/</span>
+	<span class="nx">defaultVolume</span> <span class="o">:</span> <span class="p">.</span><span class="mi">3</span><span class="p">,</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* startup position of selected song on the playlist</span>
+<span class="cm">	* @property songposition</span>
+<span class="cm">	* @type int</span>
+<span class="cm">	*/</span>
+	<span class="nx">songposition</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* last position of bytes played in Sound Object. Use for scrubbing.</span>
+<span class="cm">	* @property lastposition</span>
+<span class="cm">	* @type int</span>
+<span class="cm">	*/</span>
+	<span class="nx">lastposition</span> <span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* channel container for AIR sound Object</span>
+<span class="cm">	* @property channel</span>
+<span class="cm">	* @type AIR {object}</span>
+<span class="cm">	* @return AIR {object}</span>
+<span class="cm">	*/</span>
+	<span class="nx">channel</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+	<span class="nx">listLenght</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* status of player</span>
+<span class="cm">	* @property isPlaying</span>
+<span class="cm">	* @type boolean</span>
+<span class="cm">	*/</span>
+	<span class="nx">isPlaying</span> <span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* status of random</span>
+<span class="cm">	* @property isRandom</span>
+<span class="cm">	* @type boolean</span>
+<span class="cm">	*/</span>	
+	<span class="nx">isRandom</span> <span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* status of pause</span>
+<span class="cm">	* @property isPaused</span>
+<span class="cm">	* @type boolean</span>
+<span class="cm">	*/</span>	
+	<span class="nx">isPaused</span> <span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* status of scrub</span>
+<span class="cm">	* @property scrubed</span>
+<span class="cm">	* @type boolean</span>
+<span class="cm">	*/</span>	
+	<span class="nx">scrubed</span> <span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+ 	
+	<span class="cm">/**   </span>
+<span class="cm">	* http stream URL</span>
+<span class="cm">	* @property httpStream</span>
+<span class="cm">	* @type string</span>
+<span class="cm">	* @final</span>
+<span class="cm">	*/</span>
+	<span class="nx">httpStream</span> <span class="o">:</span> <span class="s1">&#39;http://dev.stream.chatbeat.com/&#39;</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* API URL</span>
+<span class="cm">	* @property httpStream</span>
+<span class="cm">	* @type string</span>
+<span class="cm">	* @final</span>
+<span class="cm">	*/</span>
+	<span class="nx">API</span> <span class="o">:</span> <span class="s1">&#39;https://dev.api.Chatbeat.com/v2&#39;</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Thumbnail URL</span>
+<span class="cm">	* @property staticURL</span>
+<span class="cm">	* @type string</span>
+<span class="cm">	* @final</span>
+<span class="cm">	*/</span>
+	<span class="nx">staticURL</span> <span class="o">:</span> <span class="s1">&#39;http://dev.static.chatbeat.com&#39;</span><span class="p">,</span>
+
+<span class="c1">//	mode : &#39;light&#39;,</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* mode of the application to use.</span>
+<span class="cm">	* @property mode</span>
+<span class="cm">	* @type {string [full or light]}</span>
+<span class="cm">	* @final</span>
+<span class="cm">	*/</span>	
+	<span class="nx">mode</span> <span class="o">:</span> <span class="s1">&#39;full&#39;</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* status of Network Connectivity</span>
+<span class="cm">	* @property isOnline</span>
+<span class="cm">	* @type boolean</span>
+<span class="cm">	*/</span>		
+	<span class="nx">isOnline</span> <span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Chatbeat global URL Request Object</span>
+<span class="cm">	* @property URLObj</span>
+<span class="cm">	* @type {AIR Object}</span>
+<span class="cm">	*/</span>			
+	<span class="nx">URLObj</span> <span class="o">:</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">URLRequest</span><span class="p">(),</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* Chatbeat global Sound Object</span>
+<span class="cm">	* @property soundObj</span>
+<span class="cm">	* @type {AIR Object}</span>
+<span class="cm">	*/</span>				
+	<span class="nx">soundObj</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Chatbeat global Sound Context Object. Used for Volume Control</span>
+<span class="cm">	* @property soundContext</span>
+<span class="cm">	* @type {AIR Object}</span>
+<span class="cm">	*/</span>
+	<span class="nx">soundContext</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Chatbeat global Sound Transform Object. Also used for Volume Control</span>
+<span class="cm">	* @property soundTransformObj</span>
+<span class="cm">	* @type {AIR Object}</span>
+<span class="cm">	*/</span>
+	<span class="nx">soundTransformObj</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Chatbeat global Video Object</span>
+<span class="cm">	* @property videoObj</span>
+<span class="cm">	* @type {AIR Object}</span>
+<span class="cm">	*/</span>		
+	<span class="nx">videoObj</span> <span class="o">:</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">Video</span><span class="p">(),</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Global timer of the application, with the default 300 millisecond interval</span>
+<span class="cm">	* @property ticker</span>
+<span class="cm">	* @type {AIR Object}</span>
+<span class="cm">	* @final</span>
+<span class="cm">	*/</span>
+	<span class="nx">ticker</span> <span class="o">:</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">Timer</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* if the first music on a playlist will be played automatically when a playlist is loaded and selected</span>
+<span class="cm">	* @property autoPlay</span>
+<span class="cm">	* @type {boolean}</span>
+<span class="cm">	*/</span>
+	
+	<span class="nx">autoPlay</span> <span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+	<span class="c1">//directory : air.File.applicationDirectory,</span>
+	<span class="c1">//folderName : &quot;mp3&quot;,</span>
+	
+	<span class="nx">component</span><span class="o">:</span> <span class="p">{},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* Add components to the Chatbeat module dynamically on runtime</span>
+<span class="cm">	* @param name {string}</span>
+<span class="cm">	* @param ptype {Object literal}</span>
+<span class="cm">	* @method addComponent</span>
+<span class="cm">	*/</span>
+	<span class="nx">addComponent</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">ptype</span><span class="p">)</span>    <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">component</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">ptype</span><span class="p">;</span>
+        <span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* Initalize and include all extension files in the object</span>
+<span class="cm">	* @method initComponent</span>
+<span class="cm">	*/</span>
+	<span class="nx">initComponent</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		<span class="c1">// initialize plugins</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">component</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">k</span><span class="p">))</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">ptype</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">component</span><span class="p">[</span><span class="nx">k</span><span class="p">];</span>
+				<span class="c1">// jslint complaints about the below line, but this is fine</span>
+				<span class="kd">var</span> <span class="nx">F</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
+				<span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">ptype</span><span class="p">;</span>
+				<span class="k">this</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>
+				<span class="k">this</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">init</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">}</span>	
+
+		<span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;chatbeat component initialized.&quot;</span><span class="p">);</span>
+		
+	
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* Starts Chatbeat module</span>
+<span class="cm">	* @method init</span>
+<span class="cm">	*/</span>
+	<span class="nx">init</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="k">this</span><span class="p">.</span><span class="nx">checkConnection</span><span class="p">();</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">u</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="s2">&quot;please enter your USERNAME : &quot;</span><span class="p">);</span>
+			<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="s2">&quot;please enter your PASSWORD : &quot;</span><span class="p">);</span>
+			<span class="c1">//encrypt username and password		</span>
+		<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+			<span class="nx">u</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
+			<span class="nx">p</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">password</span><span class="p">;</span>	
+		<span class="p">}</span>
+		
+		<span class="kd">var</span> <span class="nx">uBytes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">ByteArray</span><span class="p">();</span>
+		<span class="nx">uBytes</span><span class="p">.</span><span class="nx">writeUTFBytes</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
+		<span class="nx">air</span><span class="p">.</span><span class="nx">EncryptedLocalStore</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="nx">uBytes</span><span class="p">);</span>
+
+		<span class="kd">var</span> <span class="nx">pBytes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">ByteArray</span><span class="p">();</span>
+		<span class="nx">pBytes</span><span class="p">.</span><span class="nx">writeUTFBytes</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+		<span class="nx">air</span><span class="p">.</span><span class="nx">EncryptedLocalStore</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="nx">pBytes</span><span class="p">);</span>
+		
+		<span class="c1">// initialize all components included</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">initComponent</span><span class="p">();</span>
+		
+		<span class="c1">// stage framerate</span>
+		<span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">frameRate</span> <span class="o">=</span> <span class="mi">60</span><span class="p">;</span>
+		
+		<span class="c1">// global timer</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">TimerEvent</span><span class="p">.</span><span class="nx">TIMER</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="nx">soundDetailsProgress</span><span class="p">);</span>
+				
+		<span class="c1">// On application start</span>
+		<span class="nx">air</span><span class="p">.</span><span class="nx">NativeApplication</span><span class="p">.</span><span class="nx">nativeApplication</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">InvokeEvent</span><span class="p">.</span><span class="nx">INVOKE</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="nx">initializationHandler</span><span class="p">);</span>		
+		
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* check internet connection asyncronously</span>
+<span class="cm">	* @method checkConnection</span>
+<span class="cm">	*/</span>
+	<span class="nx">checkConnection</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">URLRequest</span><span class="p">(</span> <span class="s1">&#39;http://www.google.com&#39;</span> <span class="p">)</span> <span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">monitor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">URLMonitor</span><span class="p">(</span> <span class="nx">request</span> <span class="p">);</span>
+		<span class="nx">monitor</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">StatusEvent</span><span class="p">.</span><span class="nx">STATUS</span><span class="p">,</span> <span class="nx">announceStatus</span><span class="p">);</span>
+		<span class="nx">monitor</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+		
+		<span class="kd">function</span> <span class="nx">announceStatus</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+	 		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Status change. Current status =&gt; &quot;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
+			<span class="k">switch</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">code</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="k">case</span> <span class="s1">&#39;Service.unavailable&#39;</span>	<span class="o">:</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isOnline</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">offline</span><span class="p">.</span><span class="nx">makeOffline</span><span class="p">();</span>
+					<span class="k">break</span><span class="p">;</span>
+				<span class="k">case</span> <span class="s1">&#39;Service.available&#39;</span><span class="o">:</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isOnline</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">offline</span><span class="p">.</span><span class="nx">makeOnline</span><span class="p">();</span>					
+					<span class="k">break</span><span class="p">;</span>
+			<span class="p">}</span>
+
+		<span class="p">}</span>			
+	<span class="p">}</span>
+<span class="p">}</span>
+	
+<span class="nb">window</span><span class="p">.</span><span class="nx">Chatbeat</span> <span class="o">=</span> <span class="nx">$cb</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+	<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+<span class="p">})</span>
+<span class="p">}(</span><span class="nb">window</span><span class="p">));</span>
+</pre></div>

@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ChatBeat Desktop Download</title>
+
+<style>
+body {
+	background: rgb(0,0,0); /* Old browsers */
+background: -moz-linear-gradient(-45deg,  rgba(0,0,0,1) 0%, rgba(69,72,77,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(0,0,0,1)), color-stop(100%,rgba(69,72,77,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  rgba(0,0,0,1) 0%,rgba(69,72,77,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  rgba(0,0,0,1) 0%,rgba(69,72,77,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  rgba(0,0,0,1) 0%,rgba(69,72,77,1) 100%); /* IE10+ */
+background: linear-gradient(-45deg,  rgba(0,0,0,1) 0%,rgba(69,72,77,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#45484d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:11px;
+	color: #fff;
+}
+a {
+	color:#CC6600;
+}
+.wrapper {
+	width:800px;
+	margin: auto;
+	padding:20px;
+
+}
+.red {
+	color: #F00;
+}
+</style>
+<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ -->
+<script type="text/javascript" src="badge/swfobject.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+<p><img src="assets/images/cb_logo.png" width="181" height="54" alt="logo" />
+</p>
+<p>For Software Development Testing Only</p>
+<h1>Quick Install</h1>
+
+  <p><br>
+  <strong>  Windows, Mac and Linux</strong>
+  </p>
+
+<div>
+<!-- BEGIN EMBED CODE -->
+	
+	<!-- IMPORTANT: Make sure you also copy the swfobject script tag from the head above -->
+	
+	<div id="flashcontent" style="width:215px; height:180px;">
+		<strong>Please upgrade your Flash Player</strong>
+		This is the content that would be shown if the user does not have Flash Player 6.0.65 or higher installed.
+	</div>
+
+	<script type="text/javascript">
+		// <![CDATA[
+		
+		// version 9.0.115 or greater is required for launching AIR apps.
+		var so = new SWFObject("badge/AIRInstallBadge.swf", "Badge", "215", "180", "9.0.115", "#000000");
+		so.useExpressInstall('badge/expressinstall.swf');
+		
+		// these parameters are required for badge install:
+		so.addVariable("airversion", "2.0"); // version of AIR runtime required
+		so.addVariable("appname", "ChatBeat Desktop"); // application name to display to the user
+		so.addVariable("appurl", "http://192.168.8.172/chatbeat/ChatBeat.air"); // absolute URL (beginning with http or https) of the application ".air" file
+		
+		// these parameters are required to support launching apps from the badge (but optional for install):
+		so.addVariable("appid", "ChatBeat"); // the qualified application ID (ex. com.gskinner.air.MyApplication)
+		so.addVariable("pubid", ""); // publisher id
+		
+		// this parameter is required in addition to the above to support upgrading from the badge:
+		so.addVariable("appversion", "1.2"); // AIR application version
+		
+		// these parameters are optional:
+		so.addVariable("image", "assets/images/chatbeat-air-logo.jpg"); // URL for an image (JPG, PNG, GIF) or SWF to display in the badge (205px wide, 170px high)
+		so.addVariable("appinstallarg", "installed from web"); // passed to the application when it is installed from the badge
+		so.addVariable("applauncharg", "launched from web"); // passed to the application when it is launched from the badge
+		so.addVariable("helpurl", "help.html"); // optional url to a page containing additional help, displayed in the badge's help screen
+		so.addVariable("hidehelp", "false"); // hides the help icon if "true"
+		so.addVariable("skiptransition", "false"); // skips the initial transition if "true"
+		so.addVariable("titlecolor", "#00AAFF"); // changes the color of titles
+		so.addVariable("buttonlabelcolor", "#00AAFF"); // changes the color of the button label
+		so.addVariable("appnamecolor", "#000000"); // changes the color of the application name if the image is not specified or loaded
+		
+		// these parameters allow you to override the default text in the badge:
+		// supported strings: str_error, str_err_params, str_err_airunavailable, str_err_airswf, str_loading, str_install, str_launch, str_upgrade, str_close, str_launching, str_launchingtext, str_installing, str_installingtext, str_tryagain, str_beta3, str_beta3text, str_help, str_helptext
+		so.addVariable("str_err_airswf", "<u>Running locally?</u><br/><br/>The AIR proxy swf won't load properly when this demo is run from the local file system."); // overrides the error text when the AIR proxy swf fails to load
+		
+		so.write("flashcontent");
+		
+		// ]]>
+	</script>
+
+<!-- END EMBED CODE -->
+
+
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1>Package Installer (with runtime Included)</h1>
+<p>For Local Distribution.</p>
+<blockquote>
+  <p><strong>Windows</strong></p>
+  <blockquote>
+  <p><a href="http://192.168.8.172/chatbeat/PACKAGE/chatbeat-windows.msi">Chatbeat Windows Package Installer (.msi)</a></p>
+  <p>&nbsp;</p>
+  </blockquote>
+  <p><strong>Mac </strong></p>
+  <blockquote>
+    <p><em>Not yet available </em></p>
+    <p>&nbsp;</p>
+  </blockquote>
+  <p><strong>Linux</strong></p>
+  <blockquote>
+    <p><em>Not yet available </em></p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </blockquote>
+</blockquote>
+<h1>AIR Installer (without Runtime)</h1>
+<blockquote>
+  <p>Windows / Mac /	Linux</p>
+  <blockquote>
+    <p><a href="http://192.168.8.172/chatbeat/ChatBeat.air">ChatBeat.air </a></p>
+    <p class="red"><strong>NOTE : Make sure you already have the Adobe AIR Runtime installed on your machine before installing this.</strong></p>
+    <p>&nbsp;</p>
+  </blockquote>
+</blockquote>
+<h1>AIR Runtime Installer</h1>
+<blockquote>
+  <p>	<strong>Windows and Mac</strong></p>
+  <blockquote>
+    <p><a href="http://get.adobe.com/air/otherversions/" target="_blank">Adobe Air Download Link</a>  </p>
+    <p>&nbsp;</p>
+  </blockquote>
+  <p><strong>Linux/Ubuntu</strong></p>
+  <blockquote>
+    <p><a href="http://192.168.8.172/chatbeat/SDK/AdobeAIRInstaller.bin" target="_blank">Dowload Adobe Air 2.6</a></p>
+    <p>Open Terminal and chmod the bin file</p>
+    <blockquote>
+      <p>sudo chmod +x AdobeAIRInstaller.bin</p>
+    </blockquote>
+    <p>Run the file</p>
+    <blockquote>
+      <p>sudo ./AdobeAIRInstaller.bin</p>
+    </blockquote>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p>
+
+
+
+</p>
+
+</div>
+</body>
+</html>

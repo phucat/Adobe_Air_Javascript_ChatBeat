@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<application xmlns="http://ns.adobe.com/air/application/3.0">
+  <filename>chatbeat</filename>
+  <copyright>Kolipri Communications Inc.</copyright>
+  <description>ChatBeat is a digital music service that gives you access to millions of songs.</description>
+  <programMenuFolder>Kolipri</programMenuFolder>
+  <name>ChatBeat</name>
+  <customUpdateUI>true</customUpdateUI>
+  <id>ChatBeat</id>
+  <versionNumber>1.9.6</versionNumber>
+  <initialWindow>
+    <content>player.html</content>
+    <height>660</height>
+    <width>1090</width>
+    <systemChrome>none</systemChrome>
+    <transparent>true</transparent>
+    <visible>true</visible>
+  </initialWindow> 
+  <icon>
+    <image128x128>assets/icon/128.png</image128x128>
+    <image48x48>assets/icon/48.png</image48x48>
+    <image16x16>assets/icon/16.png</image16x16>
+    <image32x32>assets/icon/32.png</image32x32>
+  </icon>
+  <fileTypes>
+    <fileType>
+      <name>mp3</name>
+      <extension>mp3</extension>
+      <description>Mp3 File</description>
+      <contentType>audio/mpeg3</contentType>
+      <icon>
+        <image128x128>assets/icon/128.png</image128x128>
+        <image48x48>assets/icon/48.png</image48x48>
+        <image32x32>assets/icon/32.png</image32x32>
+        <image16x16>assets/icon/16.png</image16x16>
+      </icon>
+    </fileType>
+    <fileType>
+      <name>chatbeat.music.file</name>
+      <extension>cmf</extension>
+      <description>ChatBeat Music File</description>
+      <contentType>audio/mpeg3</contentType>
+      <icon>
+        <image128x128>assets/icon/128.png</image128x128>
+        <image48x48>assets/icon/48.png</image48x48>
+        <image32x32>assets/icon/32.png</image32x32>
+        <image16x16>assets/icon/16.png</image16x16>
+      </icon>
+    </fileType>
+  </fileTypes>
+</application>

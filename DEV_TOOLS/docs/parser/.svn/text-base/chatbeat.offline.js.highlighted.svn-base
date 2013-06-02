@@ -1,0 +1,208 @@
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* Chatbeat component for Offline controls</span>
+<span class="cm">* @class offline</span>
+<span class="cm">* @constructor  </span>
+<span class="cm">* @namespace Chatbeat</span>
+<span class="cm">*/</span>
+
+<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="s1">&#39;offline&#39;</span><span class="p">,</span> <span class="p">{</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* this method is automatically loaded onStart of the application called by Chatbeat.initComponent &lt;br&gt;</span>
+<span class="cm">	* On load : Initialize the searchPlaylist method then determine the Network Connectivity.</span>
+<span class="cm">	* @method init</span>
+<span class="cm">	*/</span>
+	<span class="nx">init</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">searchPlaylist</span><span class="p">();</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#switch&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">offline</span><span class="p">.</span><span class="nx">setMode</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+		<span class="p">})</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* calling the Playlist URL and saving all info offline (Calls the saveOffline method)</span>
+<span class="cm">	* @method save</span>
+<span class="cm">	*/</span>	
+	<span class="nx">save</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">plid</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">selectedPlaylistID</span><span class="p">;</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">API</span> <span class="o">+</span> <span class="s2">&quot;/pl/&quot;</span><span class="o">+</span><span class="nx">plid</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;saveOffline&quot;</span><span class="p">);</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* this method receives the Playlist JSON content from the server and checks whether the playlist is already saved on local or not</span>
+<span class="cm">	* @method parseJSON</span>
+<span class="cm">	* @param json {JSON}	</span>
+<span class="cm">	*/</span>	
+	<span class="nx">parseJSON</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+	
+		<span class="kd">var</span> <span class="nx">_continue</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">createLocalPlaylist</span><span class="p">(</span><span class="nx">json</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">playlist_id</span><span class="p">));</span>
+
+		<span class="k">if</span><span class="p">(</span><span class="nx">_continue</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">songs</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+				<span class="kd">var</span> <span class="nx">artist_id</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">artist_id</span><span class="p">,</span>
+					<span class="nx">album_id</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">album_id</span><span class="p">,</span>
+					<span class="nx">song_id</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+					<span class="nx">songURL</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">httpStream</span> <span class="o">+</span> <span class="nx">artist_id</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">album_id</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">song_id</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="p">;</span>
+				
+				<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>				
+					<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;writing to offline playlist =&gt; &quot;</span> <span class="o">+</span> <span class="nx">songURL</span><span class="p">);</span>
+				<span class="p">}</span>
+				<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">isCached</span><span class="p">(</span><span class="nx">songURL</span><span class="p">))</span>	<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">keep</span><span class="p">(</span><span class="nx">songURL</span><span class="p">);</span>
+				
+				
+			<span class="p">});</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* writes a local playlist on the user hard drive</span>
+<span class="cm">	* @method createLocalPlaylist</span>
+<span class="cm">	* @param json {string}	</span>
+<span class="cm">	* @param name {string}		</span>
+<span class="cm">	*/</span>	
+	<span class="nx">createLocalPlaylist</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">,</span><span class="nx">name</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nx">air</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">applicationStorageDirectory</span><span class="p">;</span>
+		<span class="nx">file</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="s2">&quot;Chatbeat/Offline/&quot;</span><span class="o">+</span><span class="nx">name</span><span class="o">+</span><span class="s2">&quot;.json&quot;</span><span class="p">);</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">exists</span><span class="p">)</span>	<span class="p">{</span>
+			
+			<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">dump</span><span class="p">(</span><span class="s2">&quot;offline playlist already existed&quot;</span><span class="p">);</span>
+			<span class="p">}</span>
+			
+			<span class="kd">var</span> <span class="nx">ask</span> <span class="o">=</span> <span class="nx">confirm</span><span class="p">(</span><span class="s2">&quot;This playlist is on you offline playlist already.\nDo you want to overwrite it?&quot;</span><span class="p">);</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">ask</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">writeJSON</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+				<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+			<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+				<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>	
+			<span class="p">}</span>
+			
+		<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+			<span class="nx">writeJSON</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+		<span class="p">}</span>
+		
+		
+		<span class="kd">function</span> <span class="nx">writeJSON</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+			
+			<span class="kd">var</span> <span class="nx">fileStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">FileStream</span><span class="p">();</span>
+			<span class="nx">fileStream</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">air</span><span class="p">.</span><span class="nx">FileMode</span><span class="p">.</span><span class="nx">WRITE</span><span class="p">);</span>
+			<span class="nx">fileStream</span><span class="p">.</span><span class="nx">writeUTFBytes</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">json</span><span class="p">));</span> 
+			<span class="nx">fileStream</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+				
+			<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">dump</span><span class="p">(</span><span class="s2">&quot;offline playlist created =&gt;  &quot;</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">nativePath</span><span class="p">);</span>
+			<span class="p">}</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">addNewOfflinePL</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">playlist_id</span><span class="p">,</span> <span class="nx">json</span><span class="p">.</span><span class="nx">playlist</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* this method is being called on every first load of the application from init(). Search the local machine if theres a local playlist saved on the computer.</span>
+<span class="cm">	* @method searchPlaylist	</span>
+<span class="cm">	*/</span>
+	<span class="nx">searchPlaylist</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nx">air</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">applicationStorageDirectory</span><span class="p">;</span>
+		<span class="nx">file</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="s2">&quot;Chatbeat/Offline/&quot;</span><span class="p">);</span>		
+	
+		<span class="nx">file</span><span class="p">.</span><span class="nx">getDirectoryListingAsync</span><span class="p">();</span>
+		<span class="nx">file</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">FileListEvent</span><span class="p">.</span><span class="nx">DIRECTORY_LISTING</span><span class="p">,</span> <span class="nx">directoryListingHandler</span><span class="p">);</span>
+	
+		<span class="kd">function</span> <span class="nx">directoryListingHandler</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+	
+			<span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+			
+			<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+				
+
+				<span class="kd">var</span> <span class="nx">extension</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">nativePath</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>				
+				<span class="k">if</span><span class="p">(</span><span class="nx">extension</span> <span class="o">==</span> <span class="s1">&#39;json&#39;</span><span class="p">)</span>	<span class="p">{</span>
+					<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;offline playlist found! =&gt; &quot;</span> <span class="o">+</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">nativePath</span><span class="p">);</span>														
+					<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;app-storage:/Chatbeat/Offline/&#39;</span> <span class="o">+</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">offline</span><span class="p">.</span><span class="nx">loadPlaylist</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+				<span class="p">}</span>
+				
+			<span class="p">}</span>
+		<span class="p">}</span>		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* loads a local playlist</span>
+<span class="cm">	* @method loadPlaylist</span>
+<span class="cm">	* @param path {string}	</span>
+<span class="cm">	*/</span>
+	<span class="nx">loadPlaylist</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;loading offline playlist =&gt; &quot;</span> <span class="o">+</span> <span class="nx">path</span><span class="p">);</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;getOfflineListHandler&quot;</span><span class="p">);</span>
+
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* triggered when a Get Offline / Online button is clicked from UI.</span>
+<span class="cm">	* @method setMode</span>
+<span class="cm">	* @param obj {DOM Object}	</span>
+<span class="cm">	*/</span>	
+	<span class="nx">setMode</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">))</span>	<span class="k">this</span><span class="p">.</span><span class="nx">makeOnline</span><span class="p">();</span>
+		<span class="k">else</span>	<span class="k">this</span><span class="p">.</span><span class="nx">makeOffline</span><span class="p">();</span>
+			
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* updates the UI  to adapt Offline environment.</span>
+<span class="cm">	* @method makeOffline</span>
+<span class="cm">	*/</span>	
+	<span class="nx">makeOffline</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#switch&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;blue&quot;</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#switch&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Go Online&quot;</span><span class="p">);</span>			
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#switch&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="s2">&quot;offline&quot;</span><span class="p">);</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#onlinePlaylistDiv&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#artistsSelection&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#albumsSelection&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>		
+		
+		
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#offlinePlaylist li:first&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
+
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">)</span>	<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+		
+	<span class="p">},</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* updates the UI  to adapt Online environment.</span>
+<span class="cm">	* @method makeOnline</span>
+<span class="cm">	*/</span>		
+	<span class="nx">makeOnline</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isOnline</span><span class="p">)</span> <span class="p">{</span>
+			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#switch&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;blue&quot;</span><span class="p">);</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#switch&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Go Offline&quot;</span><span class="p">);</span>			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#switch&#39;</span><span class="p">).</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="s2">&quot;offline&quot;</span><span class="p">);</span>
+			
+			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#onlinePlaylistDiv&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>		
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#artistsSelection&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#albumsSelection&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#playlist_featured&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
+			
+			<span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#customPlayList li&#39;</span><span class="p">),</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;pl_id&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;favorites&#39;</span><span class="p">)</span>	<span class="p">{</span>
+					<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+				<span class="p">}</span>
+			<span class="p">});</span>
+			
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">getList</span><span class="p">();</span>
+		<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+			<span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;No Internet Connection.&#39;</span><span class="p">);</span>	
+		<span class="p">}</span>
+	<span class="p">}</span>
+	
+<span class="p">});</span>
+</pre></div>

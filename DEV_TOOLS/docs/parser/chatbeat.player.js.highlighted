@@ -1,0 +1,622 @@
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* Chatbeat component for UI and basic player functionalities</span>
+<span class="cm">* @class player</span>
+<span class="cm">* @constructor </span>
+<span class="cm">* @namespace Chatbeat </span>
+<span class="cm">*/</span>
+
+<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">,</span> <span class="p">{</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* this method is automatically loaded onStart of the application called by Chatbeat.initComponent &lt;br&gt;</span>
+<span class="cm">	* - Bind DOM elements with their respective methods&lt;br&gt;</span>
+<span class="cm">	* - Encrypt the secret key and store it on Encrypted local store provided by Air Runtime&lt;br&gt;</span>
+<span class="cm">	* @method init</span>
+<span class="cm">	*/</span>
+	<span class="nx">init</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		<span class="c1">// get controls ID and bind their functionality</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">bindControls</span><span class="p">();</span>
+
+
+	<span class="p">},</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* You can configure which DOM elements you want to have the Player functionality</span>
+<span class="cm">	* @method DOMcontrol</span>
+<span class="cm">	* @config test</span>
+<span class="cm">	*/</span>
+	<span class="nx">DOMcontrol</span> <span class="o">:</span> <span class="p">{</span>
+		<span class="c1">// global variables used in this extension</span>
+		<span class="nx">play</span> <span class="o">:</span> <span class="s1">&#39;#controlPlay&#39;</span><span class="p">,</span>
+		<span class="nx">next</span> <span class="o">:</span> <span class="s1">&#39;#controlNext&#39;</span><span class="p">,</span>
+		<span class="nx">prev</span> <span class="o">:</span> <span class="s1">&#39;#controlPrev&#39;</span><span class="p">,</span>
+		<span class="nx">stop</span> <span class="o">:</span> <span class="s1">&#39;#controlStop&#39;</span><span class="p">,</span>
+		<span class="nx">pause</span> <span class="o">:</span> <span class="s1">&#39;#controlPause&#39;</span><span class="p">,</span>
+		<span class="nx">scrubber</span> <span class="o">:</span> <span class="s1">&#39;#scrubber&#39;</span><span class="p">,</span>
+		<span class="nx">slider</span> <span class="o">:</span> <span class="s1">&#39;#slider&#39;</span><span class="p">,</span>
+		<span class="nx">selector</span> <span class="o">:</span> <span class="s1">&#39;.selections&#39;</span><span class="p">,</span>
+		<span class="nx">playVideo</span> <span class="o">:</span> <span class="s1">&#39;#playVideoBtn&#39;</span><span class="p">,</span>
+		<span class="nx">searchTxtBox</span> <span class="o">:</span> <span class="s1">&#39;#searchInput&#39;</span><span class="p">,</span>
+		
+		<span class="nx">displayNumberCurrent</span> <span class="o">:</span> <span class="s1">&#39;#listPos&#39;</span><span class="p">,</span>
+		<span class="nx">displayNumberTotal</span> <span class="o">:</span> <span class="s1">&#39;#totalList&#39;</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Bind the DOM and the method configured in runtime</span>
+<span class="cm">	* @method bindControls</span>
+<span class="cm">	*/</span>
+	<span class="nx">bindControls</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="nx">_Parent</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span> 
+		
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">prev</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">_Parent</span><span class="p">.</span><span class="nx">prev</span><span class="p">();</span>
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">next</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">_Parent</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">pause</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">_Parent</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">stop</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">_Parent</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">play</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;playBtn&#39;</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">_Parent</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="nx">_Parent</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+			<span class="p">}</span>
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">selector</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">_Parent</span><span class="p">.</span><span class="nx">selector</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>	
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">playVideo</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">_Parent</span><span class="p">.</span><span class="nx">playVideo</span><span class="p">();</span>	
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">searchTxtBox</span><span class="p">).</span><span class="nx">focus</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">_Parent</span><span class="p">.</span><span class="nx">_search</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>	
+		<span class="p">});</span>
+		
+		<span class="c1">// for sound scrubbing</span>
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">scrubber</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+		
+			<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">)</span> <span class="p">{</span>
+				
+				<span class="kd">var</span> <span class="nx">offset</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">offset</span><span class="p">(),</span>
+					<span class="nx">relativeX</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">-</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span>
+					<span class="nx">relativeY</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">-</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">top</span><span class="p">,</span>
+		
+					<span class="nx">origPos</span><span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(((</span><span class="nx">relativeX</span> <span class="o">*</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">estimatedLength</span><span class="p">)</span> <span class="o">/</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#mainDuration&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">()));</span>
+		
+				<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+					<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;relative X Position: &quot;</span> <span class="o">+</span> <span class="nx">relativeX</span><span class="p">);</span>
+					<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;relative Y Position: &quot;</span> <span class="o">+</span> <span class="nx">relativeY</span><span class="p">);</span>		
+					<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Sound Position: &quot;</span> <span class="o">+</span> <span class="nx">origPos</span><span class="p">);</span>
+				<span class="p">}</span>
+				
+				<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+				
+				<span class="k">if</span><span class="p">(</span><span class="nx">origPos</span>  <span class="o">&lt;=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">estimatedLength</span><span class="p">)</span>	<span class="p">{</span>		
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">origPos</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+				<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">estimatedLength</span><span class="o">-</span><span class="mi">2000</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+				<span class="p">}</span>
+				
+				<span class="nx">_Parent</span><span class="p">.</span><span class="nx">setVolume</span><span class="p">();</span>
+				<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">scrubed</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">});</span>
+		
+		<span class="c1">// volume slider</span>
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">slider</span><span class="p">).</span><span class="nx">slider</span><span class="p">({</span>
+			<span class="nx">range</span><span class="o">:</span> <span class="s2">&quot;min&quot;</span><span class="p">,</span>
+			<span class="nx">value</span><span class="o">:</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">defaultVolume</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
+			<span class="nx">min</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+			<span class="nx">max</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+			<span class="nx">slide</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">ui</span> <span class="p">)</span> <span class="p">{</span>
+				<span class="c1">//$( &quot;#amount&quot; ).val( &quot;$&quot; + ui.value );</span>
+				<span class="nx">_Parent</span><span class="p">.</span><span class="nx">setVolume</span><span class="p">(</span><span class="nx">ui</span><span class="p">.</span><span class="nx">value</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">);</span>
+			<span class="p">}</span>	
+		<span class="p">});</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Load the Sound from AIR URLloader Object to Air Sound Object</span>
+<span class="cm">	* @method _load</span>
+<span class="cm">	* @param url {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">_load</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>	<span class="p">{</span>
+
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">play</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;playBtn&#39;</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">play</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;pauseBtn&#39;</span><span class="p">);</span>
+		
+
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">URLObj</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
+
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;load from URL =&gt; &quot;</span> <span class="o">+</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">URLObj</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;operating system : &quot;</span> <span class="o">+</span> <span class="nx">air</span><span class="p">.</span><span class="nx">Capabilities</span><span class="p">.</span><span class="nx">os</span><span class="p">);</span>
+		<span class="p">}</span>
+		
+		<span class="c1">//get ids from URL and highlight the item that will be played in UI.</span>
+		<span class="k">try</span> <span class="p">{</span>		
+			<span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">parseURL</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">URLObj</span><span class="p">.</span><span class="nx">url</span><span class="p">),</span> <span class="nx">pArtistID</span><span class="p">,</span> <span class="nx">pAlbumID</span><span class="p">,</span> <span class="nx">pSongID</span><span class="p">;</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">pArtistID</span> <span class="o">=</span> <span class="nx">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+				<span class="nx">pAlbumID</span> <span class="o">=</span> <span class="nx">params</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+				<span class="nx">pSongID</span> <span class="o">=</span> <span class="nx">params</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+			<span class="p">}</span>
+			
+		<span class="p">}</span>	<span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;No URL&quot;</span><span class="p">);</span>
+			
+		<span class="p">}</span>
+
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playingitem</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">$</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playingitem</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;playing&#39;</span><span class="p">);</span>	
+		<span class="p">}</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#listitem_&#39;</span><span class="o">+</span><span class="nx">pSongID</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;playing&#39;</span><span class="p">);</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playingitem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;listitem_&#39;</span><span class="o">+</span><span class="nx">pSongID</span><span class="p">);</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;set as playing item =&gt; &quot;</span> <span class="o">+</span> <span class="s2">&quot;#listitem_&quot;</span> <span class="o">+</span> <span class="nx">pSongID</span><span class="p">);</span>		
+		<span class="p">}</span>
+
+		<span class="k">this</span><span class="p">.</span><span class="nx">setInfos</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#listitem_&#39;</span><span class="o">+</span><span class="nx">pSongID</span><span class="p">));</span>
+		
+		<span class="c1">//check if not null</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">URLObj</span><span class="p">.</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+			
+			<span class="cm">/*</span>
+<span class="cm">			//encode to safe URL			</span>
+<span class="cm">			Chatbeat.URLObj.url = (air.Capabilities.os == &quot;Linux&quot;) </span>
+<span class="cm">								? encodeURIComponent(Chatbeat.URLObj.url)</span>
+<span class="cm">								: Chatbeat.URLObj.url;</span>
+<span class="cm">			*/</span>
+			
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">autoPlay</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+			
+			<span class="c1">//check if cached		</span>
+			<span class="kd">var</span> <span class="nx">isCached</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">isCached</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">URLObj</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+			
+			<span class="c1">//check if local</span>
+			<span class="kd">var</span> <span class="nx">isLocal</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">URLObj</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">httpStream</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">?</span> <span class="kc">false</span> <span class="o">:</span> <span class="kc">true</span><span class="p">;</span>
+			
+			<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;isLocal File  : &quot;</span> <span class="o">+</span> <span class="nx">isLocal</span><span class="p">);</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">isCached</span><span class="p">)</span>	<span class="p">{</span>
+				
+				<span class="c1">// return the native path of stored cached file</span>
+				<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">URLObj</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="nx">isCached</span><span class="p">;</span>								
+				<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;playing from local storage : &quot;</span> <span class="o">+</span> <span class="nx">isCached</span><span class="p">);</span>
+				
+				
+			<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+				
+				<span class="k">if</span><span class="p">(</span><span class="nx">isLocal</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;playing a local file : &quot;</span> <span class="o">+</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">URLObj</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">autoPlay</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+				<span class="p">}</span>	<span class="k">else</span> <span class="p">{</span>
+					<span class="c1">//if not cached, save data to local storage.</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">keep</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">URLObj</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>	
+				<span class="p">}</span>		
+			<span class="p">}</span>
+					
+			<span class="c1">//start creating soundObject and load the sound from assigned URL	</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">Sound</span><span class="p">();</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundContext</span> <span class="o">=</span>  <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">SoundLoaderContext</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">bufferTime</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundTransformObj</span> <span class="o">=</span>  <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">SoundTransform</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">defaultVolume</span><span class="p">);</span>			
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">URLObj</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundContext</span><span class="p">);</span>		
+			<span class="k">this</span><span class="p">.</span><span class="nx">soundDetails</span><span class="p">();</span>
+			
+			<span class="c1">// handlers for the events of sound object</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">COMPLETE</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="nx">completeHandler</span><span class="p">);</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">ID3</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="nx">id3Handler</span><span class="p">);</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">IOErrorEvent</span><span class="p">.</span><span class="nx">IO_ERROR</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="nx">ioErrorHandler</span><span class="p">);</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">ProgressEvent</span><span class="p">.</span><span class="nx">PROGRESS</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="nx">progressHandler</span><span class="p">);</span>
+			
+			<span class="c1">//if scrubed</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">scrubed</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+	
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* play the sound loaded from the Sound Object. Can also directly load a sound when URL parameter is assigned.</span>
+<span class="cm">	* @method play</span>
+<span class="cm">	* @param url {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">play</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;isPaused :  &quot;</span> <span class="o">+</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">);</span>
+		<span class="p">}</span>
+
+		<span class="nx">url</span> <span class="o">=</span> <span class="nx">url</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+		
+		<span class="c1">// if paused</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isPaused</span> <span class="o">&amp;&amp;</span> <span class="nx">url</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>	<span class="p">{</span>
+			
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isPaused</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">lastposition</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">setVolume</span><span class="p">();</span>
+			
+		<span class="p">}</span>	<span class="k">else</span> <span class="p">{</span>
+			
+			<span class="k">if</span><span class="p">(</span><span class="nx">url</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">_load</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+			<span class="p">}</span>
+			
+			<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">)</span> <span class="p">{</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span> <span class="p">}</span>	
+			<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">)</span>	<span class="p">{</span>		
+				<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">setVolume</span><span class="p">();</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">soundTransform</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundTransformObj</span><span class="p">;</span>		
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">SOUND_COMPLETE</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="nx">handleSoundComplete</span><span class="p">);</span>
+				<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+					<span class="nx">Chatbeat</span><span class="p">.</span><span class="nb">window</span><span class="p">.</span><span class="nx">toast</span><span class="p">(</span><span class="s2">&quot;Header&quot;</span><span class="p">,</span> <span class="s2">&quot;Message!&quot;</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+
+		<span class="p">}</span>
+
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isPlaying</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>		
+		<span class="k">this</span><span class="p">.</span><span class="nx">soundDetails</span><span class="p">();</span>			
+		
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">play</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;playBtn&#39;</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">play</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;pauseBtn&#39;</span><span class="p">);</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* gets the ID of the currently playing or loaded sound.</span>
+<span class="cm">	* @method getPlayingID</span>
+<span class="cm">	* @return jQuery Object {object}</span>
+<span class="cm">	*/</span>
+	<span class="nx">getPlayingID</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		<span class="nx">retObj</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tableContent .playing&#39;</span><span class="p">);</span>
+		<span class="k">return</span> <span class="nx">retObj</span><span class="p">;</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Update the artist, album and song information in UI.</span>
+<span class="cm">	* @method setInfos</span>
+<span class="cm">	* @param jQuery Object {object}</span>
+<span class="cm">	*/</span>
+	<span class="nx">setInfos</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">playingObj</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;playind DOM id =&gt; &quot;</span> <span class="o">+</span> <span class="nx">playingObj</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;ID&quot;</span><span class="p">));</span> 		
+		<span class="p">}</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#title&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">playingObj</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;song_name&quot;</span><span class="p">));</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#artist&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">playingObj</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;artist_name&quot;</span><span class="p">));</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#album&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">playingObj</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;album_name&quot;</span><span class="p">));</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* play next song</span>
+<span class="cm">	* @method next</span>
+<span class="cm">	*/</span>
+	<span class="nx">next</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isRandom</span><span class="p">)</span>	<span class="p">{</span>
+			
+			<span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tableContent tr&#39;</span><span class="p">).</span><span class="nx">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)),</span> <span class="c1">// nth-child indices start at 1</span>
+				<span class="nx">nextURL</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#tableContent tr:nth-child(&quot;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">);</span>
+			
+		<span class="p">}</span>	<span class="k">else</span> <span class="p">{</span>
+		
+			<span class="kd">var</span> <span class="nx">playingObj</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getPlayingID</span><span class="p">(),</span>
+				<span class="nx">nextURL</span> <span class="o">=</span> <span class="nx">playingObj</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">);</span>	
+		<span class="p">}</span>		
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">nextURL</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">nextURL</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tableContent tr:first-child&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">);</span>
+		<span class="p">}</span>
+
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">lastposition</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">nextURL</span><span class="p">);</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* play previous song</span>
+<span class="cm">	* @method prev</span>
+<span class="cm">	*/</span>
+	<span class="nx">prev</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isRandom</span><span class="p">)</span>	<span class="p">{</span>
+			
+			<span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tableContent tr&#39;</span><span class="p">).</span><span class="nx">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)),</span> <span class="c1">// nth-child indices start at 1</span>
+				<span class="nx">nextURL</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#tableContent tr:nth-child(&quot;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">);</span>
+			
+		<span class="p">}</span>	<span class="k">else</span> <span class="p">{</span>
+		
+			<span class="kd">var</span> <span class="nx">playingObj</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getPlayingID</span><span class="p">(),</span>
+				<span class="nx">nextURL</span> <span class="o">=</span> <span class="nx">playingObj</span><span class="p">.</span><span class="nx">prev</span><span class="p">().</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">);</span>	
+		<span class="p">}</span>		
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">nextURL</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">nextURL</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tableContent tr:last-child&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">);</span>
+		<span class="p">}</span>
+
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">lastposition</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">nextURL</span><span class="p">);</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* stops the player</span>
+<span class="cm">	* @method stop</span>
+<span class="cm">	*/</span>
+	<span class="nx">stop</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">lastposition</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>	
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isPlaying</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>	
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+		
+	<span class="p">},</span>
+        
+	<span class="cm">/**   </span>
+<span class="cm">	* pause the player</span>
+<span class="cm">	* @method pause</span>
+<span class="cm">	*/</span>
+	<span class="nx">pause</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;isPaused :  &quot;</span> <span class="o">+</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">);</span>
+		<span class="p">}</span>
+		
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isPaused</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">isPlaying</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+		
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">lastposition</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">position</span><span class="p">;</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">play</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;playBtn&#39;</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">play</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;pauseBtn&#39;</span><span class="p">);</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* pause the player</span>
+<span class="cm">	* @method setVolume</span>
+<span class="cm">	* @param val {int}</span>
+<span class="cm">	*/</span>
+	<span class="nx">setVolume</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>	<span class="p">{</span>
+
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">defaultVolume</span> <span class="o">=</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">?</span> <span class="nx">val</span> <span class="o">:</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">defaultVolume</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">soundTransform</span><span class="p">;</span>
+			<span class="nx">transform</span><span class="p">.</span><span class="nx">volume</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">defaultVolume</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">soundTransform</span> <span class="o">=</span> <span class="nx">transform</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* calculates the current playing duration </span>
+<span class="cm">	* @method soundDetails</span>
+<span class="cm">	*/</span>
+	<span class="nx">soundDetails</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">displayNumberCurrent</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">songposition</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">displayNumberTotal</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">listLenght</span><span class="p">);</span>
+
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* updates the UI for song duration</span>
+<span class="cm">	* @method getDuration</span>
+<span class="cm">	*/</span>
+	<span class="nx">getDuration</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="kd">var</span> <span class="nx">Milliseconds</span><span class="p">,</span> <span class="nx">Minutes</span><span class="p">,</span> <span class="nx">Seconds</span><span class="p">,</span><span class="nx">SecondsTens</span><span class="p">;</span>
+		
+		<span class="c1">// duration for buffering</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesTotal</span><span class="p">)</span> <span class="p">{</span>
+			
+			<span class="nx">Milliseconds</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesTotal</span> <span class="o">/</span> <span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">bytesLoaded</span> <span class="o">/</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">soundObj</span><span class="p">.</span><span class="nx">length</span><span class="p">)),</span>
+			<span class="nx">Minutes</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">Milliseconds</span><span class="o">/</span><span class="mi">60000</span><span class="p">),</span>
+			<span class="nx">Seconds</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Milliseconds</span><span class="o">%</span><span class="mi">60000</span><span class="p">),</span>
+			<span class="nx">SecondsTens</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">Seconds</span><span class="o">/</span><span class="mi">10000</span><span class="p">),</span>
+
+			<span class="nx">Seconds</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">Seconds</span><span class="o">%</span><span class="mi">10000</span><span class="p">)</span>
+			<span class="nx">Seconds</span> <span class="o">/=</span> <span class="mi">1000</span><span class="p">;</span>		
+			
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#totalDuration&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">Minutes</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="nx">SecondsTens</span> <span class="o">+</span> <span class="s2">&quot;&quot;</span> <span class="o">+</span> <span class="nx">Seconds</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
+			
+		<span class="p">}</span>		
+
+		<span class="c1">// duration for sound length</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">)</span> <span class="p">{</span>
+			
+			<span class="nx">Milliseconds</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span>
+			<span class="nx">Minutes</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">Milliseconds</span><span class="o">/</span><span class="mi">60000</span><span class="p">),</span>
+			<span class="nx">Seconds</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Milliseconds</span><span class="o">%</span><span class="mi">60000</span><span class="p">),</span>
+			<span class="nx">SecondsTens</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">Seconds</span><span class="o">/</span><span class="mi">10000</span><span class="p">);</span>
+			
+			<span class="nx">Seconds</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">Seconds</span><span class="o">%</span><span class="mi">10000</span><span class="p">)</span>
+			<span class="nx">Seconds</span> <span class="o">/=</span> <span class="mi">1000</span><span class="p">;</span>		
+						
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#currentDuration&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">Minutes</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="nx">SecondsTens</span> <span class="o">+</span> <span class="s2">&quot;&quot;</span> <span class="o">+</span> <span class="nx">Seconds</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
+			
+		<span class="p">}</span>
+		
+		<span class="c1">// NOTE: if scrubed. the COMPLETE Event from listeners will not be triggered again,</span>
+		<span class="c1">// so we need to check if playing is completed based on the time elapsed.		</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">scrubed</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">checkIfComplete</span><span class="p">();</span>
+		<span class="p">}</span>
+
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* check if the song duration has reach the final duration</span>
+<span class="cm">	* @method checkIfComplete</span>
+<span class="cm">	*/</span>
+	<span class="nx">checkIfComplete</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">channel</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#totalDuration&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">()</span> <span class="o">==</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#currentDuration&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">())</span>	<span class="p">{</span>
+				<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>	
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* selects songs thats is being checked or selected</span>
+<span class="cm">	* @method selector</span>
+<span class="cm">	* @param jQuery Object {object}</span>
+<span class="cm">	*/</span>
+	<span class="nx">selector</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;mainSelector&#39;</span><span class="p">)</span>	<span class="p">{</span>
+			
+			<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;checked&quot;</span><span class="p">))</span>	<span class="p">{</span>
+				<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">selector</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;checked&quot;</span><span class="p">,</span> <span class="s2">&quot;checked&quot;</span><span class="p">);</span>
+			<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+				<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">.</span><span class="nx">selector</span><span class="p">).</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s2">&quot;checked&quot;</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+			
+			
+		<span class="p">}</span>
+	<span class="p">},</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* play video</span>
+<span class="cm">	* @method playVideo       </span>
+<span class="cm">	*/</span>
+	<span class="nx">playVideo</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+
+	
+	    <span class="cm">/* ==================================================================</span>
+<span class="cm">			playing local file. NOTE: do not use flv format.</span>
+<span class="cm">			* ive wasted 48 hrs trying to play a local file using FLV and </span>
+<span class="cm">			used 10 minutes to play mp4 and it magically work. demmet!</span>
+<span class="cm">		===================================================================*/</span>
+
+		<span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">File</span><span class="p">();</span>
+		<span class="nx">f</span><span class="p">.</span><span class="nx">nativePath</span> <span class="o">=</span> <span class="s1">&#39;app:/dare.mp4&#39;</span><span class="p">;</span>
+
+		<span class="nx">url</span> <span class="o">=</span> <span class="nx">f</span><span class="p">.</span><span class="nx">url</span><span class="p">;</span>
+	
+		<span class="kd">var</span> <span class="nx">videoURL</span> <span class="o">=</span> <span class="s2">&quot;http://localhost/chatbeat/dare.mp4&quot;</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">connection</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">stream</span><span class="p">;</span>
+		
+		<span class="kd">var</span> <span class="nx">CustomClient</span> <span class="o">=</span> <span class="p">{</span>
+			<span class="nx">onMetaData</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">air</span><span class="p">.</span><span class="nx">trace</span><span class="p">(</span><span class="s2">&quot;metadata: duration=&quot;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">duration</span> <span class="o">+</span> <span class="s2">&quot; width=&quot;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s2">&quot; height=&quot;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="s2">&quot; framerate=&quot;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">framerate</span><span class="p">);</span>
+			<span class="p">},</span>
+			<span class="nx">onCuePoint</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">air</span><span class="p">.</span><span class="nx">trace</span><span class="p">(</span><span class="s2">&quot;cuepoint: time=&quot;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">time</span> <span class="o">+</span> <span class="s2">&quot; name=&quot;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot; type=&quot;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span>
+			<span class="p">},</span>
+			<span class="nx">onPlayStatus</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">air</span><span class="p">.</span><span class="nx">trace</span><span class="p">(</span><span class="s2">&quot;video player status : &quot;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>				
+			<span class="p">}</span>
+		<span class="p">};</span>
+		
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">videoObj</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">220</span><span class="p">;</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">videoObj</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">160</span><span class="p">;</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">videoObj</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#centerPanel&#39;</span><span class="p">).</span><span class="nx">width</span><span class="p">();</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">videoObj</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#centerPanel&#39;</span><span class="p">).</span><span class="nx">height</span><span class="p">();</span>
+		
+        <span class="kd">function</span> <span class="nx">NetConnection</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">connection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">NetConnection</span><span class="p">();</span>
+            <span class="nx">connection</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">NetStatusEvent</span><span class="p">.</span><span class="nx">NET_STATUS</span><span class="p">,</span> <span class="nx">netStatusHandler</span><span class="p">);</span>
+            <span class="nx">connection</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">SecurityErrorEvent</span><span class="p">.</span><span class="nx">SECURITY_ERROR</span><span class="p">,</span> <span class="nx">securityErrorHandler</span><span class="p">);</span>
+            <span class="nx">connection</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kd">function</span> <span class="nx">netStatusHandler</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span>	<span class="p">{</span>
+            <span class="k">switch</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">info</span><span class="p">.</span><span class="nx">code</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">case</span> <span class="s2">&quot;NetConnection.Connect.Success&quot;</span><span class="o">:</span>
+                    <span class="nx">connectStream</span><span class="p">();</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="s2">&quot;NetStream.Play.StreamNotFound&quot;</span><span class="o">:</span>
+                    <span class="nx">air</span><span class="p">.</span><span class="nx">trace</span><span class="p">(</span><span class="s2">&quot;Stream not found: &quot;</span> <span class="o">+</span> <span class="nx">videoURL</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="kd">function</span> <span class="nx">securityErrorHandler</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">air</span><span class="p">.</span><span class="nx">trace</span><span class="p">(</span><span class="s2">&quot;securityErrorHandler: &quot;</span> <span class="o">+</span> <span class="nx">event</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kd">function</span> <span class="nx">connectStream</span><span class="p">(){</span>
+            <span class="kd">var</span> <span class="nx">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">NetStream</span><span class="p">(</span><span class="nx">connection</span><span class="p">);</span>
+            <span class="nx">stream</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">NetStatusEvent</span><span class="p">.</span><span class="nx">NET_STATUS</span><span class="p">,</span> <span class="nx">netStatusHandler</span><span class="p">);</span>
+			<span class="nx">stream</span><span class="p">.</span><span class="nx">inBufferSeek</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>			
+            <span class="nx">stream</span><span class="p">.</span><span class="nx">client</span> <span class="o">=</span> <span class="nx">CustomClient</span><span class="p">;</span>
+			<span class="nx">stream</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+			<span class="nx">stream</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+			
+			<span class="kd">var</span> <span class="kr">byte</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">ByteArray</span><span class="p">();</span>
+			<span class="kr">byte</span><span class="p">.</span><span class="nx">writeUTFBytes</span><span class="p">(</span><span class="mi">100000</span><span class="p">);</span>
+			<span class="nx">stream</span><span class="p">.</span><span class="nx">appendBytes</span><span class="p">(</span><span class="kr">byte</span><span class="p">);</span>
+			
+			
+            <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">videoObj</span><span class="p">.</span><span class="nx">attachNetStream</span><span class="p">(</span><span class="nx">stream</span><span class="p">);</span>
+
+            <span class="nx">stream</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">videoURL</span><span class="p">);</span>
+            <span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">videoObj</span><span class="p">);</span>
+			<span class="c1">//$(&#39;#centerPanel&#39;).append(video);</span>
+			
+        <span class="p">}</span>
+
+		<span class="nx">NetConnection</span><span class="p">();</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* search functionality attached to search UI.</span>
+<span class="cm">	* @method _search       </span>
+<span class="cm">	*/</span>
+	<span class="nx">_search</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span>
+			<span class="s1">&#39;font-weight&#39;</span> <span class="o">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;font-style&#39;</span> <span class="o">:</span> <span class="s1">&#39;normal&#39;</span>
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="s2">&quot;blur&quot;</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="s2">&quot;keyup&quot;</span><span class="p">);</span>		
+		
+		<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">blur</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;Search Chatbeat&#39;</span><span class="p">);</span>
+				<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span>
+					<span class="s1">&#39;font-weight&#39;</span> <span class="o">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+					<span class="s1">&#39;font-style&#39;</span> <span class="o">:</span> <span class="s1">&#39;italic&#39;</span>
+				<span class="p">});</span>
+			<span class="p">}</span>
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">val</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span> <span class="o">&amp;&amp;</span> <span class="nx">val</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>	<span class="p">{</span>				
+				<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">API</span> <span class="o">+</span> <span class="s2">&quot;/songs/?q=&quot;</span> <span class="o">+</span> <span class="nx">val</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;searchResult&quot;</span><span class="p">)</span>
+			<span class="p">}</span>			
+		<span class="p">});</span>
+	<span class="p">}</span>
+	
+	
+<span class="p">});</span>
+</pre></div>

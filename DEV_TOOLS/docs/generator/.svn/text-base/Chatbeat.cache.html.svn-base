@@ -1,0 +1,651 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: chatbeat  Chatbeat.cache   (Chatbeat Javascript Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1334918017.6" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1334918017.6" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1334918017.6"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1334918017.6"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://www.chatbeat.com" title="Chatbeat Desktop AIR Javascript Library">Chatbeat Desktop AIR Javascript Library</a></h1>
+        <h3>chatbeat&nbsp; <span class="subtitle">1.0.0</span></h3>
+        <a href="./index.html" title="Chatbeat Desktop AIR Javascript Library">Chatbeat Desktop AIR Javascript Library</a> 
+            &gt; <a href="./module_chatbeat.html" title="chatbeat">chatbeat</a>
+                 &gt; Chatbeat.cache 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">Chatbeat.cache</b>
+                        <span class="extends">
+                        </span>
+
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        Chatbeat component that controls the caching and other related caching properties and tools.
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">Chatbeat.cache</strong>
+                                <code>
+                                    (
+                                    )
+                                </code>
+                                <div class="description">
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+                        <div class="section field details">
+                            <h3 id="properties">Properties</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:property" resource="#property_appDir">
+                                    <h4><a name="property_appDir" property="yui:name">appDir</a>
+                                        - <code><span property="yui:type">string</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            sets the default Folder name
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_cacheDir">
+                                    <h4><a name="property_cacheDir" property="yui:name">cacheDir</a>
+                                        - <code><span property="yui:type">string</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            sets the cache directory name
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_cacheLocation">
+                                    <h4><a name="property_cacheLocation" property="yui:name">cacheLocation</a>
+                                        - <code><span property="yui:type">AIR file Object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            a variable to store the AIR File object of Cache directory in runtime
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_docDir">
+                                    <h4><a name="property_docDir" property="yui:name">docDir</a>
+                                        - <code><span property="yui:type">AIR File object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            get the default nativepath of the application storage
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_key">
+                                    <h4><a name="property_key" property="yui:name">key</a>
+                                        - <code><span property="yui:type">string</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Temporary secret key
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:method" resource="#method_checkLocation">
+                                    <h4>
+                                        <a name="method_checkLocation">checkLocation</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        true or false
+                                            <strong property="yui:name">checkLocation</strong>
+                                           (
+                                                
+                                                        
+                                                         artistID
+                                                    
+                                                
+                                                        , 
+                                                         albumID
+                                                    
+                                                
+                                                        , 
+                                                         songID
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Check the file if exist on local based on IDs.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">artistID</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">albumID</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">songID</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        true or false
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_decrypt">
+                                    <h4>
+                                        <a name="method_decrypt">decrypt</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        string
+                                            <strong property="yui:name">decrypt</strong>
+                                           (
+                                                
+                                                        
+                                                         str
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Decrypt the given string
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">str</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        string
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">str</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_encrypt">
+                                    <h4>
+                                        <a name="method_encrypt">encrypt</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        string
+                                            <strong property="yui:name">encrypt</strong>
+                                           (
+                                                
+                                                        
+                                                         str
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Encrypt the given string
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">str</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        string
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">str</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getID">
+                                    <h4>
+                                        <a name="method_getID">getID</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        string
+                                            <strong property="yui:name">getID</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Create random ID on runtime
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        string
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">str</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_init">
+                                    <h4>
+                                        <a name="method_init">init</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">init</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            this method is automatically loaded onStart of the application called by Chatbeat.initComponent <br>
+- Initialize the cache location and adds events listener of discovered files<br>
+- Encrypt the secret key and store it on Encrypted local store provided by Air Runtime<br>
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_isCached">
+                                    <h4>
+                                        <a name="method_isCached">isCached</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        true or false
+                                            <strong property="yui:name">isCached</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            check if the current streaming music is already on local storage
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        true or false
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_keep">
+                                    <h4>
+                                        <a name="method_keep">keep</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">keep</strong>
+                                           (
+                                                
+                                                        
+                                                         url
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Save the streaming music data in local storage
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">url</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_parseURL">
+                                    <h4>
+                                        <a name="method_parseURL">parseURL</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        Object
+                                            <strong property="yui:name">parseURL</strong>
+                                           (
+                                                
+                                                        
+                                                         url
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            return the Artist ID, Album ID, Song ID from the URL parameter (if JSON is coming from streaming server)
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">url</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        Object
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_chatbeat.html" title="chatbeat">chatbeat</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Chatbeat.html" title="Chatbeat">Chatbeat</a></li>
+                                <li class="selected"><a href="Chatbeat.cache.html" title="Chatbeat.cache">Chatbeat.cache</a></li>
+                                <li class=""><a href="Chatbeat.handlers.html" title="Chatbeat.handlers">Chatbeat.handlers</a></li>
+                                <li class=""><a href="Chatbeat.offline.html" title="Chatbeat.offline">Chatbeat.offline</a></li>
+                                <li class=""><a href="Chatbeat.pages.html" title="Chatbeat.pages">Chatbeat.pages</a></li>
+                                <li class=""><a href="Chatbeat.player.html" title="Chatbeat.player">Chatbeat.player</a></li>
+                                <li class=""><a href="Chatbeat.playlist.html" title="Chatbeat.playlist">Chatbeat.playlist</a></li>
+                                <li class=""><a href="Chatbeat.window.html" title="Chatbeat.window">Chatbeat.window</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="chatbeat.cache.js.html" title="chatbeat.cache.js">chatbeat.cache.js</a></li>
+                                <li class=""><a href="chatbeat.handlers.js.html" title="chatbeat.handlers.js">chatbeat.handlers.js</a></li>
+                                <li class=""><a href="chatbeat.js.html" title="chatbeat.js">chatbeat.js</a></li>
+                                <li class=""><a href="chatbeat.offline.js.html" title="chatbeat.offline.js">chatbeat.offline.js</a></li>
+                                <li class=""><a href="chatbeat.pages.js.html" title="chatbeat.pages.js">chatbeat.pages.js</a></li>
+                                <li class=""><a href="chatbeat.player.js.html" title="chatbeat.player.js">chatbeat.player.js</a></li>
+                                <li class=""><a href="chatbeat.playlist.js.html" title="chatbeat.playlist.js">chatbeat.playlist.js</a></li>
+                                <li class=""><a href="chatbeat.window.js.html" title="chatbeat.window.js">chatbeat.window.js</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="propertyList" class="module">
+                        <h4>Properties</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#property_appDir" title="appDir">appDir</a></li>
+                                <li class=""><a href="#property_cacheDir" title="cacheDir">cacheDir</a></li>
+                                <li class=""><a href="#property_cacheLocation" title="cacheLocation">cacheLocation</a></li>
+                                <li class=""><a href="#property_docDir" title="docDir">docDir</a></li>
+                                <li class=""><a href="#property_key" title="key">key</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#method_checkLocation" title="checkLocation">checkLocation</a></li>
+                                <li class=""><a href="#method_decrypt" title="decrypt">decrypt</a></li>
+                                <li class=""><a href="#method_encrypt" title="encrypt">encrypt</a></li>
+                                <li class=""><a href="#method_getID" title="getID">getID</a></li>
+                                <li class=""><a href="#method_init" title="init">init</a></li>
+                                <li class=""><a href="#method_isCached" title="isCached">isCached</a></li>
+                                <li class=""><a href="#method_keep" title="keep">keep</a></li>
+                                <li class=""><a href="#method_parseURL" title="parseURL">parseURL</a></li>
+                        </ul>
+                    </div>
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2012 Kolipri Communications Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "Chatbeat.cache.html#property_appDir", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "appDir"}, {"url": "Chatbeat.cache.html#property_cacheDir", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "cacheDir"}, {"url": "Chatbeat.cache.html#property_cacheLocation", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "cacheLocation"}, {"url": "Chatbeat.cache.html#method_checkLocation", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "checkLocation"}, {"url": "Chatbeat.cache.html#method_decrypt", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "decrypt"}, {"url": "Chatbeat.cache.html#property_docDir", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "docDir"}, {"url": "Chatbeat.cache.html#method_encrypt", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "encrypt"}, {"url": "Chatbeat.cache.html#method_getID", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "getID"}, {"url": "Chatbeat.cache.html#method_init", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "init"}, {"url": "Chatbeat.cache.html#method_isCached", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "isCached"}, {"url": "Chatbeat.cache.html#method_keep", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "keep"}, {"url": "Chatbeat.cache.html#property_key", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "key"}, {"url": "Chatbeat.cache.html#method_parseURL", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "parseURL"}];
+</script>
+</body>
+</html>

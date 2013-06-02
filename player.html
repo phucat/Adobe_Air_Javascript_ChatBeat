@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ChatBeat Desktop</title>
+
+<script type="application/x-shockwave-flash" src="js/packages/air/servicemonitor.swf"></script>
+<script type="text/javascript" src="js/packages/air/AIRAliases.js"></script>
+<script type="text/javascript" src="js/packages/air/AIRIntrospector.js"></script>
+
+
+<script src="js/packages/jquery/jquery-1.7.1.min.js"></script>
+<script src="js/packages/jquery/jquery.ui.min.js"></script>
+<script src="js/packages/jquery.rc4.js"></script>
+
+<script type="text/javascript" src="js/components/chatbeat.js"></script>
+<script type="text/javascript" src="js/components/chatbeat.handlers.js"></script>
+<script type="text/javascript" src="js/components/chatbeat.offline.js"></script>
+<script type="text/javascript" src="js/components/chatbeat.player.js"></script>
+<script type="text/javascript" src="js/components/chatbeat.playlist.js"></script>
+<script type="text/javascript" src="js/components/chatbeat.window.js"></script>
+<script type="text/javascript" src="js/components/chatbeat.pages.js"></script>
+<script type="text/javascript" src="js/components/chatbeat.cache.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="css/range.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.ui.css" />
+</head>
+
+<body>
+<div id="wrapper">
+	
+    <div id="resizeHandle">
+    	<div class="bottom"></div>
+    	<div class="top"></div>
+    	<div class="left"></div>
+    	<div class="right"></div>
+    	<div class="top-right"></div>
+    	<div class="top-left"></div>
+    	<div class="bottom-left"></div>
+    	<div class="bottom-right"></div>                                                        
+    </div>
+    
+	<div id="windowControls">
+    	<li href="" class="minimize" id="minBtn"></li>
+    	<li href="" class="maximize" id="maxBtn"></li>
+    	<li href="" class="close" id="closeBtn"></li>
+    </div>
+    
+    <div id="volumeControl">
+	    <div id="slider" class="rangeslider"></div>
+    </div>
+    
+    <div id="moveHandle">
+	    <div id="logo">
+        	<img src="assets/images/cb_logo.png" width="181" height="54" alt="logo" />
+		</div>
+    	<div id="infos" class="reflect" style="text-align:center" >
+                <span id="title"></span> - 
+                <span id="artist"></span> / 
+                <span id="album"></span>
+		</div>
+    </div>
+	
+	<div id="searchContainer">
+        <input type="text" value="Search Chatbeat" width="300" id="searchInput" />
+    </div> 
+    <div id="toastWindow"></div>
+    
+	<div id="contents">
+   	 
+    	<table width="100%" height="100%" cellpadding="0" cellspacing="0" style="border-top:#333 solid 1px; border-bottom:#333 solid 1px">
+        	<tr>            
+            	<td width="20%" class="tdLeftPanel">
+                	<div id="leftPanel">
+ 
+                    	<span>Library</span>
+                        <li id="nowPlayingSelection">Now Playing</li>                    	
+                        <li id="artistsSelection">Artists</li>
+                        <li id="albumsSelection">Albums</li>                        
+                        <hr class="divider" />                        
+                        
+                        <div id="onlinePlaylistDiv">
+                            <span>Playlist</span>
+                            <li pl_id="?t=featured" id="playlist_featured">Featured</li>                       
+                            
+                            <div id="customPlayList" oncontextmenu="Chatbeat.playlist.menu.showPLContext(event)">
+                            <li pl_id="favorites" id="playlist_favorites">Favorites</li>
+                            </div>      
+                            <br/>                
+                            <li id="createPlaylistBtn">Create New Playlist</li>
+                            <hr class="divider" />
+                        </div>
+                        
+                        <div id="offlinePlaylistDiv">
+                            <span>Offline Playlist</span>
+                            <div id="offlinePlaylist"></div>
+                            <hr class="divider" />          
+                        </div>              
+                        
+                        <span>Local Storage</span>                        
+
+						<hr class="divider" />                        
+                        <span>Preferences</span>
+                    	<li>My Account</li>
+                    	<li>Settings</li>
+                    	<li>Logout</li>
+
+						<hr class="divider" />
+                        <div style="padding:20px;">
+                        <button class="blue awesome" id="switch">Go Offline</button>
+                        </div>
+                    </div>
+                
+                </td>
+                <td width="60%" class="tdCenterPanel">
+                <div id="centerPanel">
+	                <div id="toggleViewsContainer">
+						<span>List</span> | <span>Album Art</span> | <span id="playVideoBtn">Play Video</span> 
+					</div> 
+                    
+                   
+                    
+                	<div id="pageTitle"></div>
+                    <div id="pageContent"  class="page"></div>
+                    
+                    <div id="nowPlayingPage"  class="page"></div>
+                    
+                    <div id="artistPage" class="page">
+                        <div id="artistList">
+                            <table id="artistDataTable" class="tablesorter" cellpadding="0" cellspacing="0" border="0"> 
+                                <thead> 
+                                    <tr>                                       
+                                        <th width="30%"></th>
+                                        <th width="70%">Artist Name</th>                                        
+                                    </tr> 
+                                </thead> 
+                                <tbody id="artistTableContent" oncontextmenu="Chatbeat.playlist.menu.show(event)"> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="albumPage" class="page">
+                        <div id="albumList">
+                        	<div id="artistInfo" style="padding:20px; display:block; min-height:70px; background:#000" >
+                            	
+                            	<h3></h3>
+                                <span></span>
+                            </div>
+                            
+                            <div style="clear:both"></div>
+                            
+                            <table id="albumDataTable" class="tablesorter" cellpadding="0" cellspacing="0" border="0">
+                                <thead>
+                                    <tr>
+	                                    <th width="30%"></th>
+                                        <th width="30%">Album Title</th>
+                                        <th width="70%">Year</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="albumTableContent" oncontextmenu="Chatbeat.playlist.menu.show(event)"> 
+                                </tbody>
+                            </table>
+                        </div>                    
+                    </div>                    
+                    
+                	<div id="songsPage"  class="page">
+                        <div class="wrapper">
+                            <div id="songlist" class="songs">                        
+                                <table id="songDataTable" class="tablesorter" cellpadding="0" cellspacing="0" border="0"> 
+                                    <thead> 
+                                        <tr>
+                                            <th><input type="checkbox" id="mainSelector" class="selections"  /></th> 
+                                            <th>Name</th>
+                                            <th>Time</th>
+                                            <th>Artist</th>
+                                            <th>Album</th>
+                                            <th>Track #</th>
+                                            <th>Year</th>                                    
+                                            <th>Genre</th>
+                                        </tr> 
+                                    </thead> 
+                                    <tbody id="tableContent" oncontextmenu="Chatbeat.playlist.menu.show(event)"> 
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="albumArtList" class="songsAlbumArt"></div>
+                                   
+                        </div>                    
+                    </div>
+                  
+                    
+                </div>
+                </td>
+                <td width="20%" class="tdRightPanel">
+                	<div id="rightPanel">
+                    	<span>People</span>
+                    	<li>
+                        <img src="assets/images/thumbs/41443_100001056887541_889239389_q.jpg" align="left" />Rainer Lainonen
+                        </li>
+                    	<li>
+                        <img src="assets/images/thumbs/70638_100000601887247_1619537506_q.jpg" align="left" />Enrique Samson
+                        </li>
+                        <li>
+                        <img src="assets/images/thumbs/161344_780615607_1046659458_q.jpg" align="left" />Mark Documento
+                        </li>
+                        <li>
+                        <img src="assets/images/thumbs/174144_1280882559_1741259093_q.jpg" align="left" />Sugar Ray Tenorio
+                        </li>
+                        <li>
+                        <img src="assets/images/thumbs/260748_1645007033_1258763654_q.jpg" align="left" />Xyldrae Jacob
+                        </li>
+                        <li>
+                        <img src="assets/images/thumbs/370610_1450005646_1245991240_q.jpg" align="left" />Earvin Sarmiento
+                        </li>
+                        <li>
+                        <img src="assets/images/thumbs/41443_100001056887541_889239389_q.jpg" align="left" />Maybelle Pacate
+                        </li>
+                    	<li>
+                        <img src="assets/images/thumbs/70638_100000601887247_1619537506_q.jpg" align="left" />Karen  Matias
+                        </li>
+                        <li>
+                        <img src="assets/images/thumbs/161344_780615607_1046659458_q.jpg" align="left" />Melinda Estuita
+                        </li>
+                        <li>
+                        <img src="assets/images/thumbs/174144_1280882559_1741259093_q.jpg" align="left" />Joy Magaling
+                        </li>
+                        <li>
+                        <img src="assets/images/thumbs/260748_1645007033_1258763654_q.jpg" align="left" />Rhegine Santos
+                        </li>
+                        <li>
+                        <img src="assets/images/thumbs/370610_1450005646_1245991240_q.jpg" align="left" />Jennifer Bermejo
+                        </li>
+                  
+                        <hr class="divider" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="playerControls">
+     	
+    	<div class="wrap">
+            
+            <div class="playBtn" id="controlPlay"></div>
+            <div class="nextBtn" id="controlNext"></div>
+            <div class="prevBtn" id="controlPrev"></div>            
+        
+        	
+            <div id="scrubberWrap">
+                <div id="mainDuration">
+                    <div id="duration"></div>
+                    <div  id="position"></div>
+                    <div  id="scrubber"></div>
+                </div> 
+			</div>
+            
+            <div id="controlStop"></div>
+            <div id="controlPause"></div>    
+            
+            
+            <div id="durationDiv" style="margin-top:10px">
+                <span id="currentDuration">0:00</span> - <span id="totalDuration">0:00</span>
+            </div>
+                        
+		</div>   
+         
+    </div>
+    
+</div>
+</body>
+</html>

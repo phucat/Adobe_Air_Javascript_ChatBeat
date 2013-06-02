@@ -1,0 +1,243 @@
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* Chatbeat component that controls the caching and other related caching properties and tools.</span>
+<span class="cm">* @class cache</span>
+<span class="cm">* @constructor  </span>
+<span class="cm">* @namespace Chatbeat</span>
+<span class="cm">*/</span>
+
+<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="s1">&#39;cache&#39;</span><span class="p">,</span> <span class="p">{</span>
+	<span class="cm">/**   </span>
+<span class="cm">	* get the default nativepath of the application storage </span>
+<span class="cm">	* @property docDir</span>
+<span class="cm">	* @type AIR File object</span>
+<span class="cm">	*/</span>
+	<span class="nx">docDir</span> <span class="o">:</span> <span class="nx">air</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">applicationStorageDirectory</span><span class="p">,</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* sets the default Folder name</span>
+<span class="cm">	* @property appDir</span>
+<span class="cm">	* @type string</span>
+<span class="cm">	*/</span>
+	<span class="nx">appDir</span> <span class="o">:</span> <span class="s2">&quot;ChatBeat&quot;</span><span class="p">,</span>
+        
+	<span class="cm">/**   </span>
+<span class="cm">	* sets the cache directory name</span>
+<span class="cm">	* @property cacheDir</span>
+<span class="cm">	* @type string</span>
+<span class="cm">	*/</span>
+	<span class="nx">cacheDir</span> <span class="o">:</span> <span class="s2">&quot;cache&quot;</span><span class="p">,</span>
+        
+	<span class="cm">/**   </span>
+<span class="cm">	* Temporary secret key </span>
+<span class="cm">	* @property key</span>
+<span class="cm">	* @type string</span>
+<span class="cm">	*/</span>
+	<span class="nx">key</span> <span class="o">:</span> <span class="s2">&quot;secretkey&quot;</span><span class="p">,</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* a variable to store the AIR File object of Cache directory in runtime</span>
+<span class="cm">	* @property cacheLocation</span>
+<span class="cm">	* @type AIR file Object</span>
+<span class="cm">	*/</span>
+	<span class="nx">cacheLocation</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* this method is automatically loaded onStart of the application called by Chatbeat.initComponent &lt;br&gt;</span>
+<span class="cm">	* - Initialize the cache location and adds events listener of discovered files&lt;br&gt;</span>
+<span class="cm">	* - Encrypt the secret key and store it on Encrypted local store provided by Air Runtime&lt;br&gt;</span>
+<span class="cm">	* @method init</span>
+<span class="cm">	*/</span>
+	<span class="nx">init</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+		<span class="k">this</span><span class="p">.</span><span class="nx">cacheLocation</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">docDir</span><span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">appDir</span><span class="p">).</span><span class="nx">resolvePath</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheDir</span><span class="p">);</span>	
+		<span class="k">this</span><span class="p">.</span><span class="nx">cacheLocation</span><span class="p">.</span><span class="nx">createDirectory</span><span class="p">();</span> 
+		<span class="k">this</span><span class="p">.</span><span class="nx">cacheLocation</span><span class="p">.</span><span class="nx">getDirectoryListingAsync</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">cacheLocation</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">FileListEvent</span><span class="p">.</span><span class="nx">DIRECTORY_LISTING</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheDirHandler</span><span class="p">);</span>
+		
+		<span class="kd">var</span> <span class="nx">passwordBytes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">ByteArray</span><span class="p">();</span>
+		<span class="nx">passwordBytes</span><span class="p">.</span><span class="nx">writeUTFBytes</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>
+		<span class="nx">air</span><span class="p">.</span><span class="nx">EncryptedLocalStore</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="nx">passwordBytes</span><span class="p">);</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;app sotrage location =&gt; &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheLocation</span><span class="p">.</span><span class="nx">nativePath</span><span class="p">);</span>			
+		<span class="p">}</span>
+
+	<span class="p">},</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* check if the current streaming music is already on local storage</span>
+<span class="cm">	* @method isCached</span>
+<span class="cm">	* @return {true or false}</span>
+<span class="cm">	*/</span>
+	<span class="nx">isCached</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>	<span class="p">{</span>
+
+		<span class="nx">params</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">parseURL</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">pArtistID</span> <span class="o">=</span> <span class="nx">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+			<span class="nx">pAlbumID</span> <span class="o">=</span> <span class="nx">params</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+			<span class="nx">pSongID</span> <span class="o">=</span> <span class="nx">params</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+			
+		<span class="nx">checkFile</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">checkLocation</span><span class="p">(</span><span class="nx">pArtistID</span><span class="p">,</span> <span class="nx">pAlbumID</span><span class="p">,</span> <span class="nx">pSongID</span><span class="p">);</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">checkFile</span><span class="p">)</span>	<span class="p">{</span>		
+			<span class="k">return</span> <span class="nx">checkFile</span><span class="p">;</span>
+		<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+			<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+		<span class="p">}</span>
+		
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* return the Artist ID, Album ID, Song ID from the URL parameter (if JSON is coming from streaming server)</span>
+<span class="cm">	* @method parseURL</span>
+<span class="cm">	* @param url {string}</span>
+<span class="cm">	* @return {Object}</span>
+<span class="cm">	*/</span>
+	<span class="nx">parseURL</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="k">try</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">paramArr</span> <span class="o">=</span> <span class="nx">url</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">httpStream</span><span class="p">)[</span><span class="mi">1</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">);</span>
+			<span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">paramArr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">();</span>
+				<span class="nx">paramArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;local&#39;</span><span class="p">;</span>
+				<span class="nx">paramArr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;local&#39;</span><span class="p">;</span>
+				<span class="nx">paramArr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span>  <span class="k">this</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+			<span class="p">}</span>
+			<span class="k">return</span> <span class="nx">paramArr</span><span class="p">;</span>			
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Check the file if exist on local based on IDs.</span>
+<span class="cm">	* @method checkLocation</span>
+<span class="cm">	* @param artistID {string}</span>
+<span class="cm">	* @param albumID {string}</span>
+<span class="cm">	* @param songID {string}</span>
+<span class="cm">	* @return {true or false}</span>
+<span class="cm">	*/</span>
+	<span class="nx">checkLocation</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">artistID</span><span class="p">,</span> <span class="nx">albumID</span><span class="p">,</span> <span class="nx">songID</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="kd">var</span> <span class="nx">getCacheLoc</span> <span class="o">=</span>  <span class="k">this</span><span class="p">.</span><span class="nx">cacheLocation</span><span class="p">,</span>
+			<span class="nx">artistLoc</span> <span class="o">=</span> <span class="nx">getCacheLoc</span><span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">artistID</span><span class="p">)),</span>
+			<span class="nx">albumLoc</span> <span class="o">=</span> <span class="nx">artistLoc</span><span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">albumID</span><span class="p">)),</span>
+			<span class="nx">songLoc</span> <span class="o">=</span> <span class="nx">albumLoc</span><span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">songID</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.cmf&quot;</span><span class="p">);</span>
+			
+		<span class="k">if</span><span class="p">(</span><span class="nx">artistLoc</span><span class="p">.</span><span class="nx">exists</span><span class="p">)</span>	<span class="p">{</span>		
+			<span class="k">if</span><span class="p">(</span><span class="nx">albumLoc</span><span class="p">.</span><span class="nx">exists</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">songLoc</span><span class="p">.</span><span class="nx">exists</span><span class="p">)</span>	<span class="p">{</span>
+					<span class="k">return</span> <span class="nx">songLoc</span><span class="p">.</span><span class="nx">url</span><span class="p">;</span>
+				<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+					<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>	
+				<span class="p">}</span>				
+			<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+				<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>	
+			<span class="p">}</span>			
+		<span class="p">}</span>	<span class="k">else</span>	<span class="p">{</span>
+			<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>	
+		<span class="p">}</span>
+
+	<span class="p">},</span>
+	
+	<span class="nx">cacheDirHandler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+			
+		
+		<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			
+		<span class="p">}</span>
+	<span class="p">},</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* Save the streaming music data in local storage</span>
+<span class="cm">	* @method keep</span>
+<span class="cm">	* @param url {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">keep</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="nx">params</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">parseURL</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+		
+		<span class="kd">var</span> <span class="nx">artistID</span> <span class="o">=</span> <span class="nx">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+			<span class="nx">albumID</span> <span class="o">=</span> <span class="nx">params</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+			<span class="nx">songID</span> <span class="o">=</span> <span class="nx">params</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+		
+			<span class="nx">newFile</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheLocation</span><span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">artistID</span><span class="p">))</span>
+							<span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">albumID</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">songID</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;.cmf&quot;</span><span class="p">),</span>
+		
+			<span class="nx">urlStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">URLStream</span><span class="p">(),</span>
+			<span class="nx">fileData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">ByteArray</span><span class="p">();</span>
+		
+		<span class="kd">var</span> <span class="nx">URLObj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">URLRequest</span><span class="p">();</span>
+		<span class="nx">URLObj</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
+		<span class="nx">urlStream</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">air</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">COMPLETE</span><span class="p">,</span> <span class="nx">loaded</span><span class="p">);</span>
+		<span class="nx">urlStream</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">URLObj</span><span class="p">);</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;params  : &quot;</span> <span class="o">+</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">convertObj</span><span class="p">(</span><span class="nx">params</span><span class="p">));</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;filename BEFORE : &quot;</span> <span class="o">+</span> <span class="nx">songID</span> <span class="o">+</span> <span class="s2">&quot; AFTER : &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">songID</span><span class="p">));</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;saving data to local storage ... &quot;</span><span class="p">);</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Trying to store in : &quot;</span> <span class="o">+</span> <span class="nx">newFile</span><span class="p">.</span><span class="nx">nativePath</span><span class="p">);</span>			
+		<span class="p">}</span>
+		
+		<span class="kd">function</span> <span class="nx">loaded</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> 
+			<span class="nx">urlStream</span><span class="p">.</span><span class="nx">readBytes</span><span class="p">(</span><span class="nx">fileData</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">urlStream</span><span class="p">.</span><span class="nx">bytesAvailable</span><span class="p">);</span> 
+			<span class="nx">writeCMF</span><span class="p">();</span> 
+		<span class="p">}</span> 
+		 
+		<span class="kd">function</span> <span class="nx">writeCMF</span><span class="p">()</span> <span class="p">{</span> 
+			<span class="kd">var</span> <span class="nx">fileStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">FileStream</span><span class="p">();</span> 
+			<span class="nx">fileStream</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">newFile</span><span class="p">,</span> <span class="nx">air</span><span class="p">.</span><span class="nx">FileMode</span><span class="p">.</span><span class="nx">WRITE</span><span class="p">);</span> 
+			<span class="nx">fileStream</span><span class="p">.</span><span class="nx">writeBytes</span><span class="p">(</span><span class="nx">fileData</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">fileData</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> 
+			<span class="nx">fileStream</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span> 
+			
+			<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;new file is writen on : &quot;</span> <span class="o">+</span> <span class="nx">newFile</span><span class="p">.</span><span class="nx">nativePath</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="nx">remove</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**   </span>
+<span class="cm">	* Encrypt the given string</span>
+<span class="cm">	* @method encrypt</span>
+<span class="cm">	* @param str {string}</span>
+<span class="cm">	* @return str {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">encrypt</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="kd">var</span> <span class="nx">localStorage</span> <span class="o">=</span> <span class="nx">air</span><span class="p">.</span><span class="nx">EncryptedLocalStore</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">),</span>
+			<span class="nx">key</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">readUTFBytes</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+			<span class="nx">enc</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">rc4EncryptStr</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+	
+		<span class="k">return</span> <span class="nx">enc</span><span class="p">;</span>
+		
+	<span class="p">},</span>
+
+	<span class="cm">/**   </span>
+<span class="cm">	* Decrypt the given string</span>
+<span class="cm">	* @method decrypt</span>
+<span class="cm">	* @param str {string}</span>
+<span class="cm">	* @return str {string}</span>
+<span class="cm">	*/</span>	
+	<span class="nx">decrypt</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>	<span class="p">{</span>
+
+		<span class="kd">var</span> <span class="nx">localStorage</span> <span class="o">=</span> <span class="nx">air</span><span class="p">.</span><span class="nx">EncryptedLocalStore</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">),</span>
+			<span class="nx">key</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">readUTFBytes</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>		
+		<span class="k">return</span>  <span class="nx">$</span><span class="p">.</span><span class="nx">rc4DecryptStr</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">key</span> <span class="p">);</span>
+		
+	<span class="p">},</span>
+        
+	<span class="cm">/**   </span>
+<span class="cm">	* Create random ID on runtime</span>
+<span class="cm">	* @method getID</span>
+<span class="cm">	* @return str {string}</span>
+<span class="cm">	*/</span>	
+	<span class="nx">getID</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		<span class="k">return</span>  <span class="s2">&quot;ID_&quot;</span> <span class="o">+</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">();</span>
+	<span class="p">}</span>
+	
+	
+<span class="p">});</span>
+</pre></div>

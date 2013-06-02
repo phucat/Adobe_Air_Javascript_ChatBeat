@@ -1,0 +1,712 @@
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* Chatbeat component that is responsible on all playlist activity, connections, UI display etc.</span>
+<span class="cm">* @class playlist</span>
+<span class="cm">* @constructor </span>
+<span class="cm">* @namespace Chatbeat </span>
+<span class="cm">*/</span>
+<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="s1">&#39;playlist&#39;</span><span class="p">,</span> <span class="p">{</span>
+	<span class="cm">/**</span>
+<span class="cm">	* container for the JSON playlist generated from server</span>
+<span class="cm">	* @property list</span>
+<span class="cm">	*/</span>
+	<span class="nx">list</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>	
+	
+	<span class="cm">/**</span>
+<span class="cm">	* a DOM object parent that will contain all the sounds information from a playlist. This will be the main DOM parent that will contain all the JSON &quot;playlist&quot; result from the server</span>
+<span class="cm">	* @property container</span>
+<span class="cm">	*/</span>
+	<span class="nx">container</span> <span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#songlist&#39;</span><span class="p">),</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* container for AIR ContextMenu Object</span>
+<span class="cm">	* @property contextMenu</span>
+<span class="cm">	*/</span>	
+	<span class="nx">contextMenu</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* this method is automatically loaded onStart of the application called by Chatbeat.initComponent &lt;br&gt;</span>
+<span class="cm">	* - initialize the UI controls, contextmenus and drag and drop source on start up.</span>
+<span class="cm">	* @method init</span>
+<span class="cm">	*/</span>
+	<span class="nx">init</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+	
+		<span class="c1">//this.featured()</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">contextMenu</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">plContext</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">createPLcontext</span><span class="p">();</span>
+		
+		<span class="k">this</span><span class="p">.</span><span class="nx">DOMcontrol</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">toggleViews</span><span class="p">();</span>
+		
+		<span class="kd">var</span> <span class="nx">dragSource</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;songlist&#39;</span><span class="p">);</span>
+		<span class="nx">dragSource</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragstart&quot;</span><span class="p">,</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">start</span><span class="p">);</span>
+		<span class="nx">dragSource</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragend&quot;</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">end</span><span class="p">);</span>
+		
+		<span class="kd">var</span> <span class="nx">dragTarget</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;customPlayList&#39;</span><span class="p">);</span> 
+        <span class="nx">dragTarget</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragenter&quot;</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">enter</span><span class="p">);</span> 
+        <span class="nx">dragTarget</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragover&quot;</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">enter</span><span class="p">);</span>
+        <span class="nx">dragTarget</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;drop&quot;</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">drop</span><span class="p">);</span> 
+		
+		
+		<span class="kd">var</span> <span class="nx">dropzone</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;centerPanel&quot;</span><span class="p">);</span>
+		<span class="nx">dropzone</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragenter&quot;</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">enter</span><span class="p">);</span>
+		<span class="nx">dropzone</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;dragover&quot;</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">enter</span><span class="p">);</span>
+		<span class="nx">dropzone</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;drop&quot;</span><span class="p">,</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">onDrop</span><span class="p">);</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* triggered when an object has been dropped to the targer. Gets the native path of the dragged object and serve to the application.</span>
+<span class="cm">	* @method onDrop</span>
+<span class="cm">	* @param e {System Event}</span>
+<span class="cm">	*/</span>
+	<span class="nx">onDrop</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">dataTransfer</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="s2">&quot;application/x-vnd.adobe.air.file-list&quot;</span><span class="p">);</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">f</span> <span class="o">&lt;</span> <span class="nx">files</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">f</span><span class="o">++</span><span class="p">)</span>     <span class="p">{</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">files</span><span class="p">[</span><span class="nx">f</span><span class="p">].</span><span class="nx">nativePath</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* sets the UI functionality</span>
+<span class="cm">	* @method DOMcontrol</span>
+<span class="cm">	*/</span>
+	<span class="nx">DOMcontrol</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">_plParent</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#createPlaylistBtn&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">_plParent</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+		<span class="p">});</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* serves as the Global connection of the application to server. Sends API to server and delegates the response to assigned method</span>
+<span class="cm">	* @method _send</span>
+<span class="cm">	* @param url {string}</span>
+<span class="cm">	* @param method {string [GET, POST, DELETE etc.]}</span>
+<span class="cm">	* @param handler {Chatbeat Method | Callback}</span>
+<span class="cm">	*/</span>
+	<span class="nx">_send</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">method</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span>	<span class="p">{</span>
+
+		<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">dump</span><span class="p">(</span><span class="s2">&quot;[API connect] url=&gt;&quot;</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="s2">&quot; method=&gt;&quot;</span> <span class="o">+</span> <span class="nx">method</span> <span class="o">+</span> <span class="s2">&quot; callback=&gt;&quot;</span> <span class="o">+</span> <span class="nx">handler</span><span class="p">);</span>
+		<span class="p">}</span>
+		
+		<span class="kd">var</span> <span class="nx">u</span> <span class="o">=</span> <span class="nx">air</span><span class="p">.</span><span class="nx">EncryptedLocalStore</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span> <span class="s1">&#39;username&#39;</span> <span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">air</span><span class="p">.</span><span class="nx">EncryptedLocalStore</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span> <span class="s1">&#39;password&#39;</span> <span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">access</span> <span class="o">=</span> <span class="nx">u</span><span class="p">.</span><span class="nx">readUTFBytes</span><span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">bytesAvailable</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="nx">p</span><span class="p">.</span><span class="nx">readUTFBytes</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">bytesAvailable</span><span class="p">);</span>
+		
+		<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+			<span class="nx">beforeSend</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhrObj</span><span class="p">){</span>
+				<span class="nx">xhrObj</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span><span class="s2">&quot;application/json&quot;</span><span class="p">);</span>
+				<span class="nx">xhrObj</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&quot;Accept&quot;</span><span class="p">,</span><span class="s2">&quot;application/json&quot;</span><span class="p">);</span>				
+				<span class="nx">xhrObj</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&quot;Authorization&quot;</span><span class="p">,</span><span class="s2">&quot;Basic &quot;</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">btoa</span><span class="p">(</span><span class="nx">access</span><span class="p">));</span>
+			<span class="p">},</span>
+			<span class="nx">type</span><span class="o">:</span> <span class="nx">method</span><span class="p">,</span>
+			<span class="nx">url</span><span class="o">:</span> <span class="nx">url</span><span class="p">,</span>
+			<span class="nx">processData</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+			<span class="nx">data</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+			<span class="nx">dataType</span><span class="o">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
+			<span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">){</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+					<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">dump</span><span class="p">(</span><span class="s2">&quot;returned json : &quot;</span> <span class="o">+</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">convertObj</span><span class="p">(</span><span class="nx">json</span><span class="p">));</span>
+				<span class="p">}</span>
+				<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">[</span><span class="nx">handler</span><span class="p">](</span><span class="nx">json</span><span class="p">);</span>				
+			<span class="p">},</span>
+			<span class="nx">error</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">ajaxOptions</span><span class="p">,</span> <span class="nx">thrownError</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+					<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;ERROR : &#39;</span> <span class="o">+</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span> <span class="o">+</span> <span class="s2">&quot; url : &quot;</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="s2">&quot; method : &quot;</span> <span class="o">+</span> <span class="nx">method</span><span class="p">);</span>
+				<span class="p">}</span>
+				<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">[</span><span class="nx">handler</span> <span class="o">+</span> <span class="s2">&quot;error&quot;</span><span class="p">](</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+			
+			<span class="p">}</span>
+		<span class="p">});</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* calls the featured playlist</span>
+<span class="cm">	* @method featured</span>
+<span class="cm">	*/</span>
+	<span class="nx">featured</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>		
+		<span class="k">this</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">API</span> <span class="o">+</span> <span class="s2">&quot;/pl/?t=featured&quot;</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;display&quot;</span><span class="p">);</span>		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#playlist_featured&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
+	<span class="p">},</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	* calls the Artist List</span>
+<span class="cm">	* @method getArtistList</span>
+<span class="cm">	*/</span>	
+	<span class="nx">getArtistList</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>		
+		
+		<span class="k">this</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">API</span> <span class="o">+</span> <span class="s2">&quot;/artists/&quot;</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;getArtistListHandler&quot;</span><span class="p">);</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* handler for the response when getArtistList is called.</span>
+<span class="cm">	* @method getArtistListHandler</span>
+<span class="cm">	* @param json {JSON}</span>
+<span class="cm">	*/</span>	
+	<span class="nx">getArtistListHandler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+
+		<span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">count</span><span class="p">,</span>
+			<span class="nx">length</span> <span class="o">=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">length</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#artistTableContent&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+		
+		<span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">artists</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			
+			<span class="kd">var</span> <span class="nx">counter</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#artistTableContent tr&#39;</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+			<span class="kd">var</span> <span class="nx">row</span> <span class="o">=</span> <span class="nx">counter</span><span class="o">%</span><span class="mi">2</span><span class="p">;</span>
+			<span class="kd">var</span> <span class="nx">rowClass</span> <span class="o">=</span> <span class="p">(</span><span class="nx">row</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;trOdd&#39;</span> <span class="o">:</span> <span class="s1">&#39;trEven&#39;</span><span class="p">;</span>
+			<span class="kd">var</span> <span class="nx">newItem</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;tr class=&quot;artistFileItem&quot;&gt;&lt;/tr&gt;&#39;</span><span class="p">)</span>
+						<span class="p">.</span><span class="nx">append</span>
+						<span class="p">(</span>
+							<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span>
+								<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&lt;/li&gt;&#39;</span><span class="p">)</span>
+								<span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;albumArtClass&quot;</span><span class="p">)</span>
+								
+								<span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+									<span class="s2">&quot;background&quot;</span> <span class="o">:</span> <span class="s2">&quot;url(&quot;</span><span class="o">+</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">staticURL</span> <span class="o">+</span> <span class="s2">&quot;/art/&quot;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="o">+</span><span class="s2">&quot;/)&quot;</span><span class="p">,</span>
+									<span class="s2">&quot;margin&quot;</span> <span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+									<span class="s2">&quot;margin-right&quot;</span> <span class="o">:</span> <span class="mi">5</span>
+								<span class="p">})</span>
+							<span class="p">)</span>
+						<span class="p">)</span>
+						<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">)</span>
+								<span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;&lt;div style=&#39;font-size:16px&#39;&gt;&quot;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="o">+</span><span class="s2">&quot;&lt;/div&gt;&lt;div style=&#39;margin-top:10px&#39;&gt;&quot;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">background</span><span class="o">+</span><span class="s2">&quot;&lt;/div&gt;&quot;</span><span class="p">)</span>
+								<span class="p">.</span><span class="nx">css</span><span class="p">({</span><span class="s2">&quot;padding&quot;</span> <span class="o">:</span> <span class="mi">25</span><span class="p">})</span>
+						<span class="p">)</span>
+						<span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
+							<span class="s1">&#39;artist_id&#39;</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+							<span class="s1">&#39;id&#39;</span> <span class="o">:</span> <span class="s2">&quot;artistListItem_&quot;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+							
+						<span class="p">})</span>
+						<span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">rowClass</span><span class="p">)</span>
+						<span class="p">.</span><span class="nx">dblclick</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+						
+							<span class="kd">var</span> <span class="nx">artist_id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;artist_id&#39;</span><span class="p">);</span>							
+							<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">getAlbumList</span><span class="p">(</span><span class="nx">artist_id</span><span class="p">);</span>
+							
+						<span class="p">})</span>
+						
+						<span class="p">;</span>
+			<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#artistTableContent&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">newItem</span><span class="p">);</span>
+			
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#artistPage&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* gets the Album list from the server</span>
+<span class="cm">	* @method getAlbumList</span>
+<span class="cm">	* @param id {string}</span>
+<span class="cm">	*/</span>	
+	<span class="nx">getAlbumList</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>	<span class="p">{</span>		
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#albumsSelection&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">API</span> <span class="o">+</span> <span class="s2">&quot;/artists/&quot;</span><span class="o">+</span><span class="nx">id</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;getAlbumListHandler&quot;</span><span class="p">);</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* handler for the response when getAlbumListHandler is called.</span>
+<span class="cm">	* @method getAlbumListHandler</span>
+<span class="cm">	* @param json {JSON}</span>
+<span class="cm">	*/</span>	
+	<span class="nx">getAlbumListHandler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">artist_id</span> <span class="o">=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">artist</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+			<span class="nx">background</span> <span class="o">=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">artist</span><span class="p">.</span><span class="nx">background</span><span class="p">,</span>
+			<span class="nx">artist_name</span> <span class="o">=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">artist</span><span class="p">.</span><span class="nx">name</span>
+		
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#artistInfo h3&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">artist_name</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#artistInfo span&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">background</span><span class="p">);</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#albumTableContent&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+		
+		<span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">albums</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">displayAlbums</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+			
+		<span class="p">});</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#albumPage&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* displays the album list in the UI</span>
+<span class="cm">	* @method displayAlbums</span>
+<span class="cm">	* @param albumInfo {JSON Object}</span>
+<span class="cm">	*/</span>	
+	<span class="nx">displayAlbums</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">albumInfo</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">counter</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#albumTableContent tr&#39;</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">row</span> <span class="o">=</span> <span class="nx">counter</span><span class="o">%</span><span class="mi">2</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">rowClass</span> <span class="o">=</span> <span class="p">(</span><span class="nx">row</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;trEven&#39;</span> <span class="o">:</span> <span class="s1">&#39;trOdd&#39;</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">newItem</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;tr class=&quot;artistFileItem&quot;&gt;&lt;/tr&gt;&#39;</span><span class="p">)</span>
+					<span class="p">.</span><span class="nx">append</span>
+					<span class="p">(</span>
+						<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span>
+							<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&lt;/li&gt;&#39;</span><span class="p">)</span>
+							<span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;albumArtClass&quot;</span><span class="p">)</span>
+							
+							<span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+								<span class="s2">&quot;background&quot;</span> <span class="o">:</span> <span class="s2">&quot;url(&quot;</span><span class="o">+</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">staticURL</span> <span class="o">+</span> <span class="s2">&quot;/art/&quot;</span><span class="o">+</span><span class="nx">albumInfo</span><span class="p">.</span><span class="nx">artist_id</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="nx">albumInfo</span><span class="p">.</span><span class="nx">artist_id</span><span class="o">+</span><span class="s2">&quot;/)&quot;</span><span class="p">,</span>
+								<span class="s2">&quot;margin&quot;</span> <span class="o">:</span> <span class="mi">20</span>
+							<span class="p">})</span>
+						<span class="p">)</span>
+					<span class="p">)</span>
+					<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&lt;h3&gt;&#39;</span><span class="o">+</span><span class="nx">albumInfo</span><span class="p">.</span><span class="nx">title</span><span class="o">+</span><span class="s1">&#39;&lt;/h3&gt;&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;padding-top&quot;</span><span class="p">,</span> <span class="mi">70</span><span class="p">))</span>
+					<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&lt;h3&gt;&#39;</span><span class="o">+</span><span class="nx">albumInfo</span><span class="p">.</span><span class="nx">year</span><span class="o">+</span><span class="s1">&#39;&lt;/h3&gt;&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;padding-top&quot;</span><span class="p">,</span> <span class="mi">70</span><span class="p">))</span>						
+					<span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
+						<span class="s1">&#39;artist_id&#39;</span> <span class="o">:</span> <span class="nx">albumInfo</span><span class="p">.</span><span class="nx">artist_id</span><span class="p">,</span>
+						<span class="s1">&#39;album_id&#39;</span> <span class="o">:</span> <span class="nx">albumInfo</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+						<span class="s1">&#39;id&#39;</span> <span class="o">:</span> <span class="s2">&quot;albumListItem_&quot;</span><span class="o">+</span><span class="nx">albumInfo</span><span class="p">.</span><span class="nx">artist_id</span><span class="p">,</span>
+						<span class="s1">&#39;uuid&#39;</span> <span class="o">:</span> <span class="nx">albumInfo</span><span class="p">.</span><span class="nx">uuid</span><span class="p">,</span>
+						<span class="s1">&#39;title&#39;</span> <span class="o">:</span> <span class="nx">albumInfo</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+						<span class="s1">&#39;year&#39;</span> <span class="o">:</span> <span class="nx">albumInfo</span><span class="p">.</span><span class="nx">year</span>
+						
+					<span class="p">})</span>
+					<span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">rowClass</span><span class="p">)</span>
+					<span class="p">.</span><span class="nx">dblclick</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+					
+						<span class="kd">var</span> <span class="nx">artist_id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;artist_id&#39;</span><span class="p">);</span>							
+						<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">getSongsList</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;artist_id&quot;</span><span class="p">),</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;album_id&quot;</span><span class="p">));</span>
+						
+					<span class="p">})</span>
+					
+					<span class="p">;</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#albumTableContent&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">newItem</span><span class="p">);</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* gets the song list from the server</span>
+<span class="cm">	* @method getSongsList</span>
+<span class="cm">	* @param artist_id {string}</span>
+<span class="cm">	* @param album_id {string}</span>
+<span class="cm">	*/</span>	
+	<span class="nx">getSongsList</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">artist_id</span><span class="p">,</span> <span class="nx">album_id</span><span class="p">)</span>	<span class="p">{</span>		
+		
+		<span class="k">this</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">API</span> <span class="o">+</span> <span class="s2">&quot;/artists/&quot;</span><span class="o">+</span> <span class="nx">artist_id</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">album_id</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;getSongsListHandler&quot;</span><span class="p">);</span>
+		
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* handler for the response when getSongsList is called.</span>
+<span class="cm">	* @method getSongsListHandler</span>
+<span class="cm">	* @param json {JSON}</span>
+<span class="cm">	*/</span>	
+	<span class="nx">getSongsListHandler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="k">this</span><span class="p">.</span><span class="nx">display</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#songsPage&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.songs&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.songsAlbumArt&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>		
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* gets the song list from the server</span>
+<span class="cm">	* @method getList</span>
+<span class="cm">	* @param artist_id {string}</span>
+<span class="cm">	* @param album_id {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">getList</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>		
+		<span class="k">this</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">API</span> <span class="o">+</span> <span class="s2">&quot;/pl/&quot;</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;getListHandler&quot;</span><span class="p">);</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* handler for the response when getListHandler is called.</span>
+<span class="cm">	* @method getListHandler</span>
+<span class="cm">	* @param json {JSON}</span>
+<span class="cm">	*/</span>
+	<span class="nx">getListHandler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+
+		<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">json</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>	<span class="p">{</span>			
+			<span class="k">this</span><span class="p">.</span><span class="nx">addNewPL</span><span class="p">(</span><span class="nx">json</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">playlist_id</span><span class="p">,</span> <span class="nx">json</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">playlist</span><span class="p">)</span>
+		<span class="p">}</span>		
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* handler for the response when Chatbeat.offline.loadPlaylist is called.</span>
+<span class="cm">	* @method getOfflineListHandler</span>
+<span class="cm">	* @param json {JSON}</span>
+<span class="cm">	*/</span>
+	<span class="nx">getOfflineListHandler</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">addNewOfflinePL</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">playlist_id</span><span class="p">,</span> <span class="nx">json</span><span class="p">.</span><span class="nx">playlist</span><span class="p">)</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* loads the list of song of a specified playlist on the server</span>
+<span class="cm">	* @method _load</span>
+<span class="cm">	* @param id {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">_load</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">API</span> <span class="o">+</span> <span class="s2">&quot;/pl/&quot;</span><span class="o">+</span><span class="nx">id</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;display&quot;</span><span class="p">);</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* loads the list of song of a specified playlist on the local machine</span>
+<span class="cm">	* @method _loadOffline</span>
+<span class="cm">	* @param id {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">_loadOffline</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="s2">&quot;app-storage:/Chatbeat/Offline/&quot;</span> <span class="o">+</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;display&quot;</span><span class="p">);</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* UI functionality that will display the Create new playlist input box and button. This method is attached in a UI button.</span>
+<span class="cm">	* @method add</span>
+<span class="cm">	* @param obj {DOM object}</span>
+<span class="cm">	*/</span>
+	<span class="nx">add</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">_plParent</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>		
+		<span class="kd">var</span> <span class="nx">newPL</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&lt;/li&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span>
+						<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;input /&gt;&#39;</span><span class="p">)</span>
+						<span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
+							<span class="s1">&#39;type&#39;</span> <span class="o">:</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>
+							<span class="s1">&#39;id&#39;</span> <span class="o">:</span> <span class="s1">&#39;tempPLName&#39;</span>	
+						<span class="p">})</span>
+						<span class="p">.</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+							<span class="kd">var</span> <span class="nx">code</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">?</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">which</span><span class="p">);</span>
+							
+							<span class="k">if</span><span class="p">(</span><span class="nx">code</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//Enter keycode</span>
+								<span class="nx">_plParent</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+								<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+								<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+							<span class="p">}</span>
+							
+							<span class="k">if</span><span class="p">(</span><span class="nx">code</span> <span class="o">==</span> <span class="mi">27</span><span class="p">)</span>	<span class="p">{</span>
+								<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+								<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>	 
+							<span class="p">}</span>
+						<span class="p">})</span>
+						<span class="p">.</span><span class="nx">blur</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+							<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+							<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+						<span class="p">})</span>
+					<span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="nx">newPL</span><span class="p">);</span>
+		<span class="nx">newPL</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+		<span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+	
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* UI functionality that will save the new playlist name. This method is attached in a UI button.</span>
+<span class="cm">	* @method save</span>
+<span class="cm">	* @param obj {DOM object}</span>
+<span class="cm">	*/</span>
+	<span class="nx">save</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">plName</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">API</span> <span class="o">+</span> <span class="s2">&quot;/pl/?name=&quot;</span><span class="o">+</span><span class="nx">plName</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;renderSave&quot;</span><span class="p">);</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* handler that will catch the JSON returned from server when save button is clicked.</span>
+<span class="cm">	* @method renderSave</span>
+<span class="cm">	* @param json {JSON}</span>
+<span class="cm">	*/</span>
+	<span class="nx">renderSave</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+
+		<span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+			<span class="nx">name</span> <span class="o">=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">addNewPL</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+			
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* add or creates a new playlist item in the custom playlist list in UI</span>
+<span class="cm">	* @method addNewPL</span>
+<span class="cm">	* @param playlist_id {integer}</span>
+<span class="cm">	* @param name {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">addNewPL</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">playlist_id</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="nx">newPL</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&lt;/li&gt;&#39;</span><span class="p">)</span>
+					<span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
+						<span class="s1">&#39;id&#39;</span> <span class="o">:</span> <span class="s2">&quot;playlist_&quot;</span> <span class="o">+</span> <span class="nx">playlist_id</span><span class="p">,</span>
+						<span class="s2">&quot;pl_id&quot;</span> <span class="o">:</span> <span class="nx">playlist_id</span><span class="p">,</span>
+						<span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;online&quot;</span>
+					<span class="p">})</span>
+					<span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#customPlayList&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">newPL</span><span class="p">);</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* add or creates a new playlist item in the offline playlist list in UI</span>
+<span class="cm">	* @method addNewOfflinePL</span>
+<span class="cm">	* @param playlist_id {integer}</span>
+<span class="cm">	* @param name {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">addNewOfflinePL</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">playlist_id</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="nx">newPL</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&lt;/li&gt;&#39;</span><span class="p">)</span>
+					<span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
+						<span class="s1">&#39;id&#39;</span> <span class="o">:</span> <span class="s2">&quot;offlineplaylist_&quot;</span> <span class="o">+</span> <span class="nx">playlist_id</span><span class="p">,</span>
+						<span class="s2">&quot;pl_id&quot;</span> <span class="o">:</span> <span class="nx">playlist_id</span><span class="p">,</span>
+						<span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;offline&quot;</span>
+					<span class="p">})</span>
+					<span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+		
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#offlinePlaylist&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">newPL</span><span class="p">);</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* method that will convert json object to strings</span>
+<span class="cm">	* @method convertObj</span>
+<span class="cm">	* @param playlist_id {integer}</span>
+<span class="cm">	* @param name {string}</span>
+<span class="cm">	*/</span>
+	<span class="nx">convertObj</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">m</span> <span class="k">in</span> <span class="nx">json</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">json</span><span class="p">[</span><span class="nx">m</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span>	<span class="nx">str</span> <span class="o">+=</span>  <span class="nx">m</span> <span class="o">+</span> <span class="s2">&quot; : [&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">convertObj</span><span class="p">(</span><span class="nx">json</span><span class="p">[</span><span class="nx">m</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;] &quot;</span><span class="p">;</span>
+			<span class="k">else</span>	<span class="nx">str</span> <span class="o">+=</span>  <span class="nx">m</span> <span class="o">+</span> <span class="s2">&quot; : &quot;</span> <span class="o">+</span> <span class="nx">json</span><span class="p">[</span><span class="nx">m</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="nx">str</span><span class="p">;</span>
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* list all online playlist in UI</span>
+<span class="cm">	* @method display</span>
+<span class="cm">	* @param json {JSON}</span>
+<span class="cm">	*/</span>
+	<span class="nx">display</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">list</span> <span class="o">=</span> <span class="p">{};</span>
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">list</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+		
+		<span class="kd">var</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+			<span class="nx">p_id</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">playlist_id</span><span class="p">,</span>
+			<span class="nx">p_name</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">playlist</span><span class="p">;</span>
+			<span class="nx">origin</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">origin</span>  <span class="o">||</span> <span class="s2">&quot;stream&quot;</span><span class="p">;</span>
+		
+	
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#songsPage tbody&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#songsPage .songsAlbumArt&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+		<span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">songs</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			
+			<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">.</span><span class="nx">insertToList</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+		<span class="p">});</span>
+		
+		<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">listLenght</span> <span class="o">=</span> <span class="nx">counter</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+				
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* create a song item in the playlist UI</span>
+<span class="cm">	* @method insertToList</span>
+<span class="cm">	* @param info {JSON}</span>
+<span class="cm">	*/</span>
+	<span class="nx">insertToList</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">title</span><span class="o">||</span><span class="s1">&#39; &#39;</span><span class="p">,</span>
+			<span class="nx">artist</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">artist_name</span><span class="o">||</span><span class="s1">&#39; &#39;</span><span class="p">,</span>
+			<span class="nx">album</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">album_title</span><span class="o">||</span><span class="s1">&#39; &#39;</span><span class="p">,</span>
+			<span class="nx">track</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">track</span><span class="o">||</span><span class="s1">&#39; &#39;</span><span class="p">,</span>
+			<span class="nx">year</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">year</span><span class="o">||</span><span class="s1">&#39; &#39;</span><span class="p">,</span>
+			<span class="nx">genre</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">genre</span><span class="o">||</span><span class="s1">&#39; &#39;</span><span class="p">,</span>
+			<span class="nx">art</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">album_art</span><span class="p">,</span>
+			<span class="nx">id</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+			<span class="nx">artist_id</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">artist_id</span><span class="p">,</span>
+			<span class="nx">album_id</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">album_id</span><span class="p">;</span>
+			
+		<span class="k">if</span><span class="p">(</span><span class="nx">origin</span> <span class="o">==</span> <span class="s1">&#39;stream&#39;</span><span class="p">)</span>	<span class="nx">path</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">httpStream</span> <span class="o">+</span> <span class="nx">artist_id</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nx">album_id</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nx">id</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
+		<span class="k">else</span>	<span class="nx">path</span> <span class="o">=</span> 	<span class="nx">info</span><span class="p">.</span><span class="nx">path</span><span class="p">;</span>
+			
+		
+		<span class="kd">var</span> <span class="nx">counter</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tableContent tr&#39;</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">row</span> <span class="o">=</span> <span class="nx">counter</span><span class="o">%</span><span class="mi">2</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">rowClass</span> <span class="o">=</span> <span class="p">(</span><span class="nx">row</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;trOdd&#39;</span> <span class="o">:</span> <span class="s1">&#39;trEven&#39;</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">dragInfo</span> <span class="o">=</span> <span class="s2">&quot;title: &quot;</span> <span class="o">+</span> <span class="nx">title</span> <span class="o">+</span> <span class="s2">&quot;|id:&quot;</span><span class="o">+</span><span class="nx">id</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">newItem</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;tr class=&quot;fileItem&quot;&gt;&lt;/tr&gt;&#39;</span><span class="p">)</span>
+						<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&lt;input type=&quot;checkbox&quot; class=&quot;selections&quot; /&gt;&#39;</span><span class="p">))</span>	
+						<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;a&gt;&lt;/a&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">title</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">dragInfo</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;cursor&quot;</span><span class="p">,</span> <span class="s2">&quot;move&quot;</span><span class="p">)))</span>
+						<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+						<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">artist</span><span class="p">))</span>
+						<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">album</span><span class="p">))</span>
+						<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">track</span><span class="p">))</span>
+						<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">year</span><span class="p">))</span>
+						<span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">genre</span><span class="p">))</span>							
+						<span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">rowClass</span><span class="p">)</span>
+						<span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
+							<span class="s1">&#39;artist_id&#39;</span> <span class="o">:</span> <span class="nx">artist_id</span><span class="p">,</span>
+							<span class="s1">&#39;album_id&#39;</span> <span class="o">:</span> <span class="nx">album_id</span><span class="p">,</span>
+							<span class="s1">&#39;song_id&#39;</span> <span class="o">:</span> <span class="nx">id</span><span class="p">,</span>
+							<span class="s1">&#39;path&#39;</span> <span class="o">:</span> <span class="nx">path</span><span class="p">,</span>
+							<span class="s1">&#39;id&#39;</span> <span class="o">:</span> <span class="s2">&quot;listitem_&quot;</span><span class="o">+</span><span class="nx">id</span><span class="p">,</span>
+							<span class="s1">&#39;song_name&#39;</span> <span class="o">:</span>  <span class="nx">title</span><span class="p">,</span>
+							<span class="s1">&#39;album_name&#39;</span> <span class="o">:</span> <span class="nx">album</span><span class="p">,</span>
+							<span class="s1">&#39;artist_name&#39;</span> <span class="o">:</span> <span class="nx">artist</span>
+							
+						<span class="p">})</span>
+						
+						<span class="p">;</span>
+						
+	
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#songsPage tbody&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">newItem</span><span class="p">);</span>
+		
+		
+		
+		<span class="kd">var</span> <span class="nx">newAlbumArt</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&lt;/li&gt;&#39;</span><span class="p">)</span>
+					<span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
+						<span class="s1">&#39;artist_id&#39;</span> <span class="o">:</span> <span class="nx">artist_id</span><span class="p">,</span>
+						<span class="s1">&#39;album_id&#39;</span> <span class="o">:</span> <span class="nx">album_id</span><span class="p">,</span>
+						<span class="s1">&#39;song_id&#39;</span> <span class="o">:</span> <span class="nx">id</span><span class="p">,</span>
+						<span class="s1">&#39;path&#39;</span> <span class="o">:</span> <span class="nx">path</span><span class="p">,</span>
+						<span class="s1">&#39;id&#39;</span> <span class="o">:</span> <span class="s2">&quot;albumlistitem_&quot;</span><span class="o">+</span><span class="nx">id</span>
+					<span class="p">})</span>
+					<span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;albumArtList&quot;</span><span class="p">)</span>
+					<span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;artReflect&quot;</span><span class="p">)</span>
+					<span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;albumArtClass&quot;</span><span class="p">)</span>
+					<span class="p">.</span><span class="nx">css</span><span class="p">({</span> 
+						<span class="s2">&quot;background&quot;</span> <span class="o">:</span><span class="s2">&quot;url(&quot;</span><span class="o">+</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">staticURL</span> <span class="o">+</span> <span class="s2">&quot;/art/&quot;</span><span class="o">+</span><span class="nx">artist_id</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="nx">album_id</span><span class="o">+</span><span class="s2">&quot;/)&quot;</span><span class="p">,</span>
+						<span class="s2">&quot;width&quot;</span> <span class="o">:</span> <span class="mi">140</span><span class="p">,</span>
+						<span class="s2">&quot;height&quot;</span> <span class="o">:</span> <span class="mi">140</span><span class="p">,</span>
+						<span class="s2">&quot;float&quot;</span> <span class="o">:</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span>
+						<span class="s2">&quot;margin&quot;</span> <span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+						<span class="s2">&quot;margin-bottom&quot;</span> <span class="o">:</span> <span class="mi">80</span>
+					<span class="p">})</span>
+					<span class="cm">/*</span>
+<span class="cm">					.append(</span>
+<span class="cm">						$(&#39;&lt;span&gt;&lt;/span&gt;&#39;)</span>
+<span class="cm">						.addClass(&#39;listAlbumName&#39;)</span>
+<span class="cm">						.text(album)</span>
+<span class="cm">					)</span>
+<span class="cm">					*/</span>
+					<span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+						
+						<span class="nx">artist_id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;artist_id&#39;</span><span class="p">);</span>
+						<span class="nx">album_id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;album_id&#39;</span><span class="p">);</span>
+						<span class="nx">id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;song_id&#39;</span><span class="p">);</span>
+						
+						<span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">));</span>
+						
+					<span class="p">});</span>
+					
+		<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#songsPage .songsAlbumArt&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">newAlbumArt</span><span class="p">);</span>			
+	<span class="p">},</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* dynamic playlist creation. used for creating playlist for local mp3 files that is opened by the system.</span>
+<span class="cm">	* @method create</span>
+<span class="cm">	* @param e {system event}</span>
+<span class="cm">	*/</span>
+	<span class="nx">create</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>	<span class="p">{</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="nx">tempCreateInterval</span><span class="p">)</span>	<span class="nx">tempCreateInterval</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+			
+		
+				
+		<span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">e</span><span class="p">,</span> 
+			<span class="nx">_plParent</span> <span class="o">=</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">playlist</span><span class="p">;</span>
+			<span class="nx">timelimit</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>
+			
+		<span class="nx">_plParent</span><span class="p">.</span><span class="nx">temp</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+
+			
+		<span class="kd">var</span> <span class="nx">tempCreateInterval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>	<span class="p">{</span>
+			<span class="nx">clearInterval</span><span class="p">(</span><span class="nx">tempCreateInterval</span><span class="p">);</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">_plParent</span><span class="p">.</span><span class="nx">temp</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+					<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;outside initialize object length : &quot;</span> <span class="o">+</span> <span class="nx">_plParent</span><span class="p">.</span><span class="nx">temp</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> 
+				<span class="p">}</span>
+				<span class="nx">createJSON</span><span class="p">();</span>					
+			<span class="p">}</span>
+			
+		<span class="p">},</span> <span class="nx">timelimit</span><span class="p">);</span>
+	
+		
+		<span class="kd">function</span> <span class="nx">createJSON</span><span class="p">()</span> <span class="p">{</span>
+			
+			<span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="p">{</span>
+				<span class="s2">&quot;playlist_id&quot;</span> <span class="o">:</span> <span class="s2">&quot;local_092009&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;playlist&quot;</span> <span class="o">:</span> <span class="s2">&quot;Local Storage&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;origin&quot;</span> <span class="o">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;songs&quot;</span> <span class="o">:</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">()</span>
+			<span class="p">};</span>
+			
+			<span class="kd">var</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+			
+			<span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">_plParent</span><span class="p">.</span><span class="nx">temp</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>	<span class="p">{</span>
+				
+				
+				
+				<span class="kd">var</span> <span class="nx">tempFile</span><span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">File</span><span class="p">();</span>
+				<span class="nx">tempFile</span><span class="p">.</span><span class="nx">nativePath</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
+				<span class="nx">tempFile</span><span class="p">.</span><span class="nx">canonicalize</span><span class="p">();</span>
+			
+				<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+					<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;reading file : &quot;</span> <span class="o">+</span> <span class="nx">val</span><span class="p">);</span> 
+					<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Conicalize path of file : &quot;</span> <span class="o">+</span> <span class="nx">tempFile</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span> 					
+				<span class="p">}</span>
+	
+ 				<span class="kd">var</span> <span class="nx">fileStr</span><span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">FileStream</span><span class="p">();</span> 
+				<span class="nx">fileStr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">tempFile</span><span class="p">,</span> <span class="nx">air</span><span class="p">.</span><span class="nx">FileMode</span><span class="p">.</span><span class="nx">UPDATE</span><span class="p">);</span>  
+				<span class="nx">fileStr</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">tempFile</span><span class="p">.</span><span class="nx">size</span> <span class="o">-</span> <span class="mi">125</span><span class="p">;</span>
+				
+				<span class="kd">var</span> <span class="nx">fileName</span> <span class="o">=</span> <span class="nx">tempFile</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;.mp3&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+					<span class="nx">fileName</span> <span class="o">=</span> <span class="nx">fileName</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">);</span>
+					<span class="nx">fileName</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">fileName</span><span class="p">[</span><span class="nx">fileName</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\+/gi</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">);</span>
+					
+				
+				<span class="kd">var</span> <span class="nx">charset</span> <span class="o">=</span> <span class="s2">&quot;iso-8859-1&quot;</span><span class="p">,</span>
+					<span class="nx">id3Title</span> <span class="o">=</span> <span class="nx">checkString</span><span class="p">(</span><span class="nx">fileStr</span><span class="p">.</span><span class="nx">readMultiByte</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="nx">charset</span><span class="p">))</span> <span class="o">||</span> <span class="nx">fileName</span><span class="p">,</span>
+					<span class="nx">id3Artist</span> <span class="o">=</span> <span class="nx">checkString</span><span class="p">(</span><span class="nx">fileStr</span><span class="p">.</span><span class="nx">readMultiByte</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="nx">charset</span><span class="p">))</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+					<span class="nx">id3Album</span> <span class="o">=</span> <span class="nx">checkString</span><span class="p">(</span><span class="nx">fileStr</span><span class="p">.</span><span class="nx">readMultiByte</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="nx">charset</span><span class="p">))</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+					<span class="nx">id3Year</span> <span class="o">=</span> <span class="nx">fileStr</span><span class="p">.</span><span class="nx">readMultiByte</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nx">charset</span><span class="p">),</span>
+					<span class="nx">id3Comment</span> <span class="o">=</span> <span class="nx">fileStr</span><span class="p">.</span><span class="nx">readMultiByte</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="nx">charset</span><span class="p">),</span>
+					<span class="nx">id3GenreCode</span> <span class="o">=</span>  <span class="nx">fileStr</span><span class="p">.</span><span class="nx">readByte</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> 				
+					
+				<span class="kd">var</span> <span class="nx">song</span> <span class="o">=</span> <span class="p">{</span>
+					<span class="s2">&quot;album_id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> 
+					<span class="s2">&quot;track&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> 
+					<span class="s2">&quot;ply&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> 
+					<span class="s2">&quot;artist_name&quot;</span><span class="o">:</span> <span class="nx">id3Artist</span><span class="p">,</span> 
+					<span class="s2">&quot;br&quot;</span><span class="o">:</span> <span class="mi">128</span><span class="p">,</span> 
+					<span class="s2">&quot;year&quot;</span><span class="o">:</span> <span class="nx">id3Year</span><span class="p">,</span> 
+					<span class="s2">&quot;genre&quot;</span><span class="o">:</span> <span class="nx">id3GenreCode</span><span class="p">,</span> 
+					<span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">tempFile</span><span class="p">.</span><span class="nx">url</span><span class="p">),</span> 
+					<span class="s2">&quot;album_art&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> 
+					<span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="nx">id3Title</span><span class="p">,</span> 
+					<span class="s2">&quot;album_title&quot;</span><span class="o">:</span> <span class="nx">id3Album</span><span class="p">,</span> 
+					<span class="s2">&quot;artist_id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+					<span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="nx">tempFile</span><span class="p">.</span><span class="nx">url</span>
+				<span class="p">}</span>				
+				
+			
+				
+				<span class="nx">content</span><span class="p">.</span><span class="nx">songs</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">song</span><span class="p">);</span>				
+				<span class="nx">counter</span><span class="o">++</span><span class="p">;</span>
+				
+<span class="c1">//				Chatbeat.playlist.insertToList(song);</span>
+			<span class="p">});</span>
+			
+			
+
+			<span class="nx">_plParent</span><span class="p">.</span><span class="nx">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">();</span>
+			<span class="nx">content</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="p">{</span>
+				<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">dump</span><span class="p">(</span><span class="s2">&quot;JSON created :  &quot;</span> <span class="o">+</span> <span class="nx">content</span><span class="p">);</span> <span class="c1">// file path					</span>
+			<span class="p">}</span>
+			
+			<span class="nx">createFile</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+
+		<span class="p">}</span>
+		
+		<span class="kd">function</span> <span class="nx">createFile</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nx">air</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">applicationStorageDirectory</span><span class="p">;</span>
+			<span class="nx">file</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="s2">&quot;Chatbeat/Playlist/testplaylist.json&quot;</span><span class="p">);</span>
+			<span class="kd">var</span> <span class="nx">fileStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">FileStream</span><span class="p">();</span>
+			<span class="nx">fileStream</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">air</span><span class="p">.</span><span class="nx">FileMode</span><span class="p">.</span><span class="nx">WRITE</span><span class="p">);</span>
+			<span class="nx">fileStream</span><span class="p">.</span><span class="nx">writeUTFBytes</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span> 
+			<span class="nx">fileStream</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+			
+			<span class="k">if</span><span class="p">(</span><span class="nx">Chatbeat</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>	<span class="nx">air</span><span class="p">.</span><span class="nx">Introspector</span><span class="p">.</span><span class="nx">Console</span><span class="p">.</span><span class="nx">dump</span><span class="p">(</span><span class="s2">&quot;local playlist created :  &quot;</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+
+			<span class="nx">_plParent</span><span class="p">.</span><span class="nx">_send</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;display&quot;</span><span class="p">);</span>
+	
+		<span class="p">}</span>
+		
+		<span class="kd">function</span> <span class="nx">checkString</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>	<span class="p">{</span>
+			<span class="k">if</span><span class="

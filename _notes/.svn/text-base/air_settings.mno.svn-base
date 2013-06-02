@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="airDestinationFolder" value="C:\xampp\htdocs\chatbeat" />
+	<infoitem key="airDestinationFileName" value="ChatBeat.air" />
+	<infoitem key="airChosenCert" value="C:\xampp\htdocs\CHATBEAT_RELEASE\cert.p12" />
+	<infoitem key="airPackageType" value="packageAIR" />
+	<infoitem key="airRememberPassword" value="true" />
+	<infoitem key="airFilesList" value="assets/#css/#js/" />
+	<infoitem key="airFullFilesList" value="player.html#assets/#css/#js/" />
+</info>

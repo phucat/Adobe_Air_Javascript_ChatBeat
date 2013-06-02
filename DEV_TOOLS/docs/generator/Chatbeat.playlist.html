@@ -1,0 +1,2034 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: chatbeat  Chatbeat.playlist   (Chatbeat Javascript Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1334918017.6" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1334918017.6" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1334918017.6"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1334918017.6"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://www.chatbeat.com" title="Chatbeat Desktop AIR Javascript Library">Chatbeat Desktop AIR Javascript Library</a></h1>
+        <h3>chatbeat&nbsp; <span class="subtitle">1.0.0</span></h3>
+        <a href="./index.html" title="Chatbeat Desktop AIR Javascript Library">Chatbeat Desktop AIR Javascript Library</a> 
+            &gt; <a href="./module_chatbeat.html" title="chatbeat">chatbeat</a>
+                 &gt; Chatbeat.playlist 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">Chatbeat.playlist</b>
+                        <span class="extends">
+                        </span>
+
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        Chatbeat component that is responsible on all playlist activity, connections, UI display etc.
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">Chatbeat.playlist</strong>
+                                <code>
+                                    (
+                                    )
+                                </code>
+                                <div class="description">
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+                        <div class="section field details">
+                            <h3 id="properties">Properties</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:property" resource="#property_container">
+                                    <h4><a name="property_container" property="yui:name">container</a>
+                                        - <code><span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            a DOM object parent that will contain all the sounds information from a playlist. This will be the main DOM parent that will contain all the JSON "playlist" result from the server
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_contextMenu">
+                                    <h4><a name="property_contextMenu" property="yui:name">contextMenu</a>
+                                        - <code><span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            container for AIR ContextMenu Object
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_drag {object}">
+                                    <h4><a name="property_drag {object}" property="yui:name">drag {object}</a>
+                                        - <code><span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Drag and Drop Object Controller
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_list">
+                                    <h4><a name="property_list" property="yui:name">list</a>
+                                        - <code><span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            container for the JSON playlist generated from server
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_menu {object}">
+                                    <h4><a name="property_menu {object}" property="yui:name">menu {object}</a>
+                                        - <code><span property="yui:type">object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Chatbeat playlist AIR context menu object
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:method" resource="#method__load">
+                                    <h4>
+                                        <a name="method__load">_load</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_load</strong>
+                                           (
+                                                
+                                                        
+                                                         id
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            loads the list of song of a specified playlist on the server
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">id</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method__loadOffline">
+                                    <h4>
+                                        <a name="method__loadOffline">_loadOffline</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_loadOffline</strong>
+                                           (
+                                                
+                                                        
+                                                         id
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            loads the list of song of a specified playlist on the local machine
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">id</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method__send">
+                                    <h4>
+                                        <a name="method__send">_send</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_send</strong>
+                                           (
+                                                
+                                                        
+                                                         url
+                                                    
+                                                
+                                                        , 
+                                                         method
+                                                    
+                                                
+                                                        , 
+                                                         handler
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            serves as the Global connection of the application to server. Sends API to server and delegates the response to assigned method
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">url</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">method</span>
+                                                        &lt;<span property="yui:type">string [GET, POST, DELETE etc.]</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">handler</span>
+                                                        &lt;<span property="yui:type">Chatbeat Method | Callback</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_add">
+                                    <h4>
+                                        <a name="method_add">add</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">add</strong>
+                                           (
+                                                
+                                                        
+                                                         obj
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            UI functionality that will display the Create new playlist input box and button. This method is attached in a UI button.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">obj</span>
+                                                        &lt;<span property="yui:type">DOM object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_addNewOfflinePL">
+                                    <h4>
+                                        <a name="method_addNewOfflinePL">addNewOfflinePL</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">addNewOfflinePL</strong>
+                                           (
+                                                
+                                                        
+                                                         playlist_id
+                                                    
+                                                
+                                                        , 
+                                                         name
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            add or creates a new playlist item in the offline playlist list in UI
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">playlist_id</span>
+                                                        &lt;<span property="yui:type">integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">name</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_addNewPL">
+                                    <h4>
+                                        <a name="method_addNewPL">addNewPL</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">addNewPL</strong>
+                                           (
+                                                
+                                                        
+                                                         playlist_id
+                                                    
+                                                
+                                                        , 
+                                                         name
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            add or creates a new playlist item in the custom playlist list in UI
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">playlist_id</span>
+                                                        &lt;<span property="yui:type">integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">name</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_addSong {object}">
+                                    <h4>
+                                        <a name="method_addSong {object}">addSong {object}</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">addSong {object}</strong>
+                                           (
+                                                
+                                                        
+                                                         plylistID
+                                                    
+                                                
+                                                        , 
+                                                         songID
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            sends add song API to the server
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">plylistID</span>
+                                                        &lt;<span property="yui:type">integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">songID</span>
+                                                        &lt;<span property="yui:type">integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_addSongHandler">
+                                    <h4>
+                                        <a name="method_addSongHandler">addSongHandler</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">addSongHandler</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler that will catch the JSON returned from server when addSong method is called.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_convertObj">
+                                    <h4>
+                                        <a name="method_convertObj">convertObj</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">convertObj</strong>
+                                           (
+                                                
+                                                        
+                                                         playlist_id
+                                                    
+                                                
+                                                        , 
+                                                         name
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            method that will convert json object to strings
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">playlist_id</span>
+                                                        &lt;<span property="yui:type">integer</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">name</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_create">
+                                    <h4>
+                                        <a name="method_create">create</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">create</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            dynamic playlist creation. used for creating playlist for local mp3 files that is opened by the system.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">system event</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_deletePlaylist">
+                                    <h4>
+                                        <a name="method_deletePlaylist">deletePlaylist</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">deletePlaylist</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            sends delete playlist API to the server based on the selected DOM playlist item.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_deletePlaylistHandler">
+                                    <h4>
+                                        <a name="method_deletePlaylistHandler">deletePlaylistHandler</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">deletePlaylistHandler</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler that will catch the JSON returned from server when deletePlaylist method is called.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_display">
+                                    <h4>
+                                        <a name="method_display">display</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">display</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            list all online playlist in UI
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_displayAlbums">
+                                    <h4>
+                                        <a name="method_displayAlbums">displayAlbums</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">displayAlbums</strong>
+                                           (
+                                                
+                                                        
+                                                         albumInfo
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            displays the album list in the UI
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">albumInfo</span>
+                                                        &lt;<span property="yui:type">JSON Object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_DOMcontrol">
+                                    <h4>
+                                        <a name="method_DOMcontrol">DOMcontrol</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">DOMcontrol</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            sets the UI functionality
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_featured">
+                                    <h4>
+                                        <a name="method_featured">featured</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">featured</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            calls the featured playlist
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getAlbumList">
+                                    <h4>
+                                        <a name="method_getAlbumList">getAlbumList</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">getAlbumList</strong>
+                                           (
+                                                
+                                                        
+                                                         id
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            gets the Album list from the server
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">id</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getAlbumListHandler">
+                                    <h4>
+                                        <a name="method_getAlbumListHandler">getAlbumListHandler</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">getAlbumListHandler</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler for the response when getAlbumListHandler is called.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getArtistList">
+                                    <h4>
+                                        <a name="method_getArtistList">getArtistList</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">getArtistList</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            calls the Artist List
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getArtistListHandler">
+                                    <h4>
+                                        <a name="method_getArtistListHandler">getArtistListHandler</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">getArtistListHandler</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler for the response when getArtistList is called.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getList">
+                                    <h4>
+                                        <a name="method_getList">getList</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">getList</strong>
+                                           (
+                                                
+                                                        
+                                                         artist_id
+                                                    
+                                                
+                                                        , 
+                                                         album_id
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            gets the song list from the server
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">artist_id</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">album_id</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getListHandler">
+                                    <h4>
+                                        <a name="method_getListHandler">getListHandler</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">getListHandler</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler for the response when getListHandler is called.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getOfflineListHandler">
+                                    <h4>
+                                        <a name="method_getOfflineListHandler">getOfflineListHandler</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">getOfflineListHandler</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler for the response when Chatbeat.offline.loadPlaylist is called.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getSongsList">
+                                    <h4>
+                                        <a name="method_getSongsList">getSongsList</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">getSongsList</strong>
+                                           (
+                                                
+                                                        
+                                                         artist_id
+                                                    
+                                                
+                                                        , 
+                                                         album_id
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            gets the song list from the server
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">artist_id</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">album_id</span>
+                                                        &lt;<span property="yui:type">string</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_getSongsListHandler">
+                                    <h4>
+                                        <a name="method_getSongsListHandler">getSongsListHandler</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">getSongsListHandler</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler for the response when getSongsList is called.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_init">
+                                    <h4>
+                                        <a name="method_init">init</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">init</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            this method is automatically loaded onStart of the application called by Chatbeat.initComponent <br>
+- initialize the UI controls, contextmenus and drag and drop source on start up.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_insertToList">
+                                    <h4>
+                                        <a name="method_insertToList">insertToList</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">insertToList</strong>
+                                           (
+                                                
+                                                        
+                                                         info
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            create a song item in the playlist UI
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">info</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_onDrop">
+                                    <h4>
+                                        <a name="method_onDrop">onDrop</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">onDrop</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            triggered when an object has been dropped to the targer. Gets the native path of the dragged object and serve to the application.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">System Event</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_renderSave">
+                                    <h4>
+                                        <a name="method_renderSave">renderSave</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">renderSave</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler that will catch the JSON returned from server when save button is clicked.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_save">
+                                    <h4>
+                                        <a name="method_save">save</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">save</strong>
+                                           (
+                                                
+                                                        
+                                                         obj
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            UI functionality that will save the new playlist name. This method is attached in a UI button.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">obj</span>
+                                                        &lt;<span property="yui:type">DOM object</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_saveOffline">
+                                    <h4>
+                                        <a name="method_saveOffline">saveOffline</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">saveOffline</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler that will catch the JSON returned from server when Chatbeat.offline.save method is called.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_searchResult">
+                                    <h4>
+                                        <a name="method_searchResult">searchResult</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">searchResult</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler that will catch the JSON returned from server when  Search API returns.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_searchResulterror">
+                                    <h4>
+                                        <a name="method_searchResulterror">searchResulterror</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">searchResulterror</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            handler that will catch the ERROR response when  Search API returns.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_toggleViews">
+                                    <h4>
+                                        <a name="method_toggleViews">toggleViews</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">toggleViews</strong>
+                                           (
+                                                
+                                                        
+                                                         json
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            method that binds the UI to its respective functionality. UI method for Views.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">json</span>
+                                                        &lt;<span property="yui:type">JSON</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_chatbeat.html" title="chatbeat">chatbeat</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Chatbeat.html" title="Chatbeat">Chatbeat</a></li>
+                                <li class=""><a href="Chatbeat.cache.html" title="Chatbeat.cache">Chatbeat.cache</a></li>
+                                <li class=""><a href="Chatbeat.handlers.html" title="Chatbeat.handlers">Chatbeat.handlers</a></li>
+                                <li class=""><a href="Chatbeat.offline.html" title="Chatbeat.offline">Chatbeat.offline</a></li>
+                                <li class=""><a href="Chatbeat.pages.html" title="Chatbeat.pages">Chatbeat.pages</a></li>
+                                <li class=""><a href="Chatbeat.player.html" title="Chatbeat.player">Chatbeat.player</a></li>
+                                <li class="selected"><a href="Chatbeat.playlist.html" title="Chatbeat.playlist">Chatbeat.playlist</a></li>
+                                <li class=""><a href="Chatbeat.window.html" title="Chatbeat.window">Chatbeat.window</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="chatbeat.cache.js.html" title="chatbeat.cache.js">chatbeat.cache.js</a></li>
+                                <li class=""><a href="chatbeat.handlers.js.html" title="chatbeat.handlers.js">chatbeat.handlers.js</a></li>
+                                <li class=""><a href="chatbeat.js.html" title="chatbeat.js">chatbeat.js</a></li>
+                                <li class=""><a href="chatbeat.offline.js.html" title="chatbeat.offline.js">chatbeat.offline.js</a></li>
+                                <li class=""><a href="chatbeat.pages.js.html" title="chatbeat.pages.js">chatbeat.pages.js</a></li>
+                                <li class=""><a href="chatbeat.player.js.html" title="chatbeat.player.js">chatbeat.player.js</a></li>
+                                <li class=""><a href="chatbeat.playlist.js.html" title="chatbeat.playlist.js">chatbeat.playlist.js</a></li>
+                                <li class=""><a href="chatbeat.window.js.html" title="chatbeat.window.js">chatbeat.window.js</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="propertyList" class="module">
+                        <h4>Properties</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#property_container" title="container">container</a></li>
+                                <li class=""><a href="#property_contextMenu" title="contextMenu">contextMenu</a></li>
+                                <li class=""><a href="#property_drag {object}" title="drag {object}">drag {object}</a></li>
+                                <li class=""><a href="#property_list" title="list">list</a></li>
+                                <li class=""><a href="#property_menu {object}" title="menu {object}">menu {object}</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#method__load" title="_load">_load</a></li>
+                                <li class=""><a href="#method__loadOffline" title="_loadOffline">_loadOffline</a></li>
+                                <li class=""><a href="#method__send" title="_send">_send</a></li>
+                                <li class=""><a href="#method_add" title="add">add</a></li>
+                                <li class=""><a href="#method_addNewOfflinePL" title="addNewOfflinePL">addNewOfflinePL</a></li>
+                                <li class=""><a href="#method_addNewPL" title="addNewPL">addNewPL</a></li>
+                                <li class=""><a href="#method_addSong {object}" title="addSong {object}">addSong {object}</a></li>
+                                <li class=""><a href="#method_addSongHandler" title="addSongHandler">addSongHandler</a></li>
+                                <li class=""><a href="#method_convertObj" title="convertObj">convertObj</a></li>
+                                <li class=""><a href="#method_create" title="create">create</a></li>
+                                <li class=""><a href="#method_deletePlaylist" title="deletePlaylist">deletePlaylist</a></li>
+                                <li class=""><a href="#method_deletePlaylistHandler" title="deletePlaylistHandler">deletePlaylistHandler</a></li>
+                                <li class=""><a href="#method_display" title="display">display</a></li>
+                                <li class=""><a href="#method_displayAlbums" title="displayAlbums">displayAlbums</a></li>
+                                <li class=""><a href="#method_DOMcontrol" title="DOMcontrol">DOMcontrol</a></li>
+                                <li class=""><a href="#method_featured" title="featured">featured</a></li>
+                                <li class=""><a href="#method_getAlbumList" title="getAlbumList">getAlbumList</a></li>
+                                <li class=""><a href="#method_getAlbumListHandler" title="getAlbumListHandler">getAlbumListHandler</a></li>
+                                <li class=""><a href="#method_getArtistList" title="getArtistList">getArtistList</a></li>
+                                <li class=""><a href="#method_getArtistListHandler" title="getArtistListHandler">getArtistListHandler</a></li>
+                                <li class=""><a href="#method_getList" title="getList">getList</a></li>
+                                <li class=""><a href="#method_getListHandler" title="getListHandler">getListHandler</a></li>
+                                <li class=""><a href="#method_getOfflineListHandler" title="getOfflineListHandler">getOfflineListHandler</a></li>
+                                <li class=""><a href="#method_getSongsList" title="getSongsList">getSongsList</a></li>
+                                <li class=""><a href="#method_getSongsListHandler" title="getSongsListHandler">getSongsListHandler</a></li>
+                                <li class=""><a href="#method_init" title="init">init</a></li>
+                                <li class=""><a href="#method_insertToList" title="insertToList">insertToList</a></li>
+                                <li class=""><a href="#method_onDrop" title="onDrop">onDrop</a></li>
+                                <li class=""><a href="#method_renderSave" title="renderSave">renderSave</a></li>
+                                <li class=""><a href="#method_save" title="save">save</a></li>
+                                <li class=""><a href="#method_saveOffline" title="saveOffline">saveOffline</a></li>
+                                <li class=""><a href="#method_searchResult" title="searchResult">searchResult</a></li>
+                                <li class=""><a href="#method_searchResulterror" title="searchResulterror">searchResulterror</a></li>
+                                <li class=""><a href="#method_toggleViews" title="toggleViews">toggleViews</a></li>
+                        </ul>
+                    </div>
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2012 Kolipri Communications Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "Chatbeat.pages.html#property_active", "access": "", "host": "Chatbeat.pages", "type": "property", "name": "active"}, {"url": "Chatbeat.playlist.html#method_add", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "add"}, {"url": "Chatbeat.playlist.html#method_addNewOfflinePL", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "addNewOfflinePL"}, {"url": "Chatbeat.playlist.html#method_addNewPL", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "addNewPL"}, {"url": "Chatbeat.playlist.html#method_addSong {object}", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "addSong {object}"}, {"url": "Chatbeat.playlist.html#method_addSongHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "addSongHandler"}, {"url": "Chatbeat.cache.html#property_appDir", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "appDir"}, {"url": "Chatbeat.cache.html#property_cacheDir", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "cacheDir"}, {"url": "Chatbeat.cache.html#property_cacheLocation", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "cacheLocation"}, {"url": "Chatbeat.cache.html#method_checkLocation", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "checkLocation"}, {"url": "Chatbeat.handlers.html#method_completeHandler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "completeHandler"}, {"url": "Chatbeat.playlist.html#property_container", "access": "", "host": "Chatbeat.playlist", "type": "property", "name": "container"}, {"url": "Chatbeat.playlist.html#property_contextMenu", "access": "", "host": "Chatbeat.playlist", "type": "property", "name": "contextMenu"}, {"url": "Chatbeat.playlist.html#method_convertObj", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "convertObj"}, {"url": "Chatbeat.playlist.html#method_create", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "create"}, {"url": "Chatbeat.offline.html#method_createLocalPlaylist", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "createLocalPlaylist"}, {"url": "Chatbeat.cache.html#method_decrypt", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "decrypt"}, {"url": "Chatbeat.playlist.html#method_deletePlaylist", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "deletePlaylist"}, {"url": "Chatbeat.playlist.html#method_deletePlaylistHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "deletePlaylistHandler"}, {"url": "Chatbeat.handlers.html#method_directoryListingHandler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "directoryListingHandler"}, {"url": "Chatbeat.playlist.html#method_display", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "display"}, {"url": "Chatbeat.playlist.html#method_displayAlbums", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "displayAlbums"}, {"url": "Chatbeat.cache.html#property_docDir", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "docDir"}, {"url": "Chatbeat.playlist.html#method_DOMcontrol", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "DOMcontrol"}, {"url": "Chatbeat.playlist.html#property_drag {object}", "access": "", "host": "Chatbeat.playlist", "type": "property", "name": "drag {object}"}, {"url": "Chatbeat.cache.html#method_encrypt", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "encrypt"}, {"url": "Chatbeat.playlist.html#method_featured", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "featured"}, {"url": "Chatbeat.playlist.html#method_getAlbumList", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getAlbumList"}, {"url": "Chatbeat.playlist.html#method_getAlbumListHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getAlbumListHandler"}, {"url": "Chatbeat.playlist.html#method_getArtistList", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getArtistList"}, {"url": "Chatbeat.playlist.html#method_getArtistListHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getArtistListHandler"}, {"url": "Chatbeat.cache.html#method_getID", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "getID"}, {"url": "Chatbeat.playlist.html#method_getList", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getList"}, {"url": "Chatbeat.playlist.html#method_getListHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getListHandler"}, {"url": "Chatbeat.playlist.html#method_getOfflineListHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getOfflineListHandler"}, {"url": "Chatbeat.playlist.html#method_getSongsList", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getSongsList"}, {"url": "Chatbeat.playlist.html#method_getSongsListHandler", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "getSongsListHandler"}, {"url": "Chatbeat.handlers.html#method_handleSoundComplete", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "handleSoundComplete"}, {"url": "Chatbeat.handlers.html#method_id3Handler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "id3Handler"}, {"url": "Chatbeat.cache.html#method_init", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "init"}, {"url": "Chatbeat.offline.html#method_init", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "init"}, {"url": "Chatbeat.pages.html#method_init", "access": "", "host": "Chatbeat.pages", "type": "method", "name": "init"}, {"url": "Chatbeat.handlers.html#method_init", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "init"}, {"url": "Chatbeat.window.html#method_init", "access": "", "host": "Chatbeat.window", "type": "method", "name": "init"}, {"url": "Chatbeat.playlist.html#method_init", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "init"}, {"url": "Chatbeat.handlers.html#method_initializationHandler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "initializationHandler"}, {"url": "Chatbeat.playlist.html#method_insertToList", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "insertToList"}, {"url": "Chatbeat.handlers.html#method_ioErrorHandler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "ioErrorHandler"}, {"url": "Chatbeat.cache.html#method_isCached", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "isCached"}, {"url": "Chatbeat.cache.html#method_keep", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "keep"}, {"url": "Chatbeat.cache.html#property_key", "access": "", "host": "Chatbeat.cache", "type": "property", "name": "key"}, {"url": "Chatbeat.playlist.html#property_list", "access": "", "host": "Chatbeat.playlist", "type": "property", "name": "list"}, {"url": "Chatbeat.playlist.html#method__load", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "_load"}, {"url": "Chatbeat.playlist.html#method__loadOffline", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "_loadOffline"}, {"url": "Chatbeat.offline.html#method_loadPlaylist", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "loadPlaylist"}, {"url": "Chatbeat.offline.html#method_makeOffline", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "makeOffline"}, {"url": "Chatbeat.offline.html#method_makeOnline", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "makeOnline"}, {"url": "Chatbeat.playlist.html#property_menu {object}", "access": "", "host": "Chatbeat.playlist", "type": "property", "name": "menu {object}"}, {"url": "Chatbeat.playlist.html#method_onDrop", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "onDrop"}, {"url": "Chatbeat.offline.html#method_parseJSON", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "parseJSON"}, {"url": "Chatbeat.cache.html#method_parseURL", "access": "", "host": "Chatbeat.cache", "type": "method", "name": "parseURL"}, {"url": "Chatbeat.handlers.html#method_progressHandler", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "progressHandler"}, {"url": "Chatbeat.playlist.html#method_renderSave", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "renderSave"}, {"url": "Chatbeat.offline.html#method_save", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "save"}, {"url": "Chatbeat.playlist.html#method_save", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "save"}, {"url": "Chatbeat.playlist.html#method_saveOffline", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "saveOffline"}, {"url": "Chatbeat.offline.html#method_searchPlaylist", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "searchPlaylist"}, {"url": "Chatbeat.playlist.html#method_searchResult", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "searchResult"}, {"url": "Chatbeat.playlist.html#method_searchResulterror", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "searchResulterror"}, {"url": "Chatbeat.playlist.html#method__send", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "_send"}, {"url": "Chatbeat.pages.html#method_setActions", "access": "", "host": "Chatbeat.pages", "type": "method", "name": "setActions"}, {"url": "Chatbeat.offline.html#method_setMode", "access": "", "host": "Chatbeat.offline", "type": "method", "name": "setMode"}, {"url": "Chatbeat.pages.html#method_setPages", "access": "", "host": "Chatbeat.pages", "type": "method", "name": "setPages"}, {"url": "Chatbeat.handlers.html#method_soundDetailsProgress", "access": "", "host": "Chatbeat.handlers", "type": "method", "name": "soundDetailsProgress"}, {"url": "Chatbeat.window.html#property_state {[normal or maximized]}", "access": "", "host": "Chatbeat.window", "type": "property", "name": "state {[normal or maximized]}"}, {"url": "Chatbeat.playlist.html#method_toggleViews", "access": "", "host": "Chatbeat.playlist", "type": "method", "name": "toggleViews"}];
+</script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="B3E40BCF-06CA-4692-AD07-E95718F3AC59" Name="ChatBeat Desktop" Language="1033" Version="0.0.0.1" Manufacturer="Kolipri Software" UpgradeCode="D7C5CF26-CCEE-4AC9-89F6-C2BB25D31459">
+        <Package Description="ChatBeat Desktop" Comments="ChatBeat Desktop" InstallerVersion="200" Compressed="yes" />
+        <Media Id="1" Cabinet="simple.cab" EmbedCab="yes" />
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder" Name="PFiles">
+                <Directory Name="Kolipri Software" Id="KOLIPRI_SOFTWARE">
+                    <Directory Id="BUILD" Name="BUILD">
+                        <Component Id="CHATBEAT.EXE" DiskId="1" Guid="9296C857-911C-4C02-9334-06D8871FC7C7">
+                            <File Id="CHATBEAT.EXE" Name="chatbeat.exe" Source="C:\xampp\htdocs\chatbeat\BUILD\chatbeat.exe">
+                                <Shortcut Id="desktopShortcut" Directory="DesktopFolder" Name="ChatBeat" WorkingDirectory="INSTALLDIR" Advertise="yes" Icon="DesktopIcon.exe" IconIndex="0" />
+                                <Shortcut Id="ExeShortcut" Directory="ProgramMenuDir" Name="ChatBeat" Advertise="yes" Icon="StartMenuIcon.exe" IconIndex="0" />
+                            </File>
+                        </Component>
+                        <Component Id="MIMETYPE" DiskId="1" Guid="C2321910-7966-4500-A787-64EEECC96100">
+                            <File Id="MIMETYPE" Name="mimetype" Source="C:\xampp\htdocs\chatbeat\BUILD\mimetype" />
+                        </Component>
+                        <Component Id="PLAYER.HTML" DiskId="1" Guid="49DC3732-1DBB-4A3F-87BB-4168C85CE8A5">
+                            <File Id="PLAYER.HTML" Name="player.html" Source="C:\xampp\htdocs\chatbeat\BUILD\player.html" />
+                        </Component>
+                        <Directory Id="ADOBE_AIR" Name="Adobe AIR">
+                            <Directory Id="VERSIONS" Name="Versions">
+                                <Directory Id="_1.0" Name="1.0">
+                                    <Component Id="ADOBE_AIR.DLL" DiskId="1" Guid="828DD720-2822-42DC-B808-AEC8C3E9D819">
+                                        <File Id="ADOBE_AIR.DLL" Name="Adobe AIR.dll" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Adobe AIR.dll" />
+                                    </Component>
+                                    <Directory Id="RESOURCES" Name="Resources">
+                                        <Component Id="ADOBE_AIR.VCH" DiskId="1" Guid="2CDB7D48-9E8F-4CE8-940E-CAAE22B53D9F">
+                                            <File Id="ADOBE_AIR.VCH" Name="Adobe AIR.vch" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\Adobe AIR.vch" />
+                                        </Component>
+                                        <Component Id="ADOBECP.DLL" DiskId="1" Guid="5627AEC1-BBEA-4A62-9E09-7D9A735E84BA">
+                                            <File Id="ADOBECP.DLL" Name="adobecp.dll" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\adobecp.dll" />
+                                        </Component>
+                                        <Component Id="ADOBECP.VCH" DiskId="1" Guid="59B6056C-7C66-45DD-9B0A-A28FF08FBDFC">
+                                            <File Id="ADOBECP.VCH" Name="adobecp.vch" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\adobecp.vch" />
+                                        </Component>
+                                        <Component Id="ADOBECP15.DLL" DiskId="1" Guid="256BA081-AFAD-4034-9EF1-21717FA1E078">
+                                            <File Id="ADOBECP15.DLL" Name="AdobeCP15.dll" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\AdobeCP15.dll" />
+                                        </Component>
+                                        <Component Id="CAPTIVEAPPENTRY.EXE" DiskId="1" Guid="914F9CEB-41D2-464D-8F1A-6B75185B0A9D">
+                                            <File Id="CAPTIVEAPPENTRY.EXE" Name="CaptiveAppEntry.exe" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\CaptiveAppEntry.exe" />
+                                        </Component>
+                                        <Component Id="NPSWF32.DLL" DiskId="1" Guid="FC3CC818-7202-40F3-83F2-27E903AFAF8E">
+                                            <File Id="NPSWF32.DLL" Name="NPSWF32.dll" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\NPSWF32.dll" />
+                                        </Component>
+                                        <Component Id="WEBKIT.DLL" DiskId="1" Guid="9DFD3F64-C381-4843-9F3F-4486758F7F1B">
+                                            <File Id="WEBKIT.DLL" Name="WebKit.dll" Source="C:\xampp\htdocs\chatbeat\BUILD\Adobe AIR\Versions\1.0\Resources\WebKit.dll" />
+                                        </Component>
+                                    </Directory>
+                                </Directory>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="ASSETS" Name="assets">
+                            <Directory Id="FONTS" Name="fonts">
+                                <Component Id="MYRIADPRO_BOLD.OTF" DiskId="1" Guid="4886B82B-95E2-43E8-8D71-68FCDAF41E27">
+                                    <File Id="MYRIADPRO_BOLD.OTF" Name="MyriadPro-Bold.otf" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\fonts\MyriadPro-Bold.otf" />
+                                </Component>
+                                <Component Id="MYRIADPRO_REGULAR.OTF" DiskId="1" Guid="93CA06A0-FC98-4BC2-9F33-B12E97F72BAF">
+                                    <File Id="MYRIADPRO_REGULAR.OTF" Name="MyriadPro-Regular.otf" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\fonts\MyriadPro-Regular.otf" />
+                                </Component>
+                                <Component Id="MYRIADPRO_SEMIBOLD.OTF" DiskId="1" Guid="97D2104F-9153-433D-9A81-B1AA5D391E90">
+                                    <File Id="MYRIADPRO_SEMIBOLD.OTF" Name="MyriadPro-Semibold.otf" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\fonts\MyriadPro-Semibold.otf" />
+                                </Component>
+                            </Directory>
+                            <Directory Id="ICON" Name="icon">
+                                <Component Id="_128.PNG" DiskId="1" Guid="7A8F143C-1BBC-4314-A7D6-049BE9E106E8">
+                                    <File Id="_128.PNG" Name="128.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\icon\128.png" />
+                                </Component>
+                                <Component Id="_16.PNG" DiskId="1" Guid="6060A1EB-ECDF-426B-AD68-C72873B1CD72">
+                                    <File Id="_16.PNG" Name="16.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\icon\16.png" />
+                                </Component>
+                                <Component Id="_32.PNG" DiskId="1" Guid="3512B66F-6CEB-4495-AFCB-506CC3A19F37">
+                                    <File Id="_32.PNG" Name="32.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\icon\32.png" />
+                                </Component>
+                                <Component Id="_48.PNG" DiskId="1" Guid="4F74C097-3A20-494B-9A6E-260F1781AD89">
+                                    <File Id="_48.PNG" Name="48.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\icon\48.png" />
+                                </Component>
+                            </Directory>
+                            <Directory Id="IMAGES" Name="images">
+                                <Component Id="CB_CLOSE.PNG" DiskId="1" Guid="D52FCCDF-132B-4E38-B2BA-3B43F402CE5E">
+                                    <File Id="CB_CLOSE.PNG" Name="cb_close.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_close.png" />
+                                </Component>
+                                <Component Id="CB_DIVIDER.PNG" DiskId="1" Guid="460B4832-A143-4D5F-A387-70DCE4AE8032">
+                                    <File Id="CB_DIVIDER.PNG" Name="cb_divider.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_divider.png" />
+                                </Component>
+                                <Component Id="CB_LOGO.PNG" DiskId="1" Guid="A00E365C-8D8E-4592-890D-51BCD987D737">
+                                    <File Id="CB_LOGO.PNG" Name="cb_logo.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_logo.png" />
+                                </Component>
+                                <Component Id="CB_MINIMIZE.PNG" DiskId="1" Guid="3C46D806-0F96-4195-9FB1-D5BD532DD721">
+                                    <File Id="CB_MINIMIZE.PNG" Name="cb_minimize.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_minimize.png" />
+                                </Component>
+                                <Component Id="CB_NEXT.PNG" DiskId="1" Guid="61925617-4595-4FA1-AA65-A7EAED8F0AB6">
+                                    <File Id="CB_NEXT.PNG" Name="cb_next.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_next.png" />
+                                </Component>
+                                <Component Id="CB_NEXT_HOVER.PNG" DiskId="1" Guid="B1913E6F-6498-435B-AFDC-98C38ECA2AD1">
+                                    <File Id="CB_NEXT_HOVER.PNG" Name="cb_next_hover.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_next_hover.png" />
+                                </Component>
+                                <Component Id="CB_PLAY.PNG" DiskId="1" Guid="D3B97A40-C234-4CCC-93DF-359354315B2C">
+                                    <File Id="CB_PLAY.PNG" Name="cb_play.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_play.png" />
+                                </Component>
+                                <Component Id="CB_PLAY_HOVER.PNG" DiskId="1" Guid="52849D0D-2424-4C62-9742-F61EF1C0A0E0">
+                                    <File Id="CB_PLAY_HOVER.PNG" Name="cb_play_hover.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_play_hover.png" />
+                                </Component>
+                                <Component Id="CB_PREV.PNG" DiskId="1" Guid="02A9A0B9-AE0D-4E48-8304-BF9331742E1E">
+                                    <File Id="CB_PREV.PNG" Name="cb_prev.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_prev.png" />
+                                </Component>
+                                <Component Id="CB_PREV_HOVER.PNG" DiskId="1" Guid="AB1718D7-7A95-46B1-936A-EC8DB69A76F3">
+                                    <File Id="CB_PREV_HOVER.PNG" Name="cb_prev_hover.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_prev_hover.png" />
+                                </Component>
+                                <Component Id="CB_REPEAT.PNG" DiskId="1" Guid="B72DBF9C-BC8A-4964-B968-ADD41852C286">
+                                    <File Id="CB_REPEAT.PNG" Name="cb_repeat.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_repeat.png" />
+                                </Component>
+                                <Component Id="CB_SHUFFLE.PNG" DiskId="1" Guid="1775E11F-1B9F-4369-9262-6C2506670000">
+                                    <File Id="CB_SHUFFLE.PNG" Name="cb_shuffle.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\cb_shuffle.png" />
+                                </Component>
+                                <Component Id="ICON_MUSIC.PNG" DiskId="1" Guid="02EB51FC-EFF8-4A12-BA93-191BF7680F11">
+                                    <File Id="ICON_MUSIC.PNG" Name="icon_music.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\icon_music.png" />
+                                </Component>
+                                <Component Id="SCRUB_BG.PNG" DiskId="1" Guid="019D6A34-E6B4-49D5-9F3D-3D0BBBC80288">
+                                    <File Id="SCRUB_BG.PNG" Name="scrub_bg.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\scrub_bg.png" />
+                                </Component>
+                                <Component Id="UNTITLED_1.PNG" DiskId="1" Guid="07E21F5A-8DBB-4384-9B26-8CE68EB0B822">
+                                    <File Id="UNTITLED_1.PNG" Name="Untitled-1.png" Source="C:\xampp\htdocs\chatbeat\BUILD\assets\images\Untitled-1.png" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="CSS" Name="css">
+                            <Component Id="MAIN.CSS" DiskId="1" Guid="F282D685-D468-47B4-9B64-287C9BF704F3">
+                                <File Id="MAIN.CSS" Name="main.css" Source="C:\xampp\htdocs\chatbeat\BUILD\css\main.css" />
+                            </Component>
+                            <Component Id="RANGE.CSS" DiskId="1" Guid="38211F39-D567-4660-9ABD-DE6EA85E1214">
+                                <File Id="RANGE.CSS" Name="range.css" Source="C:\xampp\htdocs\chatbeat\BUILD\css\range.css" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="JS" Name="js">
+                            <Directory Id="COMPONENTS" Name="components">
+                                <Component Id="CHATBEAT.CONTROLS.JS" DiskId="1" Guid="C4E5B833-B326-4A60-B66B-B52EDF3712C7">
+                                    <File Id="CHATBEAT.CONTROLS.JS" Name="chatbeat.controls.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.controls.js" />
+                                </Component>
+                                <Component Id="CHATBEAT.FEATURED.JS" DiskId="1" Guid="B609FF44-BFFD-482D-BB56-1802CF1235FC">
+                                    <File Id="CHATBEAT.FEATURED.JS" Name="chatbeat.featured.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.featured.js" />
+                                </Component>
+                                <Component Id="CHATBEAT.HANDLERS.JS" DiskId="1" Guid="7BD77886-E23C-4804-BAD4-7866A5BD6D80">
+                                    <File Id="CHATBEAT.HANDLERS.JS" Name="chatbeat.handlers.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.handlers.js" />
+                                </Component>
+                                <Component Id="CHATBEAT.JS" DiskId="1" Guid="B66B39A1-88DD-4FE8-A792-281F5BE38A90">
+                                    <File Id="CHATBEAT.JS" Name="chatbeat.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.js" />
+                                </Component>
+                                <Component Id="CHATBEAT.LISTING.JS" DiskId="1" Guid="32E8A936-4973-40E7-B2D9-CE56CC1F6D22">
+                                    <File Id="CHATBEAT.LISTING.JS" Name="chatbeat.listing.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.listing.js" />
+                                </Component>
+                                <Component Id="CHATBEAT.PAGES.JS" DiskId="1" Guid="C4F1A9AC-9F82-42C0-A04C-3AF3F8BA6974">
+                                    <File Id="CHATBEAT.PAGES.JS" Name="chatbeat.pages.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.pages.js" />
+                                </Component>
+                                <Component Id="CHATBEAT.PLAYER.JS" DiskId="1" Guid="EC8BB1E7-0EF1-4604-B390-10E9AB554A45">
+                                    <File Id="CHATBEAT.PLAYER.JS" Name="chatbeat.player.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.player.js" />
+                                </Component>
+                                <Component Id="CHATBEAT.STREAM.JS" DiskId="1" Guid="7854FF51-2573-464F-BD0D-8787C3FDBC72">
+                                    <File Id="CHATBEAT.STREAM.JS" Name="chatbeat.stream.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.stream.js" />
+                                </Component>
+                                <Component Id="CHATBEAT.WINDOW.JS" DiskId="1" Guid="A97C547D-A34D-4A6B-9762-129A0D3C879A">
+                                    <File Id="CHATBEAT.WINDOW.JS" Name="chatbeat.window.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\components\chatbeat.window.js" />
+                                </Component>
+                            </Directory>
+                            <Directory Id="PACKAGES" Name="packages">
+                                <Component Id="AIRALIASES.JS" DiskId="1" Guid="BCC7BC5C-9234-4C85-856C-E787387E1BF5">
+                                    <File Id="AIRALIASES.JS" Name="AIRAliases.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\AIRAliases.js" />
+                                </Component>
+                                <Component Id="AIRINTROSPECTOR.JS" DiskId="1" Guid="4F0F2D92-A7CE-4391-A7BB-022FDC6E33DE">
+                                    <File Id="AIRINTROSPECTOR.JS" Name="AIRIntrospector.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\AIRIntrospector.js" />
+                                </Component>
+                                <Component Id="JQUERY_1.3.MIN.JS" DiskId="1" Guid="258665F7-B293-491E-AF5F-DA8830735D1E">
+                                    <File Id="JQUERY_1.3.MIN.JS" Name="jquery-1.3.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery-1.3.min.js" />
+                                </Component>
+                                <Component Id="JQUERY_1.6.4.JS" DiskId="1" Guid="7E900CA1-D068-4254-AF0F-C6F736489559">
+                                    <File Id="JQUERY_1.6.4.JS" Name="jquery-1.6.4.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery-1.6.4.js" />
+                                </Component>
+                                <Directory Id="JQUERY" Name="jquery">
+                                    <Component Id="JQUERY_1.7.1.MIN.JS" DiskId="1" Guid="3EF5ACAF-D6F4-4BD6-83B1-173897B49E79">
+                                        <File Id="JQUERY_1.7.1.MIN.JS" Name="jquery-1.7.1.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery\jquery-1.7.1.min.js" />
+                                    </Component>
+                                    <Component Id="JQUERY_UI_1.8.17.CUSTOM.MIN.JS" DiskId="1" Guid="78AC60CB-31A6-437D-8A8B-CA1B11C3A012">
+                                        <File Id="JQUERY_UI_1.8.17.CUSTOM.MIN.JS" Name="jquery-ui-1.8.17.custom.min.js" Source="C:\xampp\htdocs\chatbeat\BUILD\js\packages\jquery\jquery-ui-1.8.17.custom.min.js" />
+                                    </Component>
+                                </Directory>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="META_INF" Name="META-INF">
+                            <Component Id="SIGNATURES.XML" DiskId="1" Guid="1AC2BB02-A957-48A7-8547-3C89F02286C8">
+                                <File Id="SIGNATURES.XML" Name="signatures.xml" Source="C:\xampp\htdocs\chatbeat\BUILD\META-INF\signatures.xml" />
+                            </Component>
+                            <Directory Id="AIR" Name="AIR">
+                                <Component Id="APPLICATION.XML" DiskId="1" Guid="62001E55-FA92-4F36-8A04-7C43679CCED5">
+                                    <File Id="APPLICATION.XML" Name="application.xml" Source="C:\xampp\htdocs\chatbeat\BUILD\META-INF\AIR\application.xml" />
+                                </Component>
+                                <Component Id="HASH" DiskId="1" Guid="427D86EB-ECBD-4336-B707-7F17328C51F2">
+                                    <File Id="HASH" Name="hash" Source="C:\xampp\htdocs\chatbeat\BUILD\META-INF\AIR\hash" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+            <Directory Id="DesktopFolder" />
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ProgramMenuDir" Name="Kolipri Software">
+                    <Component Id="StartMenuShortcuts" Guid="A3229DD7-9006-46D0-A6E1-5B472DD4195C">
+                        <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+                        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" />
+                        <Shortcut Id="UninstallProduct" Name="Uninstall" Description="Uninstalls the application" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]" />
+                    </Component>
+                </Directory>
+            </Directory>
+        </Directory>
+        <Feature Id="DefaultFeature" Title="Main Feature" Level="1">
+            <ComponentRef Id="CHATBEAT.EXE" />
+            <ComponentRef Id="MIMETYPE" />
+            <ComponentRef Id="PLAYER.HTML" />
+            <ComponentRef Id="ADOBE_AIR.DLL" />
+            <ComponentRef Id="ADOBE_AIR.VCH" />
+            <ComponentRef Id="ADOBECP.DLL" />
+            <ComponentRef Id="ADOBECP.VCH" />
+            <ComponentRef Id="ADOBECP15.DLL" />
+            <ComponentRef Id="CAPTIVEAPPENTRY.EXE" />
+            <ComponentRef Id="NPSWF32.DLL" />
+            <ComponentRef Id="WEBKIT.DLL" />
+            <ComponentRef Id="MYRIADPRO_BOLD.OTF" />
+            <ComponentRef Id="MYRIADPRO_REGULAR.OTF" />
+            <ComponentRef Id="MYRIADPRO_SEMIBOLD.OTF" />
+            <ComponentRef Id="_128.PNG" />
+            <ComponentRef Id="_16.PNG" />
+            <ComponentRef Id="_32.PNG" />
+            <ComponentRef Id="_48.PNG" />
+            <ComponentRef Id="CB_CLOSE.PNG" />
+            <ComponentRef Id="CB_DIVIDER.PNG" />
+            <ComponentRef Id="CB_LOGO.PNG" />
+            <ComponentRef Id="CB_MINIMIZE.PNG" />
+            <ComponentRef Id="CB_NEXT.PNG" />
+            <ComponentRef Id="CB_NEXT_HOVER.PNG" />
+            <ComponentRef Id="CB_PLAY.PNG" />
+            <ComponentRef Id="CB_PLAY_HOVER.PNG" />
+            <ComponentRef Id="CB_PREV.PNG" />
+            <ComponentRef Id="CB_PREV_HOVER.PNG" />
+            <ComponentRef Id="CB_REPEAT.PNG" />
+            <ComponentRef Id="CB_SHUFFLE.PNG" />
+            <ComponentRef Id="ICON_MUSIC.PNG" />
+            <ComponentRef Id="SCRUB_BG.PNG" />
+            <ComponentRef Id="UNTITLED_1.PNG" />
+            <ComponentRef Id="MAIN.CSS" />
+            <ComponentRef Id="RANGE.CSS" />
+            <ComponentRef Id="CHATBEAT.CONTROLS.JS" />
+            <ComponentRef Id="CHATBEAT.FEATURED.JS" />
+            <ComponentRef Id="CHATBEAT.HANDLERS.JS" />
+            <ComponentRef Id="CHATBEAT.JS" />
+            <ComponentRef Id="CHATBEAT.LISTING.JS" />
+            <ComponentRef Id="CHATBEAT.PAGES.JS" />
+            <ComponentRef Id="CHATBEAT.PLAYER.JS" />
+            <ComponentRef Id="CHATBEAT.STREAM.JS" />
+            <ComponentRef Id="CHATBEAT.WINDOW.JS" />
+            <ComponentRef Id="AIRALIASES.JS" />
+            <ComponentRef Id="AIRINTROSPECTOR.JS" />
+            <ComponentRef Id="JQUERY_1.3.MIN.JS" />
+            <ComponentRef Id="JQUERY_1.6.4.JS" />
+            <ComponentRef Id="JQUERY_1.7.1.MIN.JS" />
+            <ComponentRef Id="JQUERY_UI_1.8.17.CUSTOM.MIN.JS" />
+            <ComponentRef Id="SIGNATURES.XML" />
+            <ComponentRef Id="APPLICATION.XML" />
+            <ComponentRef Id="HASH" />
+            <ComponentRef Id="StartMenuShortcuts" />
+        </Feature>
+        <UI />
+        <UIRef Id="WixUI_Minimal" />
+        <Icon Id="DesktopIcon.exe" SourceFile="C:\xampp\htdocs\chatbeat\BUILD\chatbeat.exe" />
+        <Icon Id="StartMenuIcon.exe" SourceFile="C:\xampp\htdocs\chatbeat\BUILD\chatbeat.exe" />
+    </Product>
+</Wix>
