@@ -1,6 +1,5 @@
 # AIR Javascript Music Streaming and Chat
 
-CSS for clean and fast web apps
 
 ---
 
